@@ -1,0 +1,24 @@
+plugins {
+    id 'java'
+    id 'io.quarkus'
+}
+
+jar {
+    exclude('')
+}
+
+repositories {
+    mavenCentral()
+    mavenLocal()
+}
+
+dependencies {
+    implementation enforcedPlatform("${quarkusPlatformGroupId}:${quarkusPlatformArtifactId}:${quarkusPlatformVersion}")
+    implementation 'io.quarkus:quarkus-oidc:2.1.3.Final'
+    implementation 'io.quarkus:quarkus-resteasy-jsonb'
+    implementation 'io.quarkus:quarkus-resteasy'
+    implementation 'io.quarkus:quarkus-smallrye-openapi'
+
+}
+
+version = '1.0.0'
