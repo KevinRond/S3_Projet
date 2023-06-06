@@ -1,30 +1,29 @@
 CREATE TABLE DEPARTEMENT
 (
     Id_departement INT NOT NULL,
-    Nom_departement INT NOT NULL,
+    Nom_departement VARCHAR(128) NOT NULL,
     PRIMARY KEY (Id_departement)
 );
 
 CREATE TABLE COURS
 (
-    Sigle INT NOT NULL,
-    Nom_cours INT NOT NULL,
+    Sigle VARCHAR(64) NOT NULL,
+    Nom_cours VARCHAR(256) NOT NULL,
     PRIMARY KEY (Sigle)
 );
 
 CREATE TABLE EVALUATION
 (
     Id_evaluation INT NOT NULL,
-    Nom_evaluation INT NOT NULL,
-    Ponderation INT NOT NULL,
-    Date INT NOT NULL,
+    Nom_evaluation VARCHAR(64) NOT NULL,
+    Ponderation FLOAT NOT NULL,
     PRIMARY KEY (Id_evaluation)
 );
 
 CREATE TABLE PROGRAMME
 (
     Id_programme INT NOT NULL,
-    Nom_programme INT NOT NULL,
+    Nom_programme VARCHAR(128) NOT NULL,
     Id_departement INT NOT NULL,
     PRIMARY KEY (Id_programme),
     FOREIGN KEY (Id_departement) REFERENCES DEPARTEMENT(Id_departement)
@@ -33,28 +32,28 @@ CREATE TABLE PROGRAMME
 CREATE TABLE COMPETENCE
 (
     Id_competence INT NOT NULL,
-    nom_comp INT NOT NULL,
-    Sigle INT NOT NULL,
+    nom_comp VARCHAR(8) NOT NULL,
+    Sigle VARCHAR(64) NOT NULL,
     PRIMARY KEY (Id_competence, Sigle),
     FOREIGN KEY (Sigle) REFERENCES COURS(Sigle)
 );
 
-CREATE TABLE evalue_par
+CREATE TABLE EVALUATION_COMPETENCE
 (
-    Resultat INT NOT NULL,
-    Ponderation_competence INT NOT NULL,
+    Resultat FLOAT NOT NULL,
+    Ponderation_competence FLOAT NOT NULL,
     Id_competence INT NOT NULL,
-    Sigle INT NOT NULL,
+    Sigle VARCHAR(64) NOT NULL,
     Id_evaluation INT NOT NULL,
     PRIMARY KEY (Id_competence, Sigle, Id_evaluation),
     FOREIGN KEY (Id_competence, Sigle) REFERENCES COMPETENCE(Id_competence, Sigle),
     FOREIGN KEY (Id_evaluation) REFERENCES EVALUATION(Id_evaluation)
 );
 
-CREATE TABLE contient
+CREATE TABLE PROGRAMME_COURS
 (
     Id_programme INT NOT NULL,
-    Sigle INT NOT NULL,
+    Sigle VARCHAR(64) NOT NULL,
     PRIMARY KEY (Id_programme, Sigle),
     FOREIGN KEY (Id_programme) REFERENCES PROGRAMME(Id_programme),
     FOREIGN KEY (Sigle) REFERENCES COURS(Sigle)
@@ -62,27 +61,27 @@ CREATE TABLE contient
 
 CREATE TABLE ETUDIANT
 (
-    Cip INT NOT NULL,
-    Prenom INT NOT NULL,
-    Nom_famille INT NOT NULL,
+    Cip VARCHAR(16) NOT NULL,
+    Prenom VARCHAR(32) NOT NULL,
+    Nom_famille VARCHAR(32) NOT NULL,
     Id_programme INT NOT NULL,
     PRIMARY KEY (Cip),
     FOREIGN KEY (Id_programme) REFERENCES PROGRAMME(Id_programme)
 );
 
-CREATE TABLE inscrit
+CREATE TABLE ETUDIANT_COURS
 (
-    Cip INT NOT NULL,
-    Sigle INT NOT NULL,
+    Cip VARCHAR(16) NOT NULL,
+    Sigle VARCHAR(64) NOT NULL,
     PRIMARY KEY (Cip, Sigle),
     FOREIGN KEY (Cip) REFERENCES ETUDIANT(Cip),
     FOREIGN KEY (Sigle) REFERENCES COURS(Sigle)
 );
 
-CREATE TABLE fait
+CREATE TABLE ETUDIANT_EVALUATION
 (
     Id_evaluation INT NOT NULL,
-    Cip INT NOT NULL,
+    Cip VARCHAR(64) NOT NULL,
     PRIMARY KEY (Id_evaluation, Cip),
     FOREIGN KEY (Id_evaluation) REFERENCES EVALUATION(Id_evaluation),
     FOREIGN KEY (Cip) REFERENCES ETUDIANT(Cip)
