@@ -19,22 +19,22 @@ INSERT INTO COMPETENCE(Id_competence, nom_comp, Sigle) VALUES (2, 'Comp2', 'INF1
 INSERT INTO COMPETENCE(Id_competence, nom_comp, Sigle) VALUES (3, 'Comp3', 'MAT1010');
 
 -- Insertion dans la table EVALUATION_COMPETENCE
-INSERT INTO EVALUATION_COMPETENCE(Resultat, Ponderation_competence, Id_competence, Sigle, Id_evaluation) VALUES (85, 0.5, 1, 'INF1001', 1);
-INSERT INTO EVALUATION_COMPETENCE(Resultat, Ponderation_competence, Id_competence, Sigle, Id_evaluation) VALUES (75, 0.5, 2, 'INF1002', 2);
+INSERT INTO EVALUATIONCOMPETENCE(Resultat, Ponderation_competence, Id_competence, Sigle, Id_evaluation) VALUES (85, 0.5, 1, 'INF1001', 1);
+INSERT INTO EVALUATIONCOMPETENCE(Resultat, Ponderation_competence, Id_competence, Sigle, Id_evaluation) VALUES (75, 0.5, 2, 'INF1002', 2);
 
 -- Insertion dans la table PROGRAMME_COURS
-INSERT INTO PROGRAMME_COURS(Id_programme, Sigle) VALUES (1, 'INF1001');
-INSERT INTO PROGRAMME_COURS(Id_programme, Sigle) VALUES (1, 'INF1002');
-INSERT INTO PROGRAMME_COURS(Id_programme, Sigle) VALUES (1, 'MAT1010');
+INSERT INTO PROGRAMMECOURS(Id_programme, Sigle) VALUES (1, 'INF1001');
+INSERT INTO PROGRAMMECOURS(Id_programme, Sigle) VALUES (1, 'INF1002');
+INSERT INTO PROGRAMMECOURS(Id_programme, Sigle) VALUES (1, 'MAT1010');
 
 -- Insertion dans la table ETUDIANT
 INSERT INTO ETUDIANT(Cip, Prenom, Nom_famille, Id_programme) VALUES ('CIP12345678', 'Jean', 'Doe', 1);
 
 -- Insertion dans la table ETUDIANT_COURS
-INSERT INTO ETUDIANT_COURS(Cip, Sigle) VALUES ('CIP12345678', 'INF1001');
-INSERT INTO ETUDIANT_COURS(Cip, Sigle) VALUES ('CIP12345678', 'INF1002');
-INSERT INTO ETUDIANT_COURS(Cip, Sigle) VALUES ('CIP12345678', 'MAT1010');
+INSERT INTO ETUDIANTCOURS(Cip, Sigle) VALUES ('CIP12345678', 'INF1001');
+INSERT INTO ETUDIANTCOURS(Cip, Sigle) VALUES ('CIP12345678', 'INF1002');
+INSERT INTO ETUDIANTCOURS(Cip, Sigle) VALUES ('CIP12345678', 'MAT1010');
 
 -- Insertion dans la table ETUDIANT_EVALUATION
-INSERT INTO ETUDIANT_EVALUATION(Id_evaluation, Cip) VALUES (1, 'CIP12345678');
-INSERT INTO ETUDIANT_EVALUATION(Id_evaluation, Cip) VALUES (2, 'CIP12345678');
+INSERT INTO ETUDIANTEVALUATION(Id_evaluation, Cip) VALUES (1, 'CIP12345678');
+INSERT INTO ETUDIANTEVALUATION(Id_evaluation, Cip) VALUES (2, 'CIP12345678');
