@@ -1,9 +1,38 @@
+<!DOCTYPE html>
 <html>
 <head>
+    <style>
+        .text-container {
+            display: flex;
+            justify-content: space-between;
+            font-weight: bold;
+            font-size: 30px;
+            margin-bottom: 20px;
+        }
+        .top-right {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .container {
+            margin-bottom: 20px;
+        }
+        table {
+            margin:10px auto;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding:10px;
+            border: 1px solid black;
+        }
+    </style>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="http://localhost:8180/js/keycloak.js"></script>
     <script>
         var keycloak;
+
         function initKeycloak() {
             keycloak = new Keycloak({
                 "realm": "usager",
@@ -13,14 +42,13 @@
                 "public-client": true,
                 "confidential-port": 0
             });
+
             keycloak.init({onLoad: 'login-required'}).then(function (authenticated) {
                 alert(authenticated ? 'authenticated' : 'not authenticated');
-
             }).catch(function () {
                 alert('failed to initialize');
             });
         }
-
 
         function requestStudent() {
             const div = document.getElementById('title');
@@ -46,7 +74,7 @@
                         console.log('Failed to refresh token');
                     })
                 });
-            span.innerHTML = '<br> <strong>' + "Vous n'avez pas le role d'etudiant" + '</strong> </br>'
+            span.innerHTML = '<br> <strong>' + "Vous n\'avez pas le rôle d\'étudiant" + '</strong> </br>'
         }
 
         function requestTeacher() {
@@ -73,20 +101,39 @@
                         console.log('Failed to refresh token');
                     })
                 });
-            span.innerHTML = '<br> <strong>' + "Vous n'avez pas le role d'enseignant" + '</strong> </br>'
+            span.innerHTML = '<br> <strong>' + "Vous n\'avez pas le rôle d\'enseignant" + '</strong> </br>'
         }
 
         function logout() {
-         //   let logoutURL = "http://localhost:8080//realms/usager/protocol/openid-connect/logout"
-         //   window.location.href = logoutURL;
+            // let logoutURL = "http://localhost:8080//realms/usager/protocol/openid-connect/logout"
+            // window.location.href = logoutURL;
         }
-
-
     </script>
 </head>
 <body onload="initKeycloak()">
-<button onclick="requestStudent()">etudiant?</button>
-<button onclick="requestTeacher()">Enseignant?</button>
+<div class="top-right">Universite de Sherbrooke</div>
+
+<div class="text-container">Vos Notes</div>
+
+<div class="container">
+    <div class="dropdown">
+        <label for="trimestre">Choisir un trimestre:</label>
+        <select id="trimestre">
+            <option value="trimestre1">Trimestre 1</option>
+            <option value="trimestre2">Trimestre 2</option>
+            <option value="trimestre3">Trimestre 3</option>
+        </select>
+    </div>
+</div>
+
+<table id="myTable">
+    <tr>
+        <!-- Headers of the table -->
+        <!-- ... -->
+    </tr>
+</table>
+<script src="script.js"></script>
+
 <div id="title">
     <span></span>
 </div>
