@@ -1,3 +1,7 @@
+DROP SCHEMA IF EXISTS PROJET cascade;
+CREATE schema PROJET;
+set search_path = PROJET, pg_catalog;
+
 CREATE TABLE DEPARTEMENT
 (
     Id_departement INT NOT NULL,
