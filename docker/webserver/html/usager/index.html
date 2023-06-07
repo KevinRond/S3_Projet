@@ -1,92 +1,32 @@
+<!DOCTYPE html>
 <html>
 <head>
+    <link rel="stylesheet" type="text/css" href="stylezzzzz.css">
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="http://localhost:8180/js/keycloak.js"></script>
-    <script>
-        var keycloak;
-        function initKeycloak() {
-            keycloak = new Keycloak({
-                "realm": "usager",
-                "auth-server-url": "http://localhost:8180/",
-                "ssl-required": "external",
-                "clientId": "frontend",
-                "public-client": true,
-                "confidential-port": 0
-            });
-            keycloak.init({onLoad: 'login-required'}).then(function (authenticated) {
-                alert(authenticated ? 'authenticated' : 'not authenticated');
-
-            }).catch(function () {
-                alert('failed to initialize');
-            });
-        }
-
-
-        function requestStudent() {
-            const div = document.getElementById('title');
-            const span = div.firstElementChild;
-            axios.get("http://localhost:8888/api/student", {
-                headers: {
-                    'Authorization': 'Bearer ' + keycloak.token
-                }
-            })
-                .then(function (response) {
-                    console.log("Response: ", response.status);
-                    span.innerHTML = '<br> <strong>' + response.data.cip + '</strong> </br>' +
-                        '<br> <strong>' + response.data.last_name + '</strong> </br>' +
-                        '<br> <strong>' + response.data.first_name + '</strong> </br>' +
-                        '<br> <strong>' + response.data.email + '</strong> </br>' +
-                        '<br> <strong>' + response.data.roles + '</strong> </br>'
-                })
-                .catch(function (error) {
-                    console.log('refreshing');
-                    keycloak.updateToken(5).then(function () {
-                        console.log('Token refreshed');
-                    }).catch(function () {
-                        console.log('Failed to refresh token');
-                    })
-                });
-            span.innerHTML = '<br> <strong>' + "Vous n'avez pas le role d'étudiant" + '</strong> </br>'
-        }
-
-        function requestTeacher() {
-            const div = document.getElementById('title');
-            const span = div.firstElementChild;
-            axios.get("http://localhost:8888/api/teacher", {
-                headers: {
-                    'Authorization': 'Bearer ' + keycloak.token
-                }
-            })
-                .then(function (response) {
-                    console.log("Response: ", response.status);
-                    span.innerHTML = '<br> <strong>' + response.data.cip + '</strong> </br>' +
-                        '<br> <strong>' + response.data.last_name + '</strong> </br>' +
-                        '<br> <strong>' + response.data.first_name + '</strong> </br>' +
-                        '<br> <strong>' + response.data.email + '</strong> </br>' +
-                        '<br> <strong>' + response.data.roles + '</strong> </br>'
-                })
-                .catch(function (error) {
-                    console.log('refreshing');
-                    keycloak.updateToken(5).then(function () {
-                        console.log('Token refreshed');
-                    }).catch(function () {
-                        console.log('Failed to refresh token');
-                    })
-                });
-            span.innerHTML = '<br> <strong>' + "Vous n'avez pas le role d'enseignant" + '</strong> </br>'
-        }
-
-        function logout() {
-         //   let logoutURL = "http://localhost:8080//realms/usager/protocol/openid-connect/logout"
-         //   window.location.href = logoutURL;
-        }
-
-
-    </script>
+    <script src="script_keycloak.js"></script>
 </head>
 <body onload="initKeycloak()">
-<button onclick="requestStudent()">Étudiant?</button>
-<button onclick="requestTeacher()">Enseignant?</button>
+<div class="top-right">Universite de Sherbrooke</div>
+
+<div class="text-container">Vos Notes</div>
+
+<div class="container">
+    <div class="dropdown">
+        <label for="trimestre">Choisir un trimestre:</label>
+        <select id="trimestre">
+            <option value="trimestre1">Trimestre 1</option>
+            <option value="trimestre2">Trimestre 2</option>
+            <option value="trimestre3">Trimestre 3</option>
+        </select>
+    </div>
+</div>
+
+<table id="myTable">
+    <tr></tr>
+</table>
+<script src="script.js"></script>
+
 <div id="title">
     <span></span>
 </div>
