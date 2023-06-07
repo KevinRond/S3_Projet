@@ -1,5 +1,6 @@
 package ca.usherbrooke.gegi.server.service;
 
+import ca.usherbrooke.gegi.server.business.Cours;
 import ca.usherbrooke.gegi.server.business.Person;
 import java.util.List;
 import java.util.Map;
@@ -11,6 +12,8 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.SecurityContext;
+
+import ca.usherbrooke.gegi.server.persistence.MessageMapper;
 import org.eclipse.microprofile.jwt.JsonWebToken;
 
 @Path("/api")
@@ -20,6 +23,16 @@ public class RoleService {
     SecurityContext securityContext;
     @Inject
     JsonWebToken jwt;
+
+    @Inject
+    MessageMapper messageMapper;
+
+    @GET
+    @Path("getCours")
+    public Cours getCours() {
+        Cours cours = messageMapper.selectcours();
+        return cours;
+    }
 
 
     @GET
