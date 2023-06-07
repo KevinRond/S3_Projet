@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+<title>Note-Ify</title>
 <head>
     <link rel="stylesheet" type="text/css" href="stylezzzzz.css">
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
@@ -7,12 +8,12 @@
     <script src="script_keycloak.js"></script>
 </head>
 <body onload="initKeycloak()">
-<div class="top-right">Universite de Sherbrooke</div>
-
-<div class="text-container">Vos Notes</div>
-
-<div class="container">
-    <div class="dropdown">
+<header>
+    <img alt="Université de Sherbrooke" src="udes.svg">
+    <div class="top-right">Vos Notes</div>
+</header>
+<div class="dropdown">
+    <div class="label-dropdown-container">
         <label for="trimestre">Choisir un trimestre:</label>
         <select id="trimestre">
             <option value="trimestre1">Trimestre 1</option>
