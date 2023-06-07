@@ -6,8 +6,8 @@
 
     <select id="selectcours" resultType="ca.usherbrooke.gegi.server.business.Cours">
         select nom_cours
-        from projet.vue_notes_etudiant
-        where nom_evaluation = 'Final'
+        from projet.cours
+
     </select>
 
     <!--    <select id="selectOne" resultType="ca.usherbrooke.fgen.api.business.Message">-->

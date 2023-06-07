@@ -6,12 +6,12 @@ function requestCours() {
     axios.get("http://localhost:8888/api/getCours")
         .then(function (response) {
             console.log("Response: ", response.status);
-            const coursList = response.data.map(cours => `<strong>${cours.nom_cours}</strong>`).join('<br>');
+            const coursNames = response.data.map(cours => cours.nomCours);
+            const coursList = coursNames.map(coursName => `<strong>${coursName}</strong>`).join('<br>');
             span.innerHTML = coursList;
         })
         .catch(function (error) {
             console.log('Error fetching data:', error);
-
             span.innerHTML = '<br> <strong>' + error.toString() + '</strong> </br>';
         });
 }

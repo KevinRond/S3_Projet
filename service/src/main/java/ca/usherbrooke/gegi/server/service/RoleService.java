@@ -30,8 +30,8 @@ public class RoleService {
     @GET
     @Path("getCours")
     @PermitAll
-    public Cours getCours() {
-        Cours cours = messageMapper.selectcours();
+    public   List<Cours> getCours() {
+        List<Cours> cours = messageMapper.selectcours();
         return cours;
     }
 

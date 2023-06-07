@@ -8,18 +8,18 @@
       <jdbc-url>jdbc:postgresql://localhost:5432/postgres</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
-    <data-source source="LOCAL" name="postgres@localhost" uuid="ce5d71c8-541b-4360-8ff1-76c5d1f7825d">
+    <data-source source="LOCAL" name="postgres@localhost [3]" uuid="0edaddcd-ea2b-47e7-9b27-959e4a3a76ed">
       <driver-ref>postgresql</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
       <jdbc-url>jdbc:postgresql://localhost:5432/postgres</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
-    <data-source source="LOCAL" name="postgres@localhost [3]" uuid="0edaddcd-ea2b-47e7-9b27-959e4a3a76ed">
+    <data-source source="LOCAL" name="postgres@localhost" uuid="99325185-ac85-4c46-9aed-8b664f5f3c83">
       <driver-ref>postgresql</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
-      <jdbc-url>jdbc:postgresql://localhost:5432/postgres</jdbc-url>
+      <jdbc-url>jdbc:postgresql://localhost:5444/postgres</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
   </component>
