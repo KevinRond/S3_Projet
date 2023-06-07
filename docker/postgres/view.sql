@@ -1,7 +1,10 @@
 DROP VIEW IF EXISTS vue_notes_etudiant CASCADE;
 
-CREATE VIEW vue_notes_etudiant AS
+CREATE VIEW vue_notes_etudiant_trimestre AS
 SELECT
+    E.cip,
+    C.id_trimestre,
+    C.Sigle,
     C.Nom_cours,
     Ev.Nom_evaluation,
     MAX(CASE WHEN Co.nom_comp = 'Comp1' THEN EC.Resultat ELSE NULL END) AS Comp1,
@@ -18,7 +21,7 @@ FROM
         JOIN EVALUATIONCOMPETENCE EC ON Ev.Id_evaluation = EC.Id_evaluation
         JOIN COMPETENCE Co ON EC.Id_competence = Co.Id_competence AND EC.Sigle = Co.Sigle
         JOIN COURS C ON Co.Sigle = C.Sigle
-WHERE
-        E.Cip = 'CIP12345678'
 GROUP BY
-    C.Nom_cours, Ev.Nom_evaluation;
+    E.Cip, C.id_trimestre,C.Sigle,C.Nom_cours, Ev.Nom_evaluation
+ORDER BY
+    E.cip ASC, C.id_trimestre ASC;
