@@ -1,4 +1,4 @@
-DROP VIEW IF EXISTS vue_notes_etudiant CASCADE;
+DROP VIEW IF EXISTS vue_notes_etudiant_trimestre CASCADE;
 
 CREATE VIEW vue_notes_etudiant_trimestre AS
 SELECT
