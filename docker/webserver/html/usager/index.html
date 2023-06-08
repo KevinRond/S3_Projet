@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="">
+<html lang="fr">
 <head>
     <link rel="stylesheet" type="text/css" href="stylezzzzz.css">
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
@@ -9,6 +9,27 @@
     <script src="script_request.js"></script>
     <title>Note-Ify</title>
     <link rel="icon" href="favicon.ico">
+    <style>
+        table {
+            table-layout: fixed;
+            width: 80%;
+            margin-bottom: 50px;
+        }
+
+        th:nth-child(1),
+        td:nth-child(1),
+        th:nth-child(2),
+        td:nth-child(2) {
+            width: 30%;
+            text-align: center;
+        }
+
+        th:nth-child(n+3),
+        td:nth-child(n+3) {
+            width: 12%;
+            text-align: center;
+        }
+    </style>
 </head>
 <body onload="initKeycloak()">
 <header>
