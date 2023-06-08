@@ -10,6 +10,15 @@
 
     </select>
 
+    <select id="selectTrimestre" resultType="ca.usherbrooke.gegi.server.business.Trimestre">
+        SELECT
+            vne.id_trimestre
+        FROM
+            projet.vue_notes_etudiant_trimestre vne
+        WHERE
+            vne.cip = #{cip}
+    </select>
+
     <select id="selectinfo" resultType="ca.usherbrooke.gegi.server.business.EtudiantsTrimestre">
         SELECT
             vne.sigle,
