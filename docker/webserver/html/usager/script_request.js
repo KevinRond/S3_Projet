@@ -11,12 +11,15 @@ function populateTrimestreDropdown() {
                 // Filter out duplicate idTrimestre values
                 const uniqueTrimestres = [...new Set(trimestres.map(trimestre => trimestre.idTrimestre))];
 
+
+
                 uniqueTrimestres.forEach(idTrimestre => {
                     const option = document.createElement('option');
                     option.value = idTrimestre;
                     option.textContent = idTrimestre;
                     trimestreSelect.appendChild(option);
                 });
+
 
                 // Add event listener to trigger the requestCours function when the dropdown changes
                 trimestreSelect.addEventListener('change', requestCours);
@@ -50,9 +53,9 @@ function requestCours() {
 
     const trimestreSelect = document.getElementById('trimestre');
     trimestreSelect.addEventListener('change', requestCours);
-    const selectedTrimestre = trimestreSelect.value;
+    const selectedTrimestre = trimestreSelect.options[trimestreSelect.selectedIndex].value;
     console.log(selectedTrimestre);
-    axios.get("http://localhost:8888/api/selectinfo/gerz0501/A22")
+    axios.get("http://localhost:8888/api/selectinfo/gerz0501/" + selectedTrimestre)
         .then(function (response) {
             console.log("Response: ", response.status);
             const coursData = response.data;

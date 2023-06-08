@@ -32,7 +32,7 @@ INSERT INTO COURS(Sigle,id_trimestre,Nom_cours) VALUES ('GEN135','A22', 'Circuit
 INSERT INTO COURS(Sigle,id_trimestre,Nom_cours) VALUES ('GEN136','A22', 'Circuits électriques II');
 INSERT INTO COURS(Sigle,id_trimestre,Nom_cours) VALUES ('GEN181','A22', 'Modélisation 3D');
 -- ## Session H23
-INSERT INTO COURS(Sigle,id_trimestre,Nom_cours) VALUES ('GEN200','H23', 'Concepts avancés en programmation orientée objet');
+INSERT INTO COURS(Sigle,id_trimestre,Nom_cours) VALUES ('GEN200','H23', 'Conception d''un systeme electronique et informatique');
 INSERT INTO COURS(Sigle,id_trimestre,Nom_cours) VALUES ('GEN211','H23', 'Mathématiques des signaux à temps continu');
 INSERT INTO COURS(Sigle,id_trimestre,Nom_cours) VALUES ('GEN230','H23', 'Électronique analogique I');
 INSERT INTO COURS(Sigle,id_trimestre,Nom_cours) VALUES ('GEN241','H23', 'Modélisation et programmation orientées objet');
@@ -322,6 +322,16 @@ INSERT INTO EVALUATION(Id_evaluation, Nom_evaluation, Ponderation) VALUES (15, '
 INSERT INTO EVALUATION(Id_evaluation, Nom_evaluation, Ponderation) VALUES (16, 'APP6 - Oral', 70);
 INSERT INTO EVALUATION(Id_evaluation, Nom_evaluation, Ponderation) VALUES (17, 'APP6 - Examen sommatif theorique', 250);
 INSERT INTO EVALUATION(Id_evaluation, Nom_evaluation, Ponderation) VALUES (18, 'Examen final - GEN136 / GEN122', 280);
+-- ## H23 ##
+-- ## Cours GEN200 ##
+INSERT INTO EVALUATION(id_evaluation, nom_evaluation, ponderation) VALUES (19, 'Projet - Audit #1', 50);
+INSERT INTO EVALUATION(id_evaluation, nom_evaluation, ponderation) VALUES (20, 'Projet - Audit #2', 55);
+INSERT INTO EVALUATION(id_evaluation, nom_evaluation, ponderation) VALUES (21, 'Projet - Rapport mi-session', 80);
+INSERT INTO EVALUATION(id_evaluation, nom_evaluation, ponderation) VALUES (22, 'Projet - Audit #3', 55);
+INSERT INTO EVALUATION(id_evaluation, nom_evaluation, ponderation) VALUES (23, 'Projet - Demo final', 40);
+INSERT INTO EVALUATION(id_evaluation, nom_evaluation, ponderation) VALUES (24, 'Projet - Rapport final', 110);
+INSERT INTO EVALUATION(id_evaluation, nom_evaluation, ponderation) VALUES (25, 'Projet - Professionalisme', 20);
+INSERT INTO EVALUATION(id_evaluation, nom_evaluation, ponderation) VALUES (26, 'Examens finaux - GEN200', 190);
 
 -- Insertion dans la table COMPETENCE
 -- ## A22 ##
@@ -450,7 +460,24 @@ INSERT INTO EVALUATIONCOMPETENCE(Resultat, Ponderation_competence, Id_competence
 INSERT INTO EVALUATIONCOMPETENCE(Resultat, Ponderation_competence, Id_competence, Sigle, Id_evaluation) VALUES (73, 80, 7, 'GEN122', 18);
 INSERT INTO EVALUATIONCOMPETENCE(Resultat, Ponderation_competence, Id_competence, Sigle, Id_evaluation) VALUES (133.5, 200, 8, 'GEN122', 18);
 
-
+-- ##H23##
+--##GEN200##
+INSERT INTO EVALUATIONCOMPETENCE(Resultat, Ponderation_competence, Id_competence, Sigle, Id_evaluation) VALUES (37.3, 40, 14, 'GEN200', 19);
+INSERT INTO EVALUATIONCOMPETENCE(Resultat, Ponderation_competence, Id_competence, Sigle, Id_evaluation) VALUES (10, 10, 15, 'GEN200', 19);
+INSERT INTO EVALUATIONCOMPETENCE(Resultat, Ponderation_competence, Id_competence, Sigle, Id_evaluation) VALUES (39.2, 40, 14, 'GEN200', 20);
+INSERT INTO EVALUATIONCOMPETENCE(Resultat, Ponderation_competence, Id_competence, Sigle, Id_evaluation) VALUES (15.6, 15, 15, 'GEN200', 20);
+INSERT INTO EVALUATIONCOMPETENCE(Resultat, Ponderation_competence, Id_competence, Sigle, Id_evaluation) VALUES (50.7, 50, 15, 'GEN200', 21);
+INSERT INTO EVALUATIONCOMPETENCE(Resultat, Ponderation_competence, Id_competence, Sigle, Id_evaluation) VALUES (30, 30, 16, 'GEN200', 21);
+INSERT INTO EVALUATIONCOMPETENCE(Resultat, Ponderation_competence, Id_competence, Sigle, Id_evaluation) VALUES (37.7, 40, 14, 'GEN200', 22);
+INSERT INTO EVALUATIONCOMPETENCE(Resultat, Ponderation_competence, Id_competence, Sigle, Id_evaluation) VALUES (15, 15, 15, 'GEN200', 22);
+INSERT INTO EVALUATIONCOMPETENCE(Resultat, Ponderation_competence, Id_competence, Sigle, Id_evaluation) VALUES (33.7, 40, 14, 'GEN200', 23);
+INSERT INTO EVALUATIONCOMPETENCE(Resultat, Ponderation_competence, Id_competence, Sigle, Id_evaluation) VALUES (36.4, 40, 14, 'GEN200', 24);
+INSERT INTO EVALUATIONCOMPETENCE(Resultat, Ponderation_competence, Id_competence, Sigle, Id_evaluation) VALUES (50.6, 50, 15, 'GEN200', 24);
+INSERT INTO EVALUATIONCOMPETENCE(Resultat, Ponderation_competence, Id_competence, Sigle, Id_evaluation) VALUES (20.2, 20, 16, 'GEN200', 24);
+INSERT INTO EVALUATIONCOMPETENCE(Resultat, Ponderation_competence, Id_competence, Sigle, Id_evaluation) VALUES (20, 20, 16, 'GEN200', 25);
+INSERT INTO EVALUATIONCOMPETENCE(Resultat, Ponderation_competence, Id_competence, Sigle, Id_evaluation) VALUES (38.83, 50, 14, 'GEN200', 26);
+INSERT INTO EVALUATIONCOMPETENCE(Resultat, Ponderation_competence, Id_competence, Sigle, Id_evaluation) VALUES (69.5, 110, 15, 'GEN200', 26);
+INSERT INTO EVALUATIONCOMPETENCE(Resultat, Ponderation_competence, Id_competence, Sigle, Id_evaluation) VALUES (25, 30, 16, 'GEN200', 26);
 -- Insertion dans la table ETUDIANT_EVALUATION
 INSERT INTO ETUDIANTEVALUATION(Id_evaluation, Cip) VALUES (1, 'gerz0501');
 INSERT INTO ETUDIANTEVALUATION(Id_evaluation, Cip) VALUES (2, 'gerz0501');
@@ -470,4 +497,12 @@ INSERT INTO ETUDIANTEVALUATION(Id_evaluation, Cip) VALUES (15, 'gerz0501');
 INSERT INTO ETUDIANTEVALUATION(Id_evaluation, Cip) VALUES (16, 'gerz0501');
 INSERT INTO ETUDIANTEVALUATION(Id_evaluation, Cip) VALUES (17, 'gerz0501');
 INSERT INTO ETUDIANTEVALUATION(Id_evaluation, Cip) VALUES (18, 'gerz0501');
+INSERT INTO ETUDIANTEVALUATION(Id_evaluation, Cip) VALUES (19, 'gerz0501');
+INSERT INTO ETUDIANTEVALUATION(Id_evaluation, Cip) VALUES (20, 'gerz0501');
+INSERT INTO ETUDIANTEVALUATION(Id_evaluation, Cip) VALUES (21, 'gerz0501');
+INSERT INTO ETUDIANTEVALUATION(Id_evaluation, Cip) VALUES (22, 'gerz0501');
+INSERT INTO ETUDIANTEVALUATION(Id_evaluation, Cip) VALUES (23, 'gerz0501');
+INSERT INTO ETUDIANTEVALUATION(Id_evaluation, Cip) VALUES (24, 'gerz0501');
+INSERT INTO ETUDIANTEVALUATION(Id_evaluation, Cip) VALUES (25, 'gerz0501');
+INSERT INTO ETUDIANTEVALUATION(Id_evaluation, Cip) VALUES (26, 'gerz0501');
 
