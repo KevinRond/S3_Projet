@@ -1,4 +1,4 @@
-CREATE OR REPLACE FUNCTION obtenir_notes_etudiant(cip_param VARCHAR, trimestre_param VARCHAR)
+CREATE OR REPLACE FUNCTION obtenir_notes_etudiant(cip_param text, trimestre_param text)
     RETURNS TABLE (
                       sigle VARCHAR,
                       nom_cours VARCHAR,

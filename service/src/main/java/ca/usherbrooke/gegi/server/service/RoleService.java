@@ -1,6 +1,7 @@
 package ca.usherbrooke.gegi.server.service;
 
 import ca.usherbrooke.gegi.server.business.Cours;
+import ca.usherbrooke.gegi.server.business.EtudiantsTrimestre;
 import ca.usherbrooke.gegi.server.business.Person;
 import java.util.List;
 import java.util.Map;
@@ -9,6 +10,7 @@ import javax.annotation.security.RolesAllowed;
 import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.SecurityContext;
@@ -30,30 +32,46 @@ public class RoleService {
     @GET
     @Path("getCours")
     @PermitAll
-    public   List<Cours> getCours() {
+    public List<Cours> getCours() {
         List<Cours> cours = messageMapper.selectcours();
         return cours;
     }
 
-
     @GET
-    @Path("/teacher")
-    @RolesAllowed({"enseignant"})
-    public Person teacher() {
-        Person p = new Person();
-        p.cip = this.securityContext.getUserPrincipal().getName();
-        p.last_name = (String)this.jwt.getClaim("family_name");
-        p.first_name = (String)this.jwt.getClaim("given_name");
-        p.email = (String)this.jwt.getClaim("email");
-        Map realmAccess = (Map)this.jwt.getClaim("realm_access");
-        if (realmAccess != null && realmAccess.containsKey("roles")) {
-            p.roles = (List)realmAccess.get("roles");
-        }
-
-        System.out.println(p);
-        return p;
+    @Path("selectinfo/{cip}/{trimestre}")
+    @PermitAll
+    public List<EtudiantsTrimestre> selectinfo(
+            @PathParam("cip") String cip,
+            @PathParam("trimestre") String trimestre
+    ) {
+        return messageMapper.selectinfo();
     }
 
+
+
+//        Message message = messageMapper.selectOne(id);
+//        return unescapeEntities(message);
+
+
+
+//    @GET
+//    @Path("/teacher")
+//    @RolesAllowed({"enseignant"})
+//    public Person teacher() {
+//        Person p = new Person();
+//        p.cip = this.securityContext.getUserPrincipal().getName();
+//        p.last_name = (String)this.jwt.getClaim("family_name");
+//        p.first_name = (String)this.jwt.getClaim("given_name");
+//        p.email = (String)this.jwt.getClaim("email");
+//        Map realmAccess = (Map)this.jwt.getClaim("realm_access");
+//        if (realmAccess != null && realmAccess.containsKey("roles")) {
+//            p.roles = (List)realmAccess.get("roles");
+//        }
+//
+//        System.out.println(p);
+//        return p;
+//    }
+//
     @GET
     @Path("/student")
     @RolesAllowed({"etudiant"})
@@ -71,22 +89,22 @@ public class RoleService {
         System.out.println(p);
         return p;
     }
-
-    @GET
-    @Path("/any")
-    @PermitAll
-    public Person me() {
-        Person p = new Person();
-        p.cip = this.securityContext.getUserPrincipal().getName();
-        p.last_name = (String)this.jwt.getClaim("family_name");
-        p.first_name = (String)this.jwt.getClaim("given_name");
-        p.email = (String)this.jwt.getClaim("email");
-        Map realmAccess = (Map)this.jwt.getClaim("realm_access");
-        if (realmAccess != null && realmAccess.containsKey("roles")) {
-            p.roles = (List)realmAccess.get("roles");
-        }
-
-        System.out.println(p);
-        return p;
-    }
+//
+//    @GET
+//    @Path("/any")
+//    @PermitAll
+//    public Person me() {
+//        Person p = new Person();
+//        p.cip = this.securityContext.getUserPrincipal().getName();
+//        p.last_name = (String)this.jwt.getClaim("family_name");
+//        p.first_name = (String)this.jwt.getClaim("given_name");
+//        p.email = (String)this.jwt.getClaim("email");
+//        Map realmAccess = (Map)this.jwt.getClaim("realm_access");
+//        if (realmAccess != null && realmAccess.containsKey("roles")) {
+//            p.roles = (List)realmAccess.get("roles");
+//        }
+//
+//        System.out.println(p);
+//        return p;
+//    }
 }
