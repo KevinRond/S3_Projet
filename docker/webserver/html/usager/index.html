@@ -7,39 +7,55 @@
     <script src="script_keycloak.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="script_request.js"></script>
-        <title>Note-Ify</title>
-        <link rel="icon" href="favicon.ico">
-    </head>
-    <body onload="initKeycloak()">
-        <header>
-            <img alt="Université de Sherbrooke" src="udes.svg">
-            <div class="top-right">Vos Notes</div>
-        </header>
-        <div class="dropdown">
-            <div class="label-dropdown-container">
-                <label for="trimestre">Choisir un trimestre:</label>
-                <select id="trimestre">
-                    <option value="trimestre1">Trimestre 1</option>
-                    <option value="trimestre2">Trimestre 2</option>
-                    <option value="trimestre3">Trimestre 3</option>
-                </select>
-            </div>
-        </div>
-        
-<!--        <table id="myTable">-->
-<!--            <tr></tr>-->
-<!--        </table>-->
-<!--        <script src="script.js"></script>-->
-    
-        <div id="title">
-            <span></span>
-        </div>
-    <footer>
-        <img src="favicon.ico" alt="Favicon">
-        <p>Developpé par l'équipe PassionFruit ( ͡°( ͡° ͜ʖ ͡°( ͡▧ ͜ʖ ͡▧) ͡° ͜ʖ ͡°) ͡°)</p>
-    </footer>
+    <title>Note-Ify</title>
+    <link rel="icon" href="favicon.ico">
+    <style>
+        table {
+            table-layout: fixed;
+            width: 80%;
+            margin-bottom: 50px;
+        }
+
+        th:nth-child(1),
+        td:nth-child(1),
+        th:nth-child(2),
+        td:nth-child(2) {
+            width: 30%;
+            text-align: center;
+        }
+
+        th:nth-child(n+3),
+        td:nth-child(n+3) {
+            width: 12%;
+            text-align: center;
+        }
+    </style>
+</head>
+<body onload="initKeycloak()">
+<header>
+    <img alt="Université de Sherbrooke" src="udes.svg">
+    <div class="top-right">Vos Notes</div>
+</header>
+<div class="dropdown">
+    <div class="label-dropdown-container">
+        <label for="trimestre">Choisir un trimestre:</label>
+        <select id="trimestre">
+            <option value="trimestre1">Trimestre 1</option>
+            <option value="trimestre2">Trimestre 2</option>
+            <option value="trimestre3">Trimestre 3</option>
+        </select>
+    </div>
+</div>
+
+<div id="title">
+    <span></span>
+</div>
+<footer>
+    <img src="favicon.ico" alt="Favicon">
+    <p>Developpé par l'équipe PassionFruit ( ͡°( ͡° ͜ʖ ͡°( ͡▧ ͜ʖ ͡▧) ͡° ͜ʖ ͡°) ͡°)</p>
+</footer>
 <script>
     requestCours();
 </script>
-    </body>
+</body>
 </html>
