@@ -1,6 +1,7 @@
 window.addEventListener('DOMContentLoaded', (event) => {
     // Function to populate the values in the table cells
     function populateTable() {
+        console.log("populate table function called!!!");
         // Get the table element
         var table = document.getElementById('myTable');
 

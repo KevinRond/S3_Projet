@@ -1,12 +1,14 @@
 <!DOCTYPE html>
-<html lang="fr">
-    <head>
-        <link rel="shortcut icon" href="favicon.ico" >
-        <link rel="stylesheet" type="text/css" href="stylezzzzz.css">
-        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-        <script src="http://localhost:8180/js/keycloak.js"></script>
-        <script src="script_keycloak.js"></script>
+<html lang="">
+<head>
+    <link rel="stylesheet" type="text/css" href="stylezzzzz.css">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="http://localhost:8180/js/keycloak.js"></script>
+    <script src="script_keycloak.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="script_request.js"></script>
         <title>Note-Ify</title>
+        <link rel="icon" href="favicon.ico">
     </head>
     <body onload="initKeycloak()">
         <header>
@@ -24,17 +26,20 @@
             </div>
         </div>
         
-        <table id="myTable">
-            <tr></tr>
-        </table>
-        <script src="script.js"></script>
+<!--        <table id="myTable">-->
+<!--            <tr></tr>-->
+<!--        </table>-->
+<!--        <script src="script.js"></script>-->
     
         <div id="title">
             <span></span>
         </div>
-    </body>
     <footer>
         <img src="favicon.ico" alt="Favicon">
         <p>Developpé par l'équipe PassionFruit ( ͡°( ͡° ͜ʖ ͡°( ͡▧ ͜ʖ ͡▧) ͡° ͜ʖ ͡°) ͡°)</p>
     </footer>
+<script>
+    requestCours();
+</script>
+    </body>
 </html>
