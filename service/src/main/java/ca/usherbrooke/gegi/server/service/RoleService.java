@@ -44,7 +44,7 @@ public class RoleService {
             @PathParam("cip") String cip,
             @PathParam("trimestre") String trimestre
     ) {
-        return messageMapper.selectinfo();
+        return messageMapper.selectinfo(cip, trimestre);
     }
 
 

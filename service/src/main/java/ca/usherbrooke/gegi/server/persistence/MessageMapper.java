@@ -5,10 +5,11 @@ import ca.usherbrooke.gegi.server.business.Cours;
 import ca.usherbrooke.gegi.server.business.EtudiantsTrimestre;
 import ca.usherbrooke.gegi.server.business.Person;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 //import org.apache.ibatis.annotations.Param;
 
 @Mapper
 public interface MessageMapper {
     List<Cours> selectcours();
-    List<EtudiantsTrimestre> selectinfo();
+    List<EtudiantsTrimestre> selectinfo(@Param("cip") String cip, @Param("trimestre") String trimestre);
 }
