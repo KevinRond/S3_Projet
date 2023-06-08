@@ -43,7 +43,7 @@ th, td {
     border: 1px solid black;
 }
 footer {
-    position: fixed;
+    position: relative;
     left: 0;
     bottom: 0;
     width: 100%;
@@ -51,6 +51,7 @@ footer {
     padding: 10px;
     display: flex;
     align-items: center;
+    margin-top: 20px;
 }
 
 footer img {

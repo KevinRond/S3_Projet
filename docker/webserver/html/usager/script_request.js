@@ -2,7 +2,7 @@ function requestCours() {
     console.log("function called??????????????");
     const div = document.getElementById('title');
     const span = div.firstElementChild;
-    axios.get("http://localhost:8888/api/selectinfo/dalv1001/A22")
+    axios.get("http://localhost:8888/api/selectinfo/gerz0501/A22")
         .then(function (response) {
             console.log("Response: ", response.status);
             const coursData = response.data;
