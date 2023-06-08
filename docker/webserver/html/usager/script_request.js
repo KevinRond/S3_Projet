@@ -1,3 +1,45 @@
+function populateTrimestreDropdown() {
+    const trimestreSelect = document.getElementById('trimestre');
+    axios
+        .get('http://localhost:8888/api/selectTrimestre/gerz0501/')
+        .then(function(response) {
+            console.log('Response: ', response.status);
+            const trimestres = response.data;
+
+            // Validate the response data
+            if (Array.isArray(trimestres) && trimestres.length > 0) {
+                // Filter out duplicate idTrimestre values
+                const uniqueTrimestres = [...new Set(trimestres.map(trimestre => trimestre.idTrimestre))];
+
+                uniqueTrimestres.forEach(idTrimestre => {
+                    const option = document.createElement('option');
+                    option.value = idTrimestre;
+                    option.textContent = idTrimestre;
+                    trimestreSelect.appendChild(option);
+                });
+
+                // Add event listener to trigger the requestCours function when the dropdown changes
+                trimestreSelect.addEventListener('change', requestCours);
+
+                // Trigger the initial requestCours function
+                requestCours();
+            } else {
+                // Handle empty or invalid data
+                trimestreSelect.innerHTML = '<option value="">No trimestres available</option>';
+            }
+        })
+        .catch(function(error) {
+            console.log('Error fetching trimestres:', error);
+            trimestreSelect.innerHTML = '<option value="">Error fetching trimestres</option>';
+        });
+}
+
+
+
+// The rest of your requestCours function and other helper functions can remain the same
+// ...
+
+
 function requestCours() {
     console.log("function called??????????????");
     const div = document.getElementById('title');
