@@ -1,3 +1,7 @@
+body {
+    margin: 0;
+}
+
 header {
     display: flex;
     justify-content: space-between;
@@ -46,6 +50,7 @@ footer {
     position: relative;
     left: 0;
     bottom: 0;
+    top: 10px;
     width: 100%;
     background-color: #f5f5f5;
     padding: 10px;
