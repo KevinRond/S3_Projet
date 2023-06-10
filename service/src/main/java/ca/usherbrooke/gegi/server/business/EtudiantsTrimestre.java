@@ -2,6 +2,9 @@ package ca.usherbrooke.gegi.server.business;
 
 import java.util.List;
 
+/**
+ * class to stock the grades of a student for a specific semester
+ */
 public class EtudiantsTrimestre {
 
 

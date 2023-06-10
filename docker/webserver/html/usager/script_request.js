@@ -1,9 +1,16 @@
+
+// =======================================================================================================
+//============= Java script file for the filling of the table of grades ==================================
+//============= function to select the semester of a student populating the dropdown ========================
 function populateTrimestreDropdown() {
+    const cip = user.preferred_username;
     const trimestreSelect = document.getElementById('trimestre');
     axios
-        .get('http://localhost:8888/api/selectTrimestre/gerz0501/')
+        .get('http://localhost:8888/api/selectTrimestre/' + cip + '/')
         .then(function(response) {
             console.log('Response: ', response.status);
+            console.log(user);
+
             const trimestres = response.data;
 
             // Validate the response data
@@ -36,13 +43,11 @@ function populateTrimestreDropdown() {
             trimestreSelect.innerHTML = '<option value="">Error fetching trimestres</option>';
         });
 }
+// =========================================================================================================
 
 
-
-// The rest of your requestCours function and other helper functions can remain the same
-// ...
-
-
+// ============================================================================================================
+// ============= function to populate the table of evaluations for a student adn specific semester ============
 function requestCours() {
     console.log("function called??????????????");
     const div = document.getElementById('title');
@@ -52,10 +57,11 @@ function requestCours() {
     span.innerHTML = '';
 
     const trimestreSelect = document.getElementById('trimestre');
-    trimestreSelect.addEventListener('change', requestCours);
     const selectedTrimestre = trimestreSelect.options[trimestreSelect.selectedIndex].value;
-    console.log(selectedTrimestre);
-    axios.get("http://localhost:8888/api/selectinfo/gerz0501/" + selectedTrimestre)
+    console.log(selectedTrimestre)
+    const cip = user.preferred_username;
+    console.log("cip is : ", cip);
+    axios.get("http://localhost:8888/api/selectinfo/" + cip + "/" + selectedTrimestre)
         .then(function (response) {
             console.log("Response: ", response.status);
             const coursData = response.data;
@@ -172,15 +178,20 @@ function requestCours() {
             span.innerHTML = '<br> <strong>' + error.toString() + '</strong> </br>';
         });
 }
+// ===========================================================================================================
 
-
+// ===========================================================================================================
+// =================== function for grouping the classes of the same name together ============================
 function groupByNomCours(coursData) {
     return coursData.reduce((result, cours) => {
         (result[cours.nomCours] = result[cours.nomCours] || []).push(cours);
         return result;
     }, {});
 }
+// ==========================================================================================================
 
+// ==========================================================================================================
+// ======= function to turn the evaluations in average in percentage of the three competences ===============
 function getCoursCellValue(value, ponderation) {
     if (value === null || ponderation === null) {
         return { value: '', ponderation: '' }; // Empty cell
@@ -189,4 +200,106 @@ function getCoursCellValue(value, ponderation) {
         const formattedPonderation = ponderation !== undefined ? ponderation : '';
         return { value: formattedValue, ponderation: formattedPonderation };
     }
+}
+// =================================================================================================================
+
+
+
+var keycloak;
+let user;
+
+// ===========================================================================================================
+// ================== rest of the file in relation to the keycloak login 0_0 =================================
+function initializeKeycloak() {
+    return new Promise((resolve, reject) => {
+        keycloak = new Keycloak({
+            "realm": "usager",
+            "auth-server-url": "http://localhost:8180/",
+            "ssl-required": "external",
+            "clientId": "frontend",
+            "public-client": true,
+            "confidential-port": 0
+        });
+
+        keycloak.init({ onLoad: 'login-required' }).then((authenticated) => {
+            if (authenticated) {
+                const user = keycloak.tokenParsed;
+                console.log("User authenticated:", user);
+                resolve(user); // Resolve the promise with the user
+            } else {
+                reject(new Error('User not authenticated'));
+            }
+        }).catch((error) => {
+            reject(error);
+        });
+    });
+}
+
+function initKeycloak() {
+    initializeKeycloak().then((resolvedUser) => {
+        user = resolvedUser;
+        console.log("Initialization complete");
+        populateTrimestreDropdown();
+    }).catch((error) => {
+        console.error("Failed to initialize Keycloak:", error);
+    });
+}
+
+function requestStudent() {
+    const div = document.getElementById('title');
+    const span = div.firstElementChild;
+    axios.get("http://localhost:8888/api/student", {
+        headers: {
+            'Authorization': 'Bearer ' + keycloak.token
+        }
+    })
+        .then(function (response) {
+            console.log("Response: ", response.status);
+            span.innerHTML = '<br> <strong>' + response.data.cip + '</strong> </br>' +
+                '<br> <strong>' + response.data.last_name + '</strong> </br>' +
+                '<br> <strong>' + response.data.first_name + '</strong> </br>' +
+                '<br> <strong>' + response.data.email + '</strong> </br>' +
+                '<br> <strong>' + response.data.roles + '</strong> </br>'
+        })
+        .catch(function (error) {
+            console.log('refreshing');
+            keycloak.updateToken(5).then(function () {
+                console.log('Token refreshed');
+            }).catch(function () {
+                console.log('Failed to refresh token');
+            })
+        });
+    span.innerHTML = '<br> <strong>' + "Vous n\'avez pas le rôle d\'étudiant" + '</strong> </br>'
+}
+
+function requestTeacher() {
+    const div = document.getElementById('title');
+    const span = div.firstElementChild;
+    axios.get("http://localhost:8888/api/teacher", {
+        headers: {
+            'Authorization': 'Bearer ' + keycloak.token
+        }
+    })
+        .then(function (response) {
+            console.log("Response: ", response.status);
+            span.innerHTML = '<br> <strong>' + response.data.cip + '</strong> </br>' +
+                '<br> <strong>' + response.data.last_name + '</strong> </br>' +
+                '<br> <strong>' + response.data.first_name + '</strong> </br>' +
+                '<br> <strong>' + response.data.email + '</strong> </br>' +
+                '<br> <strong>' + response.data.roles + '</strong> </br>'
+        })
+        .catch(function (error) {
+            console.log('refreshing');
+            keycloak.updateToken(5).then(function () {
+                console.log('Token refreshed');
+            }).catch(function () {
+                console.log('Failed to refresh token');
+            })
+        });
+    span.innerHTML = '<br> <strong>' + "Vous n\'avez pas le rôle d\'enseignant" + '</strong> </br>'
+}
+
+function logout() {
+    // let logoutURL = "http://localhost:8080//realms/usager/protocol/openid-connect/logout"
+    // window.location.href = logoutURL;
 }

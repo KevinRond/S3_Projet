@@ -2,11 +2,12 @@
 <html lang="fr">
 <head>
     <link rel="stylesheet" type="text/css" href="stylezzzzz.css">
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="http://localhost:8180/js/keycloak.js"></script>
-    <script src="script_keycloak.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="script_request.js"></script>
+    <script>
+        initKeycloak();
+    </script>
     <title>Note-Ify</title>
     <link rel="icon" href="favicon.ico">
     <style>
@@ -31,7 +32,7 @@
         }
     </style>
 </head>
-<body onload="initKeycloak()">
+<body>
 <header>
     <img alt="Université de Sherbrooke" src="udes.svg">
     <div class="top-right">Vos Notes</div>
@@ -50,8 +51,5 @@
     <img src="favicon.ico" alt="Favicon">
     <p>Developpé par l'équipe PassionFruit ( ͡°( ͡° ͜ʖ ͡°( ͡▧ ͜ʖ ͡▧) ͡° ͜ʖ ͡°) ͡°)</p>
 </footer>
-<script>
-    populateTrimestreDropdown();
-</script>
 </body>
 </html>
