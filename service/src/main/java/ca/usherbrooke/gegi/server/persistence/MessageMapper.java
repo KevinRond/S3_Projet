@@ -9,6 +9,9 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 //import org.apache.ibatis.annotations.Param;
 
+/**
+ * class for the mapping of the SQL request made in the XML file
+ */
 @Mapper
 public interface MessageMapper {
     List<Cours> selectcours();
