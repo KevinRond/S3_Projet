@@ -300,6 +300,7 @@ function requestTeacher() {
 }
 
 function logout() {
-    // let logoutURL = "http://localhost:8080//realms/usager/protocol/openid-connect/logout"
-    // window.location.href = logoutURL;
+    let logoutURL = "http://localhost:8080//realms/usager/protocol/openid-connect/logout"
+    window.location.href = logoutURL;
+    keycloak.logout({ redirectUri: 'http://localhost:8080//realms/usager/protocol/openid-connect/logout' });
 }
