@@ -329,7 +329,6 @@ INSERT INTO COMPETENCE(nom_comp, Sigle, id_trimestre) VALUES ('Comp1', 'GEN136',
 INSERT INTO COMPETENCE(nom_comp, Sigle, id_trimestre) VALUES ('Comp2', 'GEN136', 'A22');
 -- ## Cours GEN181 ##
 INSERT INTO COMPETENCE(nom_comp, Sigle, id_trimestre) VALUES ('Comp1', 'GEN181', 'A22');
-
 -- ## H23 ##
 -- ## Cours GEN200 ##
 INSERT INTO COMPETENCE(nom_comp, Sigle, id_trimestre) VALUES ('Comp1', 'GEN200', 'H23');
