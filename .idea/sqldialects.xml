@@ -2,6 +2,7 @@
 <project version="4">
   <component name="SqlDialectMappings">
     <file url="file://$PROJECT_DIR$/docker/postgres/feed.sql" dialect="PostgreSQL" />
+    <file url="file://$PROJECT_DIR$/docker/postgres/function.sql" dialect="PostgreSQL" />
     <file url="file://$PROJECT_DIR$/docker/postgres/inittable.sql" dialect="PostgreSQL" />
     <file url="file://$PROJECT_DIR$/docker/postgres/view.sql" dialect="PostgreSQL" />
     <file url="file://$PROJECT_DIR$/docker/webserver/html/usager/fetch_notes.js" dialect="PostgreSQL" />

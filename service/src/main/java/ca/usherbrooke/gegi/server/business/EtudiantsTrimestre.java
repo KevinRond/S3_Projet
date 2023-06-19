@@ -19,4 +19,10 @@ public class EtudiantsTrimestre {
         public Float ponderationComp3;
         public Float total;
 
+        public Float totalComp1;
+
+        public Float totalComp2;
+
+        public Float totalComp3;
+
 }
