@@ -51,6 +51,15 @@ CREATE TABLE COMPETENCE
     PRIMARY KEY (nom_comp, Sigle, Id_trimestre),
     FOREIGN KEY (Sigle, Id_trimestre) REFERENCES COURS(Sigle, Id_trimestre)
 );
+CREATE TABLE ETUDIANT
+(
+    Cip VARCHAR(16) NOT NULL,
+    Prenom VARCHAR(32) NOT NULL,
+    Nom_famille VARCHAR(32) NOT NULL,
+    Id_programme INT NOT NULL,
+    PRIMARY KEY (Cip),
+    FOREIGN KEY (Id_programme) REFERENCES PROGRAMME(Id_programme)
+);
 
 
 CREATE TABLE EVALUATIONCOMPETENCE
@@ -61,9 +70,11 @@ CREATE TABLE EVALUATIONCOMPETENCE
     Sigle VARCHAR(64) NOT NULL,
     Id_evaluation INT NOT NULL,
     Id_trimestre VARCHAR(16) NOT NULL,
-    PRIMARY KEY (nom_comp, Sigle, Id_evaluation, Id_trimestre),
+    Cip VARCHAR(16) NOT NULL,
+    PRIMARY KEY (nom_comp, Sigle, Id_evaluation, Id_trimestre, Cip),
     FOREIGN KEY (nom_comp, Sigle, Id_trimestre) REFERENCES COMPETENCE(nom_comp, Sigle, Id_trimestre),
-    FOREIGN KEY (Id_evaluation, Sigle, Id_trimestre) REFERENCES EVALUATION(Id_evaluation, Sigle, Id_trimestre)
+    FOREIGN KEY (Id_evaluation, Sigle, Id_trimestre) REFERENCES EVALUATION(Id_evaluation, Sigle, Id_trimestre),
+    FOREIGN KEY (Cip) REFERENCES ETUDIANT(Cip)
 );
 
 
@@ -77,15 +88,7 @@ CREATE TABLE PROGRAMMECOURS
     FOREIGN KEY (Sigle, Id_trimestre) REFERENCES COURS(Sigle, Id_trimestre)
 );
 
-CREATE TABLE ETUDIANT
-(
-    Cip VARCHAR(16) NOT NULL,
-    Prenom VARCHAR(32) NOT NULL,
-    Nom_famille VARCHAR(32) NOT NULL,
-    Id_programme INT NOT NULL,
-    PRIMARY KEY (Cip),
-    FOREIGN KEY (Id_programme) REFERENCES PROGRAMME(Id_programme)
-);
+
 
 CREATE TABLE ETUDIANTCOURS
 (

@@ -16,9 +16,9 @@ SELECT
     ROUND((SUM(CASE WHEN Co.nom_comp IN ('Comp1', 'Comp2', 'Comp3') THEN EC.Resultat ELSE 0 END) / NULLIF(SUM(EC.Ponderation_competence), 0)) * 100) AS Total
 FROM
     ETUDIANT E
-        JOIN ETUDIANTEVALUATION EE ON E.Cip = EE.Cip
+        JOIN evaluationcompetence EE ON E.Cip = EE.Cip
         JOIN EVALUATION Ev ON EE.Id_evaluation = Ev.Id_evaluation AND EE.Sigle = Ev.Sigle AND EE.Id_trimestre = Ev.Id_trimestre
-        JOIN EVALUATIONCOMPETENCE EC ON Ev.Id_evaluation = EC.Id_evaluation AND Ev.Sigle = EC.Sigle AND Ev.Id_trimestre = EC.Id_trimestre
+        JOIN EVALUATIONCOMPETENCE EC ON Ev.Id_evaluation = EC.Id_evaluation AND Ev.Sigle = EC.Sigle AND Ev.Id_trimestre = EC.Id_trimestre AND E.cip = EC.cip
         JOIN COMPETENCE Co ON EC.id_trimestre = Co.id_trimestre AND EC.Sigle = Co.Sigle AND Co.nom_comp = EC.nom_comp
         JOIN COURS C ON Co.Sigle = C.Sigle AND Co.Id_trimestre = C.Id_trimestre
 GROUP BY
