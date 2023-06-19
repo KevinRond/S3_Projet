@@ -15,6 +15,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.SecurityContext;
 
+import ca.usherbrooke.gegi.server.business.Trimestre;
 import ca.usherbrooke.gegi.server.persistence.MessageMapper;
 import org.eclipse.microprofile.jwt.JsonWebToken;
 
@@ -47,7 +48,14 @@ public class RoleService {
         return messageMapper.selectinfo(cip, trimestre);
     }
 
-
+    @GET
+    @Path("selectTrimestre/{cip}")
+    @PermitAll
+    public List<Trimestre> selectTrimestre(
+            @PathParam("cip") String cip
+    ) {
+        return messageMapper.selectTrimestre(cip);
+    }
 
 //        Message message = messageMapper.selectOne(id);
 //        return unescapeEntities(message);

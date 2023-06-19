@@ -32,7 +32,7 @@ INSERT INTO COURS(Sigle,id_trimestre,Nom_cours) VALUES ('GEN135','A22', 'Circuit
 INSERT INTO COURS(Sigle,id_trimestre,Nom_cours) VALUES ('GEN136','A22', 'Circuits électriques II');
 INSERT INTO COURS(Sigle,id_trimestre,Nom_cours) VALUES ('GEN181','A22', 'Modélisation 3D');
 -- ## Session H23
-INSERT INTO COURS(Sigle,id_trimestre,Nom_cours) VALUES ('GEN200','H23', 'Concepts avancés en programmation orientée objet');
+INSERT INTO COURS(Sigle,id_trimestre,Nom_cours) VALUES ('GEN200','H23', 'Conception d''un systeme electronique et informatique');
 INSERT INTO COURS(Sigle,id_trimestre,Nom_cours) VALUES ('GEN211','H23', 'Mathématiques des signaux à temps continu');
 INSERT INTO COURS(Sigle,id_trimestre,Nom_cours) VALUES ('GEN230','H23', 'Électronique analogique I');
 INSERT INTO COURS(Sigle,id_trimestre,Nom_cours) VALUES ('GEN241','H23', 'Modélisation et programmation orientées objet');
@@ -424,7 +424,24 @@ INSERT INTO EVALUATIONCOMPETENCE(Resultat, Ponderation_competence, nom_comp, Sig
 INSERT INTO EVALUATIONCOMPETENCE(Resultat, Ponderation_competence, nom_comp, Sigle, Id_evaluation, id_trimestre) VALUES (73, 80,'Comp1', 'GEN122', 18,'A22');
 INSERT INTO EVALUATIONCOMPETENCE(Resultat, Ponderation_competence, nom_comp, Sigle, Id_evaluation, id_trimestre) VALUES (133.5, 200,'Comp2', 'GEN122', 18,'A22');
 
-
+-- ##H23##
+--##GEN200##
+INSERT INTO EVALUATIONCOMPETENCE(Resultat, Ponderation_competence, Id_competence, Sigle, Id_evaluation) VALUES (37.3, 40, 14, 'GEN200', 19);
+INSERT INTO EVALUATIONCOMPETENCE(Resultat, Ponderation_competence, Id_competence, Sigle, Id_evaluation) VALUES (10, 10, 15, 'GEN200', 19);
+INSERT INTO EVALUATIONCOMPETENCE(Resultat, Ponderation_competence, Id_competence, Sigle, Id_evaluation) VALUES (39.2, 40, 14, 'GEN200', 20);
+INSERT INTO EVALUATIONCOMPETENCE(Resultat, Ponderation_competence, Id_competence, Sigle, Id_evaluation) VALUES (15.6, 15, 15, 'GEN200', 20);
+INSERT INTO EVALUATIONCOMPETENCE(Resultat, Ponderation_competence, Id_competence, Sigle, Id_evaluation) VALUES (50.7, 50, 15, 'GEN200', 21);
+INSERT INTO EVALUATIONCOMPETENCE(Resultat, Ponderation_competence, Id_competence, Sigle, Id_evaluation) VALUES (30, 30, 16, 'GEN200', 21);
+INSERT INTO EVALUATIONCOMPETENCE(Resultat, Ponderation_competence, Id_competence, Sigle, Id_evaluation) VALUES (37.7, 40, 14, 'GEN200', 22);
+INSERT INTO EVALUATIONCOMPETENCE(Resultat, Ponderation_competence, Id_competence, Sigle, Id_evaluation) VALUES (15, 15, 15, 'GEN200', 22);
+INSERT INTO EVALUATIONCOMPETENCE(Resultat, Ponderation_competence, Id_competence, Sigle, Id_evaluation) VALUES (33.7, 40, 14, 'GEN200', 23);
+INSERT INTO EVALUATIONCOMPETENCE(Resultat, Ponderation_competence, Id_competence, Sigle, Id_evaluation) VALUES (36.4, 40, 14, 'GEN200', 24);
+INSERT INTO EVALUATIONCOMPETENCE(Resultat, Ponderation_competence, Id_competence, Sigle, Id_evaluation) VALUES (50.6, 50, 15, 'GEN200', 24);
+INSERT INTO EVALUATIONCOMPETENCE(Resultat, Ponderation_competence, Id_competence, Sigle, Id_evaluation) VALUES (20.2, 20, 16, 'GEN200', 24);
+INSERT INTO EVALUATIONCOMPETENCE(Resultat, Ponderation_competence, Id_competence, Sigle, Id_evaluation) VALUES (20, 20, 16, 'GEN200', 25);
+INSERT INTO EVALUATIONCOMPETENCE(Resultat, Ponderation_competence, Id_competence, Sigle, Id_evaluation) VALUES (38.83, 50, 14, 'GEN200', 26);
+INSERT INTO EVALUATIONCOMPETENCE(Resultat, Ponderation_competence, Id_competence, Sigle, Id_evaluation) VALUES (69.5, 110, 15, 'GEN200', 26);
+INSERT INTO EVALUATIONCOMPETENCE(Resultat, Ponderation_competence, Id_competence, Sigle, Id_evaluation) VALUES (25, 30, 16, 'GEN200', 26);
 -- Insertion dans la table ETUDIANT_EVALUATION
 INSERT INTO ETUDIANTEVALUATION(Id_evaluation, sigle, id_trimestre, Cip) VALUES (1, 'GEN111', 'A22', 'gerz0501');
 INSERT INTO ETUDIANTEVALUATION(Id_evaluation, sigle, id_trimestre, Cip) VALUES (2, 'GEN111', 'A22', 'gerz0501');

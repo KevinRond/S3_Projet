@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ca.usherbrooke.fgen.api.persistence.MessageMapper">
+
+<!--    <select id="select" resultType="ca.usherbrooke.fgen.api.business.Message">-->
+<!--        select id,-->
+<!--               trimester_id,-->
+<!--               profile_id,-->
+<!--               unit,-->
+<!--               description,-->
+<!--               inscription,-->
+<!--               cip,-->
+<!--               inscriptor-->
+<!--        from projet.vue_notes_etudiant-->
+<!--        where (trimester_id,-->
+<!--               profile_id,-->
+<!--               unit,-->
+<!--               id) =-->
+<!--              (coalesce(#{trimesterId}, trimester_id),-->
+<!--               coalesce(#{profileId}, profile_id),-->
+<!--               coalesce(#{unit}, unit),-->
+<!--               coalesce(#{message.id}, id))-->
+<!--    </select>-->
+
+    <select id="selectOne" resultType="ca.usherbrooke.fgen.api.business.Message">
+        select /*trimester_id,*/
+               nom_cours,
+               nom_evaluation,
+               comp1,
+               ponderation_comp1,
+               comp2,
+               ponderation_comp2,
+               comp3,
+               ponderation_comp3,
+               total
+        from projet.vue_notes_etudiant
+        where nom_cours = #{nom_cours}
+    </select>
+
+
+<!--    <select id="allMessages" resultType="ca.usherbrooke.fgen.api.business.Message">-->
+<!--        select id,-->
+<!--               trimester_id,-->
+<!--               profile_id,-->
+<!--               unit,-->
+<!--               description,-->
+<!--               inscription,-->
+<!--               cip,-->
+<!--               inscriptor-->
+<!--        from extern_php.message-->
+<!--        order by inscription desc;-->
+
+<!--    </select>-->
+
+<!--    <delete id="deleteOne">-->
+<!--        delete-->
+<!--        from extern_php.message-->
+<!--        where id = #{id}-->
+<!--    </delete>-->
+
+<!--    <select id="getNewId" resultType="Integer">-->
+<!--        select nextval('extern_php.message_seq'::regclass)-->
+<!--    </select>-->
+
+<!--    <insert id="insertMessage">-->
+<!--        insert into extern_php.message(id,-->
+<!--                                       trimester_id,-->
+<!--                                       profile_id,-->
+<!--                                       unit,-->
+<!--                                       description,-->
+<!--                                       cip,-->
+<!--                                       inscriptor)-->
+<!--        values (#{message.id},-->
+<!--                #{message.trimesterId},-->
+<!--                #{message.profileId},-->
+<!--                #{message.unit},-->
+<!--                #{message.description},-->
+<!--                #{message.cip},-->
+<!--                #{message.inscriptor})-->
+<!--        on conflict (id) do update set description = excluded.description;-->
+<!--    </insert>-->
+
+</mapper>

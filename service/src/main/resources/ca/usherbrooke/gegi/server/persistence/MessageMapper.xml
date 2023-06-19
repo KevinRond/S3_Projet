@@ -4,12 +4,29 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="ca.usherbrooke.gegi.server.persistence.MessageMapper">
 
+    <!-- ===================================================================================================== -->
+    <!-- old function just to test the request -->
     <select id="selectcours" resultType="ca.usherbrooke.gegi.server.business.Cours">
         select nom_cours
         from projet.cours
 
     </select>
+    <!-- ===================================================================================================== -->
 
+    <!-- ===================================================================================================== -->
+    <!-- request for the possible semester of a specific student -->
+    <select id="selectTrimestre" resultType="ca.usherbrooke.gegi.server.business.Trimestre">
+        SELECT
+            vne.id_trimestre
+        FROM
+            projet.vue_notes_etudiant_trimestre vne
+        WHERE
+            vne.cip = #{cip}
+    </select>
+    <!-- ===================================================================================================== -->
+
+    <!-- ===================================================================================================== -->
+    <!-- request for the grades of the student for a specific semester -->
     <select id="selectinfo" resultType="ca.usherbrooke.gegi.server.business.EtudiantsTrimestre">
         SELECT
             vne.sigle,
@@ -28,6 +45,7 @@
             vne.cip = #{cip} AND
             vne.id_trimestre = #{trimestre};
     </select>
+    <!-- ===================================================================================================== -->
 
     <!--    <select id="selectOne" resultType="ca.usherbrooke.fgen.api.business.Message">-->
     <!--        select id,-->
