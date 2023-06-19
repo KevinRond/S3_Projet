@@ -27,9 +27,11 @@ CREATE TABLE COURS
 CREATE TABLE EVALUATION
 (
     Id_evaluation INT NOT NULL,
+    Sigle VARCHAR(64) NOT NULL,
+    Id_trimestre VARCHAR(16) NOT NULL,
     Nom_evaluation VARCHAR(64) NOT NULL,
     Ponderation FLOAT NOT NULL,
-    PRIMARY KEY (Id_evaluation)
+    PRIMARY KEY (Id_evaluation, Sigle, Id_trimestre)
 );
 
 CREATE TABLE PROGRAMME
@@ -43,25 +45,27 @@ CREATE TABLE PROGRAMME
 
 CREATE TABLE COMPETENCE
 (
-    Id_competence INT NOT NULL,
-    nom_comp VARCHAR(8) NOT NULL,
+    nom_comp VARCHAR(64) NOT NULL,
     Sigle VARCHAR(64) NOT NULL,
     Id_trimestre VARCHAR(16) NOT NULL,
-    PRIMARY KEY (Id_competence, Sigle),
+    PRIMARY KEY (nom_comp, Sigle, Id_trimestre),
     FOREIGN KEY (Sigle, Id_trimestre) REFERENCES COURS(Sigle, Id_trimestre)
 );
+
 
 CREATE TABLE EVALUATIONCOMPETENCE
 (
     Resultat FLOAT NOT NULL,
     Ponderation_competence FLOAT NOT NULL,
-    Id_competence INT NOT NULL,
+    nom_comp VARCHAR(64) NOT NULL,
     Sigle VARCHAR(64) NOT NULL,
     Id_evaluation INT NOT NULL,
-    PRIMARY KEY (Id_competence, Sigle, Id_evaluation),
-    FOREIGN KEY (Id_competence, Sigle) REFERENCES COMPETENCE(Id_competence, Sigle),
-    FOREIGN KEY (Id_evaluation) REFERENCES EVALUATION(Id_evaluation)
+    Id_trimestre VARCHAR(16) NOT NULL,
+    PRIMARY KEY (nom_comp, Sigle, Id_evaluation, Id_trimestre),
+    FOREIGN KEY (nom_comp, Sigle, Id_trimestre) REFERENCES COMPETENCE(nom_comp, Sigle, Id_trimestre),
+    FOREIGN KEY (Id_evaluation, Sigle, Id_trimestre) REFERENCES EVALUATION(Id_evaluation, Sigle, Id_trimestre)
 );
+
 
 CREATE TABLE PROGRAMMECOURS
 (
@@ -96,8 +100,10 @@ CREATE TABLE ETUDIANTCOURS
 CREATE TABLE ETUDIANTEVALUATION
 (
     Id_evaluation INT NOT NULL,
+    Sigle VARCHAR(64) NOT NULL,
+    Id_trimestre VARCHAR(16) NOT NULL,
     Cip VARCHAR(64) NOT NULL,
-    PRIMARY KEY (Id_evaluation, Cip),
-    FOREIGN KEY (Id_evaluation) REFERENCES EVALUATION(Id_evaluation),
+    PRIMARY KEY (Id_evaluation, Sigle, Id_trimestre, Cip),
+    FOREIGN KEY (Id_evaluation, Sigle, Id_trimestre) REFERENCES EVALUATION(Id_evaluation, Sigle, Id_trimestre),
     FOREIGN KEY (Cip) REFERENCES ETUDIANT(Cip)
 );
