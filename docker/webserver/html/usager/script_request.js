@@ -203,6 +203,7 @@ function requestCours() {
 
                     // Append the table to the span element
                     span.appendChild(table);
+
                 });
             } else {
                 // Handle empty or invalid data
@@ -213,6 +214,23 @@ function requestCours() {
             console.log('Error fetching data:', error);
             span.innerHTML = '<br> <strong>' + error.toString() + '</strong> </br>';
         });
+    axios.get("http://localhost:8888/api/selectCoteZTrimestre/" + cip + "/" + selectedTrimestre)
+        .then(function (response) {
+            const coteZTrimestre = response.data[0].coteZTrimestre;
+            const resultDiv = document.createElement('div');
+            resultDiv.innerHTML = `Cote Z Trimestre: ${coteZTrimestre}`;
+            resultDiv.style.position = 'absolute';
+            resultDiv.style.top = '40px';
+            resultDiv.style.right = '10px';
+            span.appendChild(resultDiv);
+        })
+        .catch(function (error) {
+            console.log('Error fetching cote Z trimestre:', error);
+            span.innerHTML = '<br> <strong>' + error.toString() + '</strong> </br>';
+        });
+    axios.get("http://localhost:8888/api/selectCoteZTotal/" + cip);
+
+
 }
 // ===========================================================================================================
 
