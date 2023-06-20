@@ -2,8 +2,8 @@ DROP VIEW IF EXISTS vue_notes_etudiant_trimestre CASCADE;
 
 CREATE VIEW vue_notes_etudiant_trimestre AS
 SELECT
-    E.cip,
-    C.id_trimestre,
+    E.Cip,
+    C.Id_trimestre,
     C.Sigle,
     C.Nom_cours,
     Ev.Nom_evaluation,
@@ -16,12 +16,39 @@ SELECT
     ROUND((SUM(CASE WHEN Co.nom_comp IN ('Comp1', 'Comp2', 'Comp3') THEN EC.Resultat ELSE 0 END) / NULLIF(SUM(EC.Ponderation_competence), 0)) * 100) AS Total
 FROM
     ETUDIANT E
-        JOIN evaluationcompetence EE ON E.Cip = EE.Cip
-        JOIN EVALUATION Ev ON EE.Id_evaluation = Ev.Id_evaluation AND EE.Sigle = Ev.Sigle AND EE.Id_trimestre = Ev.Id_trimestre
-        JOIN EVALUATIONCOMPETENCE EC ON Ev.Id_evaluation = EC.Id_evaluation AND Ev.Sigle = EC.Sigle AND Ev.Id_trimestre = EC.Id_trimestre AND E.cip = EC.cip
-        JOIN COMPETENCE Co ON EC.id_trimestre = Co.id_trimestre AND EC.Sigle = Co.Sigle AND Co.nom_comp = EC.nom_comp
-        JOIN COURS C ON Co.Sigle = C.Sigle AND Co.Id_trimestre = C.Id_trimestre
+        JOIN ETUDIANTCOURS ECrs ON E.Cip = ECrs.Cip
+        JOIN COURS C ON ECrs.Sigle = C.Sigle AND ECrs.Id_trimestre = C.Id_trimestre
+        JOIN EVALUATION Ev ON C.Sigle = Ev.Sigle AND C.Id_trimestre = Ev.Id_trimestre
+        JOIN COMPETENCE Co ON C.Sigle = Co.Sigle AND C.Id_trimestre = Co.Id_trimestre
+        LEFT JOIN EVALUATIONCOMPETENCE EC ON Ev.Id_evaluation = EC.Id_evaluation AND Ev.Sigle = EC.Sigle AND Ev.Id_trimestre = EC.Id_trimestre AND E.Cip = EC.Cip AND Co.nom_comp = EC.nom_comp
 GROUP BY
-    E.Cip, C.id_trimestre, C.Sigle, C.Nom_cours, Ev.Nom_evaluation
+    E.Cip, C.Id_trimestre, C.Sigle, C.Nom_cours, Ev.Nom_evaluation
+UNION
+SELECT
+    E.Cip,
+    C.Id_trimestre,
+    C.Sigle,
+    C.Nom_cours,
+    Ev.Nom_evaluation,
+    NULL AS Comp1,
+    NULL AS Ponderation_Comp1,
+    NULL AS Comp2,
+    NULL AS Ponderation_Comp2,
+    NULL AS Comp3,
+    NULL AS Ponderation_Comp3,
+    NULL AS Total
+FROM
+    ETUDIANT E
+        JOIN ETUDIANTCOURS ECrs ON E.Cip = ECrs.Cip
+        JOIN COURS C ON ECrs.Sigle = C.Sigle AND ECrs.Id_trimestre = C.Id_trimestre
+        JOIN EVALUATION Ev ON C.Sigle = Ev.Sigle AND C.Id_trimestre = Ev.Id_trimestre
+        JOIN COMPETENCE Co ON C.Sigle = Co.Sigle AND C.Id_trimestre = Co.Id_trimestre
+WHERE
+        (Ev.Id_evaluation, Ev.Sigle, Ev.Id_trimestre) NOT IN (
+        SELECT EC.Id_evaluation, EC.Sigle, EC.Id_trimestre
+        FROM EVALUATIONCOMPETENCE EC
+    )
+GROUP BY
+    E.Cip, C.Id_trimestre, C.Sigle, C.Nom_cours, Ev.Nom_evaluation
 ORDER BY
-    E.cip ASC, C.id_trimestre ASC;
+    Cip ASC, Id_trimestre ASC;
