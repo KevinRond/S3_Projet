@@ -17,10 +17,30 @@ function populateTrimestreDropdown() {
             if (Array.isArray(trimestres) && trimestres.length > 0) {
                 // Filter out duplicate idTrimestre values
                 const uniqueTrimestres = [...new Set(trimestres.map(trimestre => trimestre.idTrimestre))];
+                console.log(uniqueTrimestres);
+                let finaltrimestres = [];
 
+                for (let trimestre of uniqueTrimestres){
+                    if (trimestre === "A22"){
+                        finaltrimestres[0] = trimestre;
+                    }
+                    if (trimestre === "H23"){
+                        finaltrimestres[1] = trimestre;
+                    }
+                    if (trimestre === "E23"){
+                        finaltrimestres[2] = trimestre;
+                    }
+                    if (trimestre === "A23"){
+                        finaltrimestres[3] = trimestre;
+                    }
+                    if (trimestre === "H24"){
+                        finaltrimestres[4] = trimestre;
+                    }
+                    // ajouter trimestre au besoin
+                }
 
-
-                uniqueTrimestres.forEach(idTrimestre => {
+                console.log(finaltrimestres)
+                finaltrimestres.forEach(idTrimestre => {
                     const option = document.createElement('option');
                     option.value = idTrimestre;
                     option.textContent = idTrimestre;
@@ -214,21 +234,37 @@ function requestCours() {
             console.log('Error fetching data:', error);
             span.innerHTML = '<br> <strong>' + error.toString() + '</strong> </br>';
         });
-    axios.get("http://localhost:8888/api/selectCoteZTrimestre/" + cip + "/" + selectedTrimestre)
+    axios.get("http://localhost:8888/api/selectCoteZTotal/" + cip)
         .then(function (response) {
-            const coteZTrimestre = response.data[0].coteZTrimestre;
-            const resultDiv = document.createElement('div');
-            resultDiv.innerHTML = `Cote Z Trimestre: ${coteZTrimestre}`;
-            resultDiv.style.position = 'absolute';
-            resultDiv.style.top = '40px';
-            resultDiv.style.right = '10px';
-            span.appendChild(resultDiv);
+            const coteZTotal = response.data.CoteZTotal;
+
+            axios.get("http://localhost:8888/api/selectCoteZTrimestre/" + cip + "/" + selectedTrimestre)
+                .then(function (response) {
+                    const coteZTrimestre = response.data[0].coteZTrimestre;
+                    const resultDiv = document.createElement('div');
+                    resultDiv.innerHTML = `Cote Z Trimestre: ${coteZTrimestre}`;
+                    resultDiv.style.position = 'absolute';
+                    resultDiv.style.top = '40px';
+                    resultDiv.style.right = '10px';
+                    span.appendChild(resultDiv);
+
+                    const totalDiv = document.createElement('div');
+                    totalDiv.innerHTML = `Cote Z Total: ${coteZTotal}`;
+                    totalDiv.style.position = 'absolute';
+                    totalDiv.style.top = '60px'; // Adjust the value to move it down or up
+                    totalDiv.style.right = '10px';
+                    span.appendChild(totalDiv);
+                })
+                .catch(function (error) {
+                    console.log('Error fetching cote Z trimestre:', error);
+                    span.innerHTML = '<br> <strong>' + error.toString() + '</strong> </br>';
+                });
         })
         .catch(function (error) {
-            console.log('Error fetching cote Z trimestre:', error);
+            console.log('Error fetching cote Z total:', error);
             span.innerHTML = '<br> <strong>' + error.toString() + '</strong> </br>';
         });
-    axios.get("http://localhost:8888/api/selectCoteZTotal/" + cip);
+
 
 
 }

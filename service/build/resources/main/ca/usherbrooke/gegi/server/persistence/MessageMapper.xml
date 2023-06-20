@@ -26,6 +26,7 @@
     <!-- ===================================================================================================== -->
 
     <!-- ===================================================================================================== -->
+    <!-- request for the cote z total of a student -->
     <select id="selectCoteZTotal" resultType="ca.usherbrooke.gegi.server.business.EtudiantCoteZTotal">
         SELECT
             VCZ.cote_z_total
@@ -34,6 +35,8 @@
         WHERE
             VCZ.cip = #{cip}
     </select>
+    <!-- ==================================================================================================================-->
+
     <!-- ======================================================================================================== -->
     <!-- request for the cote z by semester -->
     <select id="selectCoteZTrimestre" resultType="ca.usherbrooke.gegi.server.business.EtudiantCoteZ">
