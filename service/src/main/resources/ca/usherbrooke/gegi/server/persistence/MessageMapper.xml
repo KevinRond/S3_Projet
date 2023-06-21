@@ -26,6 +26,48 @@
     <!-- ===================================================================================================== -->
 
     <!-- ===================================================================================================== -->
+    <!-- request for the cote z total of a student -->
+    <select id="selectCoteZTotal" resultType="ca.usherbrooke.gegi.server.business.EtudiantCoteZTotal">
+        SELECT
+            VCZ.cote_z_total
+        FROM
+            projet.vue_cote_z_tot VCZ
+        WHERE
+            VCZ.cip = #{cip}
+    </select>
+    <!-- ==================================================================================================================-->
+
+    <!-- ======================================================================================================== -->
+    <!-- request for the cote z by semester -->
+    <select id="selectCoteZTrimestre" resultType="ca.usherbrooke.gegi.server.business.EtudiantCoteZ">
+        SELECT
+            VCZT.cote_z_trimestre
+        FROM
+            projet.vue_cote_z_trimestre VCZT
+        WHERE
+            VCZT.cip = #{cip} AND
+            VCZT.id_trimestre = #{trimestre}
+    </select>
+    <!-- ========================================================================================================== -->
+
+    <!-- =========================================================================================================== -->
+    <!-- request for total of the competence -->
+    <select id="selectCompetenceTotal" resultType="ca.usherbrooke.gegi.server.business.etudiantCompetence">
+        SELECT
+            VNTCC.sigle,
+            VNTCC.total_comp1,
+            VNTCC.total_comp2,
+            VNTCC.total_comp3
+        FROM
+            projet.vue_notes_totales_competence_cours VNTCC
+
+        WHERE
+            VNTCC.cip = #{cip} AND
+            VNTCC.id_trimestre = #{trimestre}
+    </select>
+    <!-- =========================================================================================================== -->
+
+    <!-- ===================================================================================================== -->
     <!-- request for the grades of the student for a specific semester -->
     <select id="selectinfo" resultType="ca.usherbrooke.gegi.server.business.EtudiantsTrimestre">
         SELECT
@@ -38,13 +80,37 @@
             vne.ponderation_comp2,
             vne.comp3,
             vne.ponderation_comp3,
-            vne.total
+            vne.total,
+            vnt.note_total AS noteTotal,
+            vczc.cote_z_lettre,
+            vczc.cote_z_chiffre,
+            vntcc.total_comp1,
+            vntcc.total_comp2,
+            vntcc.total_comp3
         FROM
             projet.vue_notes_etudiant_trimestre vne
+                JOIN
+            projet.vue_note_total vnt
+            ON vne.cip = vnt.cip
+                AND vne.sigle = vnt.sigle
+                AND vne.id_trimestre = vnt.id_trimestre
+            JOIN
+            projet.vue_cote_z_cours vczc
+            ON vne.cip = vczc.cip
+                AND vne.sigle = vczc.sigle
+                AND vne.id_trimestre = vczc.id_trimestre
+            JOIN
+            projet.vue_notes_totales_competence_cours vntcc
+            ON vne.cip = vntcc.cip AND
+               vne.sigle = vntcc.sigle AND
+               vne.id_trimestre = vntcc.id_trimestre
         WHERE
             vne.cip = #{cip} AND
-            vne.id_trimestre = #{trimestre};
+            vne.id_trimestre = #{trimestre}
+
     </select>
+
+
     <!-- ===================================================================================================== -->
 
     <!--    <select id="selectOne" resultType="ca.usherbrooke.fgen.api.business.Message">-->

@@ -1,8 +1,7 @@
 package ca.usherbrooke.gegi.server.service;
 
-import ca.usherbrooke.gegi.server.business.Cours;
-import ca.usherbrooke.gegi.server.business.EtudiantsTrimestre;
-import ca.usherbrooke.gegi.server.business.Person;
+import ca.usherbrooke.gegi.server.business.*;
+
 import java.util.List;
 import java.util.Map;
 import javax.annotation.security.PermitAll;
@@ -15,7 +14,6 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.SecurityContext;
 
-import ca.usherbrooke.gegi.server.business.Trimestre;
 import ca.usherbrooke.gegi.server.persistence.MessageMapper;
 import org.eclipse.microprofile.jwt.JsonWebToken;
 
@@ -55,6 +53,35 @@ public class RoleService {
             @PathParam("cip") String cip
     ) {
         return messageMapper.selectTrimestre(cip);
+    }
+
+    @GET
+    @Path("selectCoteZTrimestre/{cip}/{trimestre}")
+    @PermitAll
+    public List<EtudiantCoteZ> selectCoteZTrimestre(
+            @PathParam("cip") String cip,
+            @PathParam("trimestre") String trimestre
+    ){
+        return messageMapper.selectCoteZTrimestre(cip, trimestre);
+    }
+
+    @GET
+    @Path("selectCoteZTotal/{cip}")
+    @PermitAll
+    public EtudiantCoteZTotal selectCoteZTotal(
+            @PathParam("cip") String cip
+    ){
+        return messageMapper.selectCoteZTotal(cip);
+    }
+
+    @GET
+    @Path("selectCompetenceTotal/{cip}/{trimestre}")
+    @PermitAll
+    public List<etudiantCompetence> selectCompetenceTotal(
+            @PathParam("cip") String cip,
+            @PathParam("trimestre") String trimestre
+    ) {
+        return messageMapper.selectCompetenceTotal(cip, trimestre);
     }
 
 //        Message message = messageMapper.selectOne(id);
