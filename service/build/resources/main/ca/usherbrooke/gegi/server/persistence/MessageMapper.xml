@@ -62,7 +62,9 @@
             vne.comp3,
             vne.ponderation_comp3,
             vne.total,
-            vnt.note_total AS noteTotal
+            vnt.note_total AS noteTotal,
+            vczc.cote_z_lettre,
+            vczc.cote_z_chiffre
         FROM
             projet.vue_notes_etudiant_trimestre vne
                 JOIN
@@ -70,6 +72,11 @@
             ON vne.cip = vnt.cip
                 AND vne.sigle = vnt.sigle
                 AND vne.id_trimestre = vnt.id_trimestre
+            JOIN
+            projet.vue_cote_z_cours vczc
+            ON vne.cip = vczc.cip
+                AND vne.sigle = vczc.sigle
+                AND vne.id_trimestre = vczc.id_trimestre
         WHERE
             vne.cip = #{cip} AND
             vne.id_trimestre = #{trimestre}

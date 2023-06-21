@@ -56,8 +56,9 @@ function requestCours() {
     // clears the page before repopulating
     span.innerHTML = '';
     //Variable créez qui stocke les valeurs de la colonne Total
-    let totalValues = []
     let currentTotalValue = null;
+    let coteZLettre = null;
+    let coteZChiffre = null;
 
     const trimestreSelect = document.getElementById('trimestre');
     const selectedTrimestre = trimestreSelect.options[trimestreSelect.selectedIndex].value;
@@ -96,6 +97,8 @@ function requestCours() {
 
                         if (index === 0) {
                             currentTotalValue = cours.noteTotal !== null ? cours.noteTotal.toFixed(2) : '';
+                            coteZLettre = cours.coteZLettre !== null ? cours.coteZLettre : '';
+                            coteZChiffre = cours.coteZChiffre !== null ? cours.coteZChiffre.toFixed(1) : '';
                         }
 
                         if (index === 0) {
@@ -180,11 +183,35 @@ function requestCours() {
                         totalTitleCell.textContent = 'Total';
                         totalRow.appendChild(totalTitleCell);
 
-                        const emptyCell = document.createElement('td'); // Cellule vide pour aligner avec l'activité
-                        totalRow.appendChild(emptyCell);
+                        const coteZCell = document.createElement('td');
+                        coteZCell.style.textAlign = 'center';
+                        coteZCell.style.fontWeight = 'bold';
+                        coteZCell.style.whiteSpace = 'pre';
 
-                        const emptyCellsCount = headers.length - 3; // Compteur de cellules vides
-                        for (let i = 0; i < emptyCellsCount; i++) {
+                        if (coteZLettre !== '') {
+                            const encircledText = document.createElement('span');
+                            encircledText.style.border = '2px solid blue';
+                            encircledText.style.borderRadius = '50%';
+                            encircledText.style.display = 'inline-block';
+                            encircledText.style.width = '28px';
+                            encircledText.style.height = '28px';
+                            encircledText.style.lineHeight = '28px';
+                            encircledText.style.color = 'blue';
+                            encircledText.style.textAlign = 'center';
+                            encircledText.textContent = coteZLettre;
+
+                            coteZCell.appendChild(encircledText);
+                            coteZCell.innerHTML += '       ' + coteZChiffre;
+                        } else {
+                            coteZCell.textContent = coteZChiffre;
+                        }
+
+                        totalRow.appendChild(coteZCell);
+
+
+
+                        const emptyCellsCount = headers.length - 2;
+                        for (let i = 1; i < emptyCellsCount; i++) {
                             const emptyCell = document.createElement('td');
                             totalRow.appendChild(emptyCell);
                         }
@@ -193,14 +220,12 @@ function requestCours() {
                         resultCell.style.textAlign = 'center';
                         resultCell.style.fontWeight = 'bold';
                         totalRow.style.fontSize = '22px';
-                        const totalValueFormatted = currentTotalValue !== '' ? currentTotalValue.split('.')[0] : ''; // Supprimer les chiffres après la virgule
+                        const totalValueFormatted = currentTotalValue !== '' ? currentTotalValue.split('.')[0] : '';
                         resultCell.textContent = totalValueFormatted !== '' ? totalValueFormatted + '%' : '';
                         totalRow.appendChild(resultCell);
 
                         table.appendChild(totalRow);
                     }
-
-
                     // Append the table to the span element
                     span.appendChild(table);
 
@@ -229,8 +254,6 @@ function requestCours() {
             span.innerHTML = '<br> <strong>' + error.toString() + '</strong> </br>';
         });
     axios.get("http://localhost:8888/api/selectCoteZTotal/" + cip);
-
-
 }
 // ===========================================================================================================
 
