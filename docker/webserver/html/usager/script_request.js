@@ -200,13 +200,15 @@ function requestCours() {
                         resValueSpan.style.fontSize = '18px'; // Augmenter la taille de la police
                         resValueSpan.textContent = resValueFormatted !== '' ? resValueFormatted : ' ';
 
+                        resDiv.appendChild(resValueSpan);
+
                         if (resValueFormatted !== ''){
                             const resPonderationSpan = document.createElement('span');
                             resPonderationSpan.textContent = "%"; // Ajouter le signe "%"
                             resDiv.appendChild(resPonderationSpan);
                         }
 
-                        resDiv.appendChild(resValueSpan);
+
                         resCell.appendChild(resDiv);
                         row.appendChild(resCell);
                         table.appendChild(row);
@@ -285,6 +287,20 @@ function requestCours() {
                         totalRow.style.fontSize = '22px';
                         const totalValueFormatted = currentTotalValue !== '' ? currentTotalValue.split('.')[0] : '';
                         resultCell.textContent = totalValueFormatted !== '' ? totalValueFormatted + '%' : '';
+
+
+                        if (currentTotalValue < 50) {
+                            resultCell.classList.add('red');
+                        } else if (currentTotalValue >= 50 && currentTotalValue < 60) {
+                            resultCell.classList.add('orangered');
+                        } else if (currentTotalValue >= 60 && currentTotalValue < 75) {
+                            resultCell.classList.add('yellow');
+                        } else if (currentTotalValue >= 75 && currentTotalValue < 85) {
+                            resultCell.classList.add('lightgreen');
+                        } else {
+                            resultCell.classList.add('limegreen');
+                        }
+
                         totalRow.appendChild(resultCell);
 
                         table.appendChild(totalRow);
