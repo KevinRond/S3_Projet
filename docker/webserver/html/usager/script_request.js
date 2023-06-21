@@ -113,11 +113,10 @@ function requestCours() {
                     // Create table rows
                     coursArray.forEach((cours, index) => {
                         const row = document.createElement('tr');
-
                         if (index === 0) {
-                            currentTotalValue = cours.noteTotal !== null ? cours.noteTotal.toFixed(2) : '';
+                            currentTotalValue = cours.noteTotal !== undefined ? cours.noteTotal.toFixed(1) : '';
                             coteZLettre = cours.coteZLettre !== null ? cours.coteZLettre : '';
-                            coteZChiffre = cours.coteZChiffre !== null ? cours.coteZChiffre.toFixed(1) : '';
+                            coteZChiffre = cours.coteZChiffre !== null && cours.coteZChiffre !== undefined ? cours.coteZChiffre.toFixed(1) : '';
                         }
 
                         if (index === 0) {
@@ -195,7 +194,7 @@ function requestCours() {
                         table.appendChild(row);
                     });
 
-                    if (currentTotalValue !== null) {
+                    if (currentTotalValue !== null && currentTotalValue !== '') {
                         const totalRow = document.createElement('tr');
                         const totalTitleCell = document.createElement('td');
                         totalTitleCell.style.fontWeight = 'bold';
@@ -255,6 +254,7 @@ function requestCours() {
                             resultCell.classList.add('limegreen');
                         }
 
+
                         totalRow.appendChild(resultCell);
                         table.appendChild(totalRow);
 
@@ -275,11 +275,11 @@ function requestCours() {
         });
     axios.get("http://localhost:8888/api/selectCoteZTotal/" + cip)
         .then(function (response) {
-            const coteZTotal = response.data.CoteZTotal;
+            const coteZTotal = response.data.CoteZTotal !== undefined ? response.data.CoteZTotal : "Aucune Cote Z Total";
 
             axios.get("http://localhost:8888/api/selectCoteZTrimestre/" + cip + "/" + selectedTrimestre)
                 .then(function (response) {
-                    const coteZTrimestre = response.data[0].coteZTrimestre;
+                    const coteZTrimestre = response.data[0] !== null ? response.data[0].coteZTrimestre : 'Aucune Cote Z Trimestre';
                     const resultDiv = document.createElement('div');
                     resultDiv.innerHTML = `Cote Z Trimestre: ${coteZTrimestre}`;
                     resultDiv.style.position = 'absolute';
