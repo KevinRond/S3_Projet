@@ -1,4 +1,3 @@
-
 // =======================================================================================================
 //============= Java script file for the filling of the table of grades ==================================
 //============= function to select the semester of a student populating the dropdown ========================
@@ -17,10 +16,30 @@ function populateTrimestreDropdown() {
             if (Array.isArray(trimestres) && trimestres.length > 0) {
                 // Filter out duplicate idTrimestre values
                 const uniqueTrimestres = [...new Set(trimestres.map(trimestre => trimestre.idTrimestre))];
+                console.log(uniqueTrimestres);
+                let finaltrimestres = [];
 
+                for (let trimestre of uniqueTrimestres){
+                    if (trimestre === "A22"){
+                        finaltrimestres[0] = trimestre;
+                    }
+                    if (trimestre === "H23"){
+                        finaltrimestres[1] = trimestre;
+                    }
+                    if (trimestre === "E23"){
+                        finaltrimestres[2] = trimestre;
+                    }
+                    if (trimestre === "A23"){
+                        finaltrimestres[3] = trimestre;
+                    }
+                    if (trimestre === "H24"){
+                        finaltrimestres[4] = trimestre;
+                    }
+                    // ajouter trimestre au besoin
+                }
 
-
-                uniqueTrimestres.forEach(idTrimestre => {
+                console.log(finaltrimestres)
+                finaltrimestres.forEach(idTrimestre => {
                     const option = document.createElement('option');
                     option.value = idTrimestre;
                     option.textContent = idTrimestre;
@@ -55,6 +74,9 @@ function requestCours() {
 
     // clears the page before repopulating
     span.innerHTML = '';
+    //Variable créez qui stocke les valeurs de la colonne Total
+    let totalValues = []
+    let currentTotalValue = null;
 
     const trimestreSelect = document.getElementById('trimestre');
     const selectedTrimestre = trimestreSelect.options[trimestreSelect.selectedIndex].value;
@@ -77,7 +99,7 @@ function requestCours() {
                     const table = document.createElement('table');
 
                     // Create table headers in the desired order
-                    const headers = ["Activité", "Nom Évaluation", "C1", "C2", "C3", "Total"];
+                    const headers = ["Activité", "Nom Évaluation", "C1", "C2", "C3", "Résultat"];
 
                     const headerRow = document.createElement('tr');
                     headers.forEach(header => {
@@ -90,6 +112,10 @@ function requestCours() {
                     // Create table rows
                     coursArray.forEach((cours, index) => {
                         const row = document.createElement('tr');
+
+                        if (index === 0) {
+                            currentTotalValue = cours.noteTotal !== null ? cours.noteTotal.toFixed(2) : '';
+                        }
 
                         if (index === 0) {
                             const sigleNomCoursCell = document.createElement('td');
@@ -147,26 +173,56 @@ function requestCours() {
                         comp3Cell.appendChild(comp3Div);
                         row.appendChild(comp3Cell);
 
-                        const totalCell = document.createElement('td');
-                        const totalValue = getCoursCellValue(cours.total);
-                        const totalDiv = document.createElement('div');
-                        totalDiv.style.display = 'flex';
-                        totalDiv.style.justifyContent = 'center'; // Center align the content
-                        const totalValueSpan = document.createElement('span');
-                        totalValueSpan.style.fontWeight = 'bold';
-                        totalValueSpan.textContent = totalValue.value !== '' ? totalValue.value : ' ';
-                        const totalPonderationSpan = document.createElement('span');
-                        totalPonderationSpan.textContent = "%"; // Add the "%" sign
-                        totalDiv.appendChild(totalValueSpan);
-                        totalDiv.appendChild(totalPonderationSpan);
-                        totalCell.appendChild(totalDiv);
-                        row.appendChild(totalCell);
-
+                        const resCell = document.createElement('td');
+                        const resValue = getCoursCellValue(cours.total);
+                        const resValueFormatted = resValue.value !== '' ? resValue.value.toFixed(0) : ''; // Supprimer les chiffres après la virgule
+                        const resDiv = document.createElement('div');
+                        resDiv.style.display = 'flex';
+                        resDiv.style.justifyContent = 'center'; // Centrer le contenu
+                        const resValueSpan = document.createElement('span');
+                        resValueSpan.style.fontWeight = 'bold';
+                        resValueSpan.style.fontSize = '18px'; // Augmenter la taille de la police
+                        resValueSpan.textContent = resValueFormatted !== '' ? resValueFormatted : ' ';
+                        const resPonderationSpan = document.createElement('span');
+                        resPonderationSpan.textContent = "%"; // Ajouter le signe "%"
+                        resDiv.appendChild(resValueSpan);
+                        resDiv.appendChild(resPonderationSpan);
+                        resCell.appendChild(resDiv);
+                        row.appendChild(resCell);
                         table.appendChild(row);
                     });
 
+                    if (currentTotalValue !== null) {
+                        const totalRow = document.createElement('tr');
+                        const totalTitleCell = document.createElement('td');
+                        totalTitleCell.style.fontWeight = 'bold';
+                        totalTitleCell.textContent = 'Total';
+                        totalRow.appendChild(totalTitleCell);
+
+                        const emptyCell = document.createElement('td'); // Cellule vide pour aligner avec l'activité
+                        totalRow.appendChild(emptyCell);
+
+                        const emptyCellsCount = headers.length - 3; // Compteur de cellules vides
+                        for (let i = 0; i < emptyCellsCount; i++) {
+                            const emptyCell = document.createElement('td');
+                            totalRow.appendChild(emptyCell);
+                        }
+
+                        const resultCell = document.createElement('td');
+                        resultCell.style.textAlign = 'center';
+                        resultCell.style.fontWeight = 'bold';
+                        totalRow.style.fontSize = '22px';
+                        const totalValueFormatted = currentTotalValue !== '' ? currentTotalValue.split('.')[0] : ''; // Supprimer les chiffres après la virgule
+                        resultCell.textContent = totalValueFormatted !== '' ? totalValueFormatted + '%' : '';
+                        totalRow.appendChild(resultCell);
+
+                        table.appendChild(totalRow);
+                    }
+
+
                     // Append the table to the span element
                     span.appendChild(table);
+
                 });
             } else {
                 // Handle empty or invalid data
@@ -177,6 +233,39 @@ function requestCours() {
             console.log('Error fetching data:', error);
             span.innerHTML = '<br> <strong>' + error.toString() + '</strong> </br>';
         });
+    axios.get("http://localhost:8888/api/selectCoteZTotal/" + cip)
+        .then(function (response) {
+            const coteZTotal = response.data.CoteZTotal;
+
+            axios.get("http://localhost:8888/api/selectCoteZTrimestre/" + cip + "/" + selectedTrimestre)
+                .then(function (response) {
+                    const coteZTrimestre = response.data[0].coteZTrimestre;
+                    const resultDiv = document.createElement('div');
+                    resultDiv.innerHTML = `Cote Z Trimestre: ${coteZTrimestre}`;
+                    resultDiv.style.position = 'absolute';
+                    resultDiv.style.top = '40px';
+                    resultDiv.style.right = '10px';
+                    span.appendChild(resultDiv);
+
+                    const totalDiv = document.createElement('div');
+                    totalDiv.innerHTML = `Cote Z Total: ${coteZTotal}`;
+                    totalDiv.style.position = 'absolute';
+                    totalDiv.style.top = '60px'; // Adjust the value to move it down or up
+                    totalDiv.style.right = '10px';
+                    span.appendChild(totalDiv);
+                })
+                .catch(function (error) {
+                    console.log('Error fetching cote Z trimestre:', error);
+                    span.innerHTML = '<br> <strong>' + error.toString() + '</strong> </br>';
+                });
+        })
+        .catch(function (error) {
+            console.log('Error fetching cote Z total:', error);
+            span.innerHTML = '<br> <strong>' + error.toString() + '</strong> </br>';
+        });
+
+
+
 }
 // ===========================================================================================================
 

@@ -4,12 +4,17 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="ca.usherbrooke.gegi.server.persistence.MessageMapper">
 
+    <!-- ===================================================================================================== -->
+    <!-- old function just to test the request -->
     <select id="selectcours" resultType="ca.usherbrooke.gegi.server.business.Cours">
         select nom_cours
         from projet.cours
 
     </select>
+    <!-- ===================================================================================================== -->
 
+    <!-- ===================================================================================================== -->
+    <!-- request for the possible semester of a specific student -->
     <select id="selectTrimestre" resultType="ca.usherbrooke.gegi.server.business.Trimestre">
         SELECT
             vne.id_trimestre
@@ -18,7 +23,36 @@
         WHERE
             vne.cip = #{cip}
     </select>
+    <!-- ===================================================================================================== -->
 
+    <!-- ===================================================================================================== -->
+    <!-- request for the cote z total of a student -->
+    <select id="selectCoteZTotal" resultType="ca.usherbrooke.gegi.server.business.EtudiantCoteZTotal">
+        SELECT
+            VCZ.cote_z_total
+        FROM
+            projet.vue_cote_z_tot VCZ
+        WHERE
+            VCZ.cip = #{cip}
+    </select>
+    <!-- ==================================================================================================================-->
+
+    <!-- ======================================================================================================== -->
+    <!-- request for the cote z by semester -->
+    <select id="selectCoteZTrimestre" resultType="ca.usherbrooke.gegi.server.business.EtudiantCoteZ">
+        SELECT
+            VCZT.cote_z_trimestre
+        FROM
+            projet.vue_cote_z_trimestre VCZT
+        WHERE
+            VCZT.cip = #{cip} AND
+            VCZT.id_trimestre = #{trimestre}
+    </select>
+    <!-- ========================================================================================================== -->
+
+
+    <!-- ===================================================================================================== -->
+    <!-- request for the grades of the student for a specific semester -->
     <select id="selectinfo" resultType="ca.usherbrooke.gegi.server.business.EtudiantsTrimestre">
         SELECT
             vne.sigle,
@@ -30,13 +64,23 @@
             vne.ponderation_comp2,
             vne.comp3,
             vne.ponderation_comp3,
-            vne.total
+            vne.total,
+            vnt.note_total AS noteTotal
         FROM
             projet.vue_notes_etudiant_trimestre vne
+                JOIN
+            projet.vue_note_total vnt
+            ON vne.cip = vnt.cip
+                AND vne.sigle = vnt.sigle
+                AND vne.id_trimestre = vnt.id_trimestre
         WHERE
             vne.cip = #{cip} AND
-            vne.id_trimestre = #{trimestre};
+            vne.id_trimestre = #{trimestre}
+
     </select>
+
+
+    <!-- ===================================================================================================== -->
 
     <!--    <select id="selectOne" resultType="ca.usherbrooke.fgen.api.business.Message">-->
     <!--        select id,-->

@@ -18,5 +18,6 @@ public class EtudiantsTrimestre {
         public Float comp3;
         public Float ponderationComp3;
         public Float total;
+        public Float noteTotal;
 
 }
