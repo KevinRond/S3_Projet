@@ -55,7 +55,7 @@ WHERE
 GROUP BY
     E.Cip, C.Id_trimestre, C.Sigle, C.Nom_cours, Ev.Nom_evaluation
 ORDER BY
-    E.cip ASC, C.id_trimestre ASC;
+    cip ASC, id_trimestre ASC;
 
 CREATE VIEW vue_note_total AS
 SELECT
@@ -65,11 +65,11 @@ SELECT
     ROUND((SUM(CASE WHEN Co.nom_comp IN ('Comp1', 'Comp2', 'Comp3') THEN EC.Resultat ELSE 0 END) / NULLIF(SUM(EC.Ponderation_competence), 0)) * 100) AS Note_Total
 FROM
     ETUDIANT E
-        JOIN ETUDIANTEVALUATION EE ON E.Cip = EE.Cip
-        JOIN EVALUATION Ev ON EE.Id_evaluation = Ev.Id_evaluation
-        JOIN EVALUATIONCOMPETENCE EC ON Ev.Id_evaluation = EC.Id_evaluation
-        JOIN COMPETENCE Co ON EC.Id_competence = Co.Id_competence AND EC.Sigle = Co.Sigle
-        JOIN COURS C ON Co.Sigle = C.Sigle
+        JOIN ETUDIANTCOURS ECrs ON E.Cip = ECrs.Cip
+        JOIN COURS C ON ECrs.Sigle = C.Sigle AND ECrs.Id_trimestre = C.Id_trimestre
+        JOIN EVALUATION Ev ON C.Sigle = Ev.Sigle AND C.Id_trimestre = Ev.Id_trimestre
+        JOIN COMPETENCE Co ON C.Sigle = Co.Sigle AND C.Id_trimestre = Co.Id_trimestre
+        LEFT JOIN EVALUATIONCOMPETENCE EC ON Ev.Id_evaluation = EC.Id_evaluation AND Ev.Sigle = EC.Sigle AND Ev.Id_trimestre = EC.Id_trimestre AND E.Cip = EC.Cip AND Co.nom_comp = EC.nom_comp
 GROUP BY
     E.Cip, C.id_trimestre, C.Sigle;
 
