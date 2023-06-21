@@ -320,7 +320,8 @@ function requestCours() {
         });
     axios.get("http://localhost:8888/api/selectCoteZTotal/" + cip)
         .then(function (response) {
-            const coteZTotal = response.data.CoteZTotal !== undefined ? response.data.coteZTotal : "Aucune Cote Z Totale";
+            const coteZTotal = response.data.CoteZTotal !== undefined ? response.data.CoteZTotal : "Aucune Cote Z Totale";
+            console.log("cote Z total = " + coteZTotal);
 
             axios.get("http://localhost:8888/api/selectCoteZTrimestre/" + cip + "/" + selectedTrimestre)
                 .then(function (response) {

@@ -511,6 +511,3 @@ INSERT INTO EVALUATIONCOMPETENCE(Resultat, Ponderation_competence, nom_comp, Sig
 INSERT INTO EVALUATIONCOMPETENCE(Resultat, Ponderation_competence, nom_comp, Sigle, Id_evaluation, id_trimestre, cip) VALUES (38.83, 50, 'Comp1', 'GEN200', 26, 'H23', 'guea0902');
 INSERT INTO EVALUATIONCOMPETENCE(Resultat, Ponderation_competence, nom_comp, Sigle, Id_evaluation, id_trimestre, cip) VALUES (69.5, 110, 'Comp2', 'GEN200', 26, 'H23', 'guea0902');
 INSERT INTO EVALUATIONCOMPETENCE(Resultat, Ponderation_competence, nom_comp, Sigle, Id_evaluation, id_trimestre, cip) VALUES (25, 30, 'Comp3', 'GEN200', 26, 'H23', 'guea0902');
-
-
-

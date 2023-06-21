@@ -50,23 +50,6 @@
     </select>
     <!-- ========================================================================================================== -->
 
-    <!-- =========================================================================================================== -->
-    <!-- request for total of the competence -->
-    <select id="selectCompetenceTotal" resultType="ca.usherbrooke.gegi.server.business.etudiantCompetence">
-        SELECT
-            VNTCC.sigle,
-            VNTCC.total_comp1,
-            VNTCC.total_comp2,
-            VNTCC.total_comp3
-        FROM
-            projet.vue_notes_totales_competence_cours VNTCC
-
-        WHERE
-            VNTCC.cip = #{cip} AND
-            VNTCC.id_trimestre = #{trimestre}
-    </select>
-    <!-- =========================================================================================================== -->
-
     <!-- ===================================================================================================== -->
     <!-- request for the grades of the student for a specific semester -->
     <select id="selectinfo" resultType="ca.usherbrooke.gegi.server.business.EtudiantsTrimestre">
@@ -94,12 +77,12 @@
             ON vne.cip = vnt.cip
                 AND vne.sigle = vnt.sigle
                 AND vne.id_trimestre = vnt.id_trimestre
-            JOIN
+                JOIN
             projet.vue_cote_z_cours vczc
             ON vne.cip = vczc.cip
                 AND vne.sigle = vczc.sigle
                 AND vne.id_trimestre = vczc.id_trimestre
-            JOIN
+                JOIN
             projet.vue_notes_totales_competence_cours vntcc
             ON vne.cip = vntcc.cip AND
                vne.sigle = vntcc.sigle AND
