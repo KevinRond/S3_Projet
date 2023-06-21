@@ -245,7 +245,7 @@ function requestCours() {
                         const totalComp2Cell = document.createElement('td');
                         const totalComp3Cell = document.createElement('td');
 
-                        if (totalComp1 > 0) {
+                        if (totalComp1 !== undefined) {
                             totalComp1Cell.textContent = totalComp1 + '%';
                             totalComp1Cell.style.fontSize = '16px'; // Set the font size
                             totalComp1Cell.style.fontWeight = 'bold';
@@ -253,7 +253,7 @@ function requestCours() {
                             totalComp1Cell.textContent = '';
                         }
 
-                        if (totalComp2 > 0) {
+                        if (totalComp2 !== undefined) {
                             totalComp2Cell.textContent = totalComp2 + '%';
                             totalComp2Cell.style.fontSize = '16px'; // Set the font size
                             totalComp2Cell.style.fontWeight = 'bold';
@@ -261,7 +261,7 @@ function requestCours() {
                             totalComp2Cell.textContent = '';
                         }
 
-                        if (totalComp3 > 0) {
+                        if (totalComp3 !== undefined) {
                             totalComp3Cell.textContent = totalComp3 + '%';
                             totalComp3Cell.style.fontSize = '16px'; // Set the font size
                             totalComp3Cell.style.fontWeight = 'bold';
