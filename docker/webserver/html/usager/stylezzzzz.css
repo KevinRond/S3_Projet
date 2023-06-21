@@ -71,4 +71,22 @@ footer p {
     text-align: center;
 }
 
+.red {
+    background-color: red;
+}
 
+.orangered {
+    background-color: orangered;
+}
+
+.yellow {
+    background-color: yellow;
+}
+
+.lightgreen {
+    background-color: lightgreen;
+}
+
+.limegreen {
+    background-color: limegreen;
+}

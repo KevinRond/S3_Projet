@@ -212,9 +212,9 @@ function requestCours() {
                             encircledText.style.border = '2px solid blue';
                             encircledText.style.borderRadius = '50%';
                             encircledText.style.display = 'inline-block';
-                            encircledText.style.width = '28px';
-                            encircledText.style.height = '28px';
-                            encircledText.style.lineHeight = '28px';
+                            encircledText.style.width = '40px';
+                            encircledText.style.height = '40px';
+                            encircledText.style.lineHeight = '40px';
                             encircledText.style.color = 'blue';
                             encircledText.style.textAlign = 'center';
                             encircledText.textContent = coteZLettre;
@@ -241,7 +241,22 @@ function requestCours() {
                         totalRow.style.fontSize = '22px';
                         const totalValueFormatted = currentTotalValue !== '' ? currentTotalValue.split('.')[0] : '';
                         resultCell.textContent = totalValueFormatted !== '' ? totalValueFormatted + '%' : '';
+
+
+                        if (currentTotalValue < 50) {
+                            resultCell.classList.add('red');
+                        } else if (currentTotalValue >= 50 && currentTotalValue < 60) {
+                            resultCell.classList.add('orangered');
+                        } else if (currentTotalValue >= 60 && currentTotalValue < 75) {
+                            resultCell.classList.add('yellow');
+                        } else if (currentTotalValue >= 75 && currentTotalValue < 85) {
+                            resultCell.classList.add('lightgreen');
+                        } else {
+                            resultCell.classList.add('limegreen');
+                        }
+
                         totalRow.appendChild(resultCell);
+                        table.appendChild(totalRow);
 
                         table.appendChild(totalRow);
                     }
