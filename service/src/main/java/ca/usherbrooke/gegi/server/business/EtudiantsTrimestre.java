@@ -21,5 +21,8 @@ public class EtudiantsTrimestre {
         public Float noteTotal;
         public Float coteZChiffre;
         public String coteZLettre;
+        public Float totalComp1;
+        public Float totalComp2;
+        public Float totalComp3;
 
 }

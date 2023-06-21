@@ -69,6 +69,8 @@ function populateTrimestreDropdown() {
 // ============= function to populate the table of evaluations for a student adn specific semester ============
 function requestCours() {
     console.log("function called??????????????");
+
+
     const div = document.getElementById('title');
     const span = div.firstElementChild;
 
@@ -78,12 +80,19 @@ function requestCours() {
     let currentTotalValue = null;
     let coteZLettre = null;
     let coteZChiffre = null;
+    let totalComp1 = null;
+    let totalComp2 = null;
+    let totalComp3 = null;
+
+
 
     const trimestreSelect = document.getElementById('trimestre');
     const selectedTrimestre = trimestreSelect.options[trimestreSelect.selectedIndex].value;
     console.log(selectedTrimestre)
     const cip = user.preferred_username;
     console.log("cip is : ", cip);
+
+
     axios.get("http://localhost:8888/api/selectinfo/" + cip + "/" + selectedTrimestre)
         .then(function (response) {
             console.log("Response: ", response.status);
@@ -118,6 +127,10 @@ function requestCours() {
                             currentTotalValue = cours.noteTotal !== null ? cours.noteTotal.toFixed(2) : '';
                             coteZLettre = cours.coteZLettre !== null ? cours.coteZLettre : '';
                             coteZChiffre = cours.coteZChiffre !== null ? cours.coteZChiffre.toFixed(1) : '';
+                            totalComp1 = cours.totalComp1 !== null ? cours.totalComp1 :'';
+                            totalComp2 = cours.totalComp2 !== null ? cours.totalComp2 :'';
+                            totalComp3 = cours.totalComp3 !== null ? cours.totalComp3 :'';
+
                         }
 
                         if (index === 0) {
@@ -227,13 +240,40 @@ function requestCours() {
 
                         totalRow.appendChild(coteZCell);
 
+                        // Create cells for totalComp1, totalComp2, and totalComp3
+                        const totalComp1Cell = document.createElement('td');
+                        const totalComp2Cell = document.createElement('td');
+                        const totalComp3Cell = document.createElement('td');
 
-
-                        const emptyCellsCount = headers.length - 2;
-                        for (let i = 1; i < emptyCellsCount; i++) {
-                            const emptyCell = document.createElement('td');
-                            totalRow.appendChild(emptyCell);
+                        if (totalComp1 > 0) {
+                            totalComp1Cell.textContent = totalComp1 + '%';
+                            totalComp1Cell.style.fontSize = '16px'; // Set the font size
+                            totalComp1Cell.style.fontWeight = 'bold';
+                        } else {
+                            totalComp1Cell.textContent = '';
                         }
+
+                        if (totalComp2 > 0) {
+                            totalComp2Cell.textContent = totalComp2 + '%';
+                            totalComp2Cell.style.fontSize = '16px'; // Set the font size
+                            totalComp2Cell.style.fontWeight = 'bold';
+                        } else {
+                            totalComp2Cell.textContent = '';
+                        }
+
+                        if (totalComp3 > 0) {
+                            totalComp3Cell.textContent = totalComp3 + '%';
+                            totalComp3Cell.style.fontSize = '16px'; // Set the font size
+                            totalComp3Cell.style.fontWeight = 'bold';
+                        } else {
+                            totalComp3Cell.textContent = '';
+                        }
+
+                        totalRow.appendChild(totalComp1Cell);
+                        totalRow.appendChild(totalComp2Cell);
+                        totalRow.appendChild(totalComp3Cell);
+
+                        table.appendChild(totalRow);
 
                         const resultCell = document.createElement('td');
                         resultCell.style.textAlign = 'center';
@@ -288,6 +328,7 @@ function requestCours() {
             console.log('Error fetching cote Z total:', error);
             span.innerHTML = '<br> <strong>' + error.toString() + '</strong> </br>';
         });
+
 }
 // ===========================================================================================================
 
