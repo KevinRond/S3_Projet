@@ -124,9 +124,9 @@ function requestCours() {
                         const row = document.createElement('tr');
 
                         if (index === 0) {
-                            currentTotalValue = cours.noteTotal !== null ? cours.noteTotal.toFixed(2) : '';
+                            currentTotalValue = cours.noteTotal !== undefined ? cours.noteTotal.toFixed(2) : '';
                             coteZLettre = cours.coteZLettre !== null ? cours.coteZLettre : '';
-                            coteZChiffre = cours.coteZChiffre !== null ? cours.coteZChiffre.toFixed(1) : '';
+                            coteZChiffre = cours.coteZChiffre !== null && cours.coteZChiffre !== undefined ? cours.coteZChiffre.toFixed(1) : '';
                             totalComp1 = cours.totalComp1 !== null ? cours.totalComp1 :'';
                             totalComp2 = cours.totalComp2 !== null ? cours.totalComp2 :'';
                             totalComp3 = cours.totalComp3 !== null ? cours.totalComp3 :'';
@@ -199,16 +199,20 @@ function requestCours() {
                         resValueSpan.style.fontWeight = 'bold';
                         resValueSpan.style.fontSize = '18px'; // Augmenter la taille de la police
                         resValueSpan.textContent = resValueFormatted !== '' ? resValueFormatted : ' ';
-                        const resPonderationSpan = document.createElement('span');
-                        resPonderationSpan.textContent = "%"; // Ajouter le signe "%"
+
+                        if (resValueFormatted !== ''){
+                            const resPonderationSpan = document.createElement('span');
+                            resPonderationSpan.textContent = "%"; // Ajouter le signe "%"
+                            resDiv.appendChild(resPonderationSpan);
+                        }
+
                         resDiv.appendChild(resValueSpan);
-                        resDiv.appendChild(resPonderationSpan);
                         resCell.appendChild(resDiv);
                         row.appendChild(resCell);
                         table.appendChild(row);
                     });
 
-                    if (currentTotalValue !== null) {
+                    if (currentTotalValue !== null && currentTotalValue !== '') {
                         const totalRow = document.createElement('tr');
                         const totalTitleCell = document.createElement('td');
                         totalTitleCell.style.fontWeight = 'bold';
@@ -300,11 +304,11 @@ function requestCours() {
         });
     axios.get("http://localhost:8888/api/selectCoteZTotal/" + cip)
         .then(function (response) {
-            const coteZTotal = response.data.CoteZTotal;
+            const coteZTotal = response.data.CoteZTotal !== undefined ? response.data.coteZTotal : "Aucune Cote Z Totale";
 
             axios.get("http://localhost:8888/api/selectCoteZTrimestre/" + cip + "/" + selectedTrimestre)
                 .then(function (response) {
-                    const coteZTrimestre = response.data[0].coteZTrimestre;
+                    const coteZTrimestre = response.data[0] !==  null ? response.data[0].coteZTrimestre: "Aucune cote Z Trimestre";
                     const resultDiv = document.createElement('div');
                     resultDiv.innerHTML = `Cote Z Trimestre: ${coteZTrimestre}`;
                     resultDiv.style.position = 'absolute';
