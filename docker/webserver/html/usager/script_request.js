@@ -1,4 +1,3 @@
-
 // =======================================================================================================
 //============= Java script file for the filling of the table of grades ==================================
 //============= function to select the semester of a student populating the dropdown ========================
