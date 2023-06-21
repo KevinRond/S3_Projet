@@ -26,8 +26,6 @@
     <!-- ===================================================================================================== -->
 
     <!-- ===================================================================================================== -->
-<<<<<<< HEAD
-=======
     <!-- request for the cote z total of a student -->
     <select id="selectCoteZTotal" resultType="ca.usherbrooke.gegi.server.business.EtudiantCoteZTotal">
         SELECT
@@ -52,9 +50,24 @@
     </select>
     <!-- ========================================================================================================== -->
 
+    <!-- =========================================================================================================== -->
+    <!-- request for total of the competence -->
+    <select id="selectCompetenceTotal" resultType="ca.usherbrooke.gegi.server.business.etudiantCompetence">
+        SELECT
+            VNTCC.sigle,
+            VNTCC.total_comp1,
+            VNTCC.total_comp2,
+            VNTCC.total_comp3
+        FROM
+            projet.vue_notes_totales_competence_cours VNTCC
+
+        WHERE
+            VNTCC.cip = #{cip} AND
+            VNTCC.id_trimestre = #{trimestre}
+    </select>
+    <!-- =========================================================================================================== -->
 
     <!-- ===================================================================================================== -->
->>>>>>> lebron_james
     <!-- request for the grades of the student for a specific semester -->
     <select id="selectinfo" resultType="ca.usherbrooke.gegi.server.business.EtudiantsTrimestre">
         SELECT
@@ -81,7 +94,6 @@
             vne.id_trimestre = #{trimestre}
 
     </select>
-    <!-- ===================================================================================================== -->
 
 
     <!-- ===================================================================================================== -->

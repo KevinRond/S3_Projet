@@ -263,9 +263,6 @@ function requestCours() {
             console.log('Error fetching cote Z total:', error);
             span.innerHTML = '<br> <strong>' + error.toString() + '</strong> </br>';
         });
-
-
-
 }
 // ===========================================================================================================
 

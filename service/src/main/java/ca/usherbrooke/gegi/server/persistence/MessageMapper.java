@@ -19,4 +19,6 @@ public interface MessageMapper {
     List<EtudiantCoteZ> selectCoteZTrimestre(@Param("cip") String cip, @Param("trimestre") String trimestre);
 
     EtudiantCoteZTotal selectCoteZTotal(@Param("cip") String cip);
+
+    List<etudiantCompetence> selectCompetenceTotal(@Param("cip") String cip, @Param("trimestre") String trimestre);
 }

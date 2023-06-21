@@ -74,6 +74,16 @@ public class RoleService {
         return messageMapper.selectCoteZTotal(cip);
     }
 
+    @GET
+    @Path("selectCompetenceTotal/{cip}/{trimestre}")
+    @PermitAll
+    public List<etudiantCompetence> selectCompetenceTotal(
+            @PathParam("cip") String cip,
+            @PathParam("trimestre") String trimestre
+    ) {
+        return messageMapper.selectCompetenceTotal(cip, trimestre);
+    }
+
 //        Message message = messageMapper.selectOne(id);
 //        return unescapeEntities(message);
 

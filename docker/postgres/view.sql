@@ -135,4 +135,28 @@ FROM
     vue_cote_z_trimestre VCZT
 
 GROUP BY
-    VCZT.cip
+    VCZT.cip;
+
+DROP VIEW IF EXISTS vue_notes_totales_competence_cours CASCADE;
+
+CREATE VIEW vue_notes_totales_competence_cours AS
+SELECT
+    cip,
+    Id_trimestre,
+    Sigle,
+    Nom_cours,
+    SUM(Comp1) AS TotalNotes_Comp1,
+    SUM(Ponderation_Comp1) AS Total_Ponderation_Comp1,
+    SUM(Comp2) AS TotalNotes_Comp2,
+    SUM(Ponderation_Comp2) AS Total_Ponderation_Comp2,
+    SUM(Comp3) AS TotalNotes_Comp3,
+    SUM(Ponderation_Comp3) AS Total_Ponderation_Comp3,
+    ROUND((SUM(Comp1) / NULLIF(SUM(Ponderation_Comp1), 0)) * 100) AS total_comp1,
+    ROUND((SUM(Comp2) / NULLIF(SUM(Ponderation_Comp2), 0)) * 100) AS total_comp2,
+    ROUND((SUM(Comp3) / NULLIF(SUM(Ponderation_Comp3), 0)) * 100) AS total_comp3
+FROM
+    vue_notes_etudiant_trimestre
+GROUP BY
+    cip, Sigle, Id_trimestre, Nom_cours
+ORDER BY
+    cip, Sigle, Id_trimestre;
