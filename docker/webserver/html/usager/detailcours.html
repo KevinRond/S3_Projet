@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Détails du Cours</title>
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const sigle = urlParams.get("sigle");
+      const cip = urlParams.get("cip");
+
+      // Utilisez les variables sigle et cip pour afficher les informations du cours spécifique
+      document.getElementById("course-name").innerHTML = sigle;
+      document.getElementById("cip").innerHTML = cip;
+
+    });
+  </script>
+</head>
+<body>
+<h1>Détails du Cours</h1>
+
+<p>Nom du cours: <span id="course-name"></span></p>
+
+<!-- Lien de retour à la page principale -->
+<a href="index.html">Retour à la page principale</a>
+</body>
+</html>
