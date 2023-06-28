@@ -100,6 +100,7 @@ INSERT INTO ETUDIANT(Cip, Prenom, Nom_famille, Id_programme) VALUES ('barr1306',
 INSERT INTO ETUDIANT(Cip, Prenom, Nom_famille, Id_programme) VALUES ('ronk2602', 'Kevin', 'Rondeau', 1);
 
 
+
 -- Insertion dans la table ETUDIANT_COURS (Quels etudiants font quels cours)
 -- ## gerz0501 ##
 -- ## A22 ##
@@ -300,6 +301,13 @@ INSERT INTO EVALUATION(id_evaluation, sigle, Nom_evaluation, id_trimestre, ponde
 INSERT INTO EVALUATION(id_evaluation, sigle, Nom_evaluation, id_trimestre, ponderation) VALUES (25, 'GEN200', 'Projet - Professionalisme', 'H23', 20);
 INSERT INTO EVALUATION(id_evaluation, sigle, Nom_evaluation, id_trimestre, ponderation) VALUES (26, 'GEN200', 'Examens finaux - GEN200', 'H23', 190);
 
+--# E23 ##
+INSERT INTO EVALUATION(ID_EVALUATION, SIGLE,  NOM_EVALUATION, ID_TRIMESTRE, PONDERATION) VALUES (27, 'GIF302', 'Memoire daprobation de projet','E23', 120);
+INSERT INTO EVALUATION(ID_EVALUATION, SIGLE,  NOM_EVALUATION, ID_TRIMESTRE, PONDERATION) VALUES (28, 'GIF302', 'Mini test SCRUM','E23', 60);
+INSERT INTO EVALUATION(ID_EVALUATION, SIGLE,  NOM_EVALUATION, ID_TRIMESTRE, PONDERATION) VALUES (29, 'GIF302', 'Demo et rapport iteration 1','E23', 60);
+INSERT INTO EVALUATION(ID_EVALUATION, SIGLE,  NOM_EVALUATION, ID_TRIMESTRE, PONDERATION) VALUES (30, 'GIF302', 'Demo et rapport iteration 2','E23', 60);
+INSERT INTO EVALUATION(ID_EVALUATION, SIGLE,  NOM_EVALUATION, ID_TRIMESTRE, PONDERATION) VALUES (31, 'GIF302', 'Demo fin iteration 3','E23', 60);
+
 -- Insertion dans la table COMPETENCE (liste des competences par cours)
 -- ## A22 ##
 -- ## Cours GEN101 ##
@@ -450,6 +458,28 @@ INSERT INTO COMPETENCEPOND(Ponderation_competence, nom_comp, Sigle, Id_evaluatio
 INSERT INTO COMPETENCEPOND(Ponderation_competence, nom_comp, Sigle, Id_evaluation, id_trimestre) VALUES ( 50, 'Comp1', 'GEN200', 26, 'H23');
 INSERT INTO COMPETENCEPOND(Ponderation_competence, nom_comp, Sigle, Id_evaluation, id_trimestre) VALUES ( 110, 'Comp2', 'GEN200', 26, 'H23');
 INSERT INTO COMPETENCEPOND(Ponderation_competence, nom_comp, Sigle, Id_evaluation, id_trimestre) VALUES ( 30, 'Comp3', 'GEN200', 26, 'H23');
+
+-- E23
+--GIF302
+INSERT INTO COMPETENCEPOND(Ponderation_competence, nom_comp, Sigle, Id_evaluation, id_trimestre) VALUES ( 40, 'Comp1', 'GIF302', 27, 'E23');
+INSERT INTO COMPETENCEPOND(Ponderation_competence, nom_comp, Sigle, Id_evaluation, id_trimestre) VALUES ( 40, 'Comp2', 'GIF302', 27, 'E23');
+INSERT INTO COMPETENCEPOND(Ponderation_competence, nom_comp, Sigle, Id_evaluation, id_trimestre) VALUES ( 40, 'Comp3', 'GIF302', 27, 'E23');
+
+INSERT INTO COMPETENCEPOND(Ponderation_competence, nom_comp, Sigle, Id_evaluation, id_trimestre) VALUES ( 20, 'Comp1', 'GIF302', 28, 'E23');
+INSERT INTO COMPETENCEPOND(Ponderation_competence, nom_comp, Sigle, Id_evaluation, id_trimestre) VALUES ( 20, 'Comp2', 'GIF302', 28, 'E23');
+INSERT INTO COMPETENCEPOND(Ponderation_competence, nom_comp, Sigle, Id_evaluation, id_trimestre) VALUES ( 20, 'Comp3', 'GIF302', 28, 'E23');
+
+INSERT INTO COMPETENCEPOND(Ponderation_competence, nom_comp, Sigle, Id_evaluation, id_trimestre) VALUES ( 20, 'Comp1', 'GIF302', 29, 'E23');
+INSERT INTO COMPETENCEPOND(Ponderation_competence, nom_comp, Sigle, Id_evaluation, id_trimestre) VALUES ( 20, 'Comp2', 'GIF302', 29, 'E23');
+INSERT INTO COMPETENCEPOND(Ponderation_competence, nom_comp, Sigle, Id_evaluation, id_trimestre) VALUES ( 20, 'Comp3', 'GIF302', 29, 'E23');
+
+INSERT INTO COMPETENCEPOND(Ponderation_competence, nom_comp, Sigle, Id_evaluation, id_trimestre) VALUES ( 20, 'Comp1', 'GIF302', 30, 'E23');
+INSERT INTO COMPETENCEPOND(Ponderation_competence, nom_comp, Sigle, Id_evaluation, id_trimestre) VALUES ( 20, 'Comp2', 'GIF302', 30, 'E23');
+INSERT INTO COMPETENCEPOND(Ponderation_competence, nom_comp, Sigle, Id_evaluation, id_trimestre) VALUES ( 20, 'Comp3', 'GIF302', 30, 'E23');
+
+INSERT INTO COMPETENCEPOND(Ponderation_competence, nom_comp, Sigle, Id_evaluation, id_trimestre) VALUES ( 20, 'Comp1', 'GIF302', 31, 'E23');
+INSERT INTO COMPETENCEPOND(Ponderation_competence, nom_comp, Sigle, Id_evaluation, id_trimestre) VALUES ( 20, 'Comp2', 'GIF302', 31, 'E23');
+INSERT INTO COMPETENCEPOND(Ponderation_competence, nom_comp, Sigle, Id_evaluation, id_trimestre) VALUES ( 20, 'Comp3', 'GIF302', 31, 'E23');
 
 
 
