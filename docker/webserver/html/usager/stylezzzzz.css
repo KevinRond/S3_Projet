@@ -151,13 +151,13 @@ footer p {
 }
 
 .box {
-    position: absolute;
+    position: fixed;
     background-color: lightgrey;
     border: 1px solid #ccc;
     padding: 5px;
     font-size: 16px;
     display: none;
-    width: 100px; /* Adjust the width as needed */
+    width: 115px; /* Adjust the width as needed */
     height: 40px; /* Adjust the height as needed */
     border-radius: 15px;
     justify-content: center; /* Center horizontally */
