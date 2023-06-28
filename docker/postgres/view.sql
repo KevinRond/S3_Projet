@@ -154,3 +154,19 @@ GROUP BY
     Sigle, Id_trimestre, Nom_cours, Nom_evaluation
 ORDER BY
     Sigle, Id_trimestre;
+
+DROP VIEW IF EXISTS vue_moyenne_total_competence CASCADE;
+CREATE VIEW vue_moyenne_total_competence AS
+SELECT
+    Id_trimestre,
+    Sigle,
+    Nom_cours,
+    AVG(TotalNotes_Comp1) AS Moyenne_total_competence1,
+    AVG(TotalNotes_Comp2) AS Moyenne_total_competence2,
+    AVG(TotalNotes_Comp3) AS Moyenne_total_competence3
+FROM
+    vue_notes_totales_competence_cours
+GROUP BY
+    Id_trimestre, Sigle, Nom_cours
+ORDER BY
+    Sigle, Id_trimestre;
