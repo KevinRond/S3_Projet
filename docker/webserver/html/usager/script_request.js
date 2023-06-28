@@ -83,6 +83,9 @@ function requestCours() {
     let totalComp1 = null;
     let totalComp2 = null;
     let totalComp3 = null;
+    let totalComp1Pond = null;
+    let totalComp2Pond = null;
+    let totalComp3Pond = null;
 
 
 
@@ -127,10 +130,12 @@ function requestCours() {
                             currentTotalValue = cours.noteTotal !== undefined ? cours.noteTotal.toFixed(2) : '';
                             coteZLettre = cours.coteZLettre !== null ? cours.coteZLettre : '';
                             coteZChiffre = cours.coteZChiffre !== null && cours.coteZChiffre !== undefined ? cours.coteZChiffre.toFixed(1) : '';
-                            totalComp1 = cours.totalComp1 !== null ? cours.totalComp1 :'';
-                            totalComp2 = cours.totalComp2 !== null ? cours.totalComp2 :'';
-                            totalComp3 = cours.totalComp3 !== null ? cours.totalComp3 :'';
-
+                            totalComp1 = cours.TotalNotesComp1!== null ? cours.TotalNotesComp1 :'';
+                            totalComp1Pond = cours.TotalPonderationComp1 !== null ? cours.TotalPonderationComp1 : '';
+                            totalComp2 = cours.TotalNotesComp2 !== null ? cours.TotalNotesComp2 :'';
+                            totalComp2Pond = cours.TotalPonderationComp2 !== null ? cours.TotalPonderationComp2 : '';
+                            totalComp3 = cours.TotalNotesComp3 !== null ? cours.TotalNotesComp3 :'';
+                            totalComp3Pond = cours.TotalPonderationComp3 !== null ? cours.TotalPonderationComp3 : '';
                         }
 
                         if (index === 0) {
@@ -252,7 +257,7 @@ function requestCours() {
                         const totalComp3Cell = document.createElement('td');
 
                         if (totalComp1 !== undefined) {
-                            totalComp1Cell.textContent = totalComp1 + '%';
+                            totalComp1Cell.textContent = totalComp1 + ' / ' + totalComp1Pond;
                             totalComp1Cell.style.fontSize = '16px'; // Set the font size
                             totalComp1Cell.style.fontWeight = 'bold';
                         } else {
@@ -260,7 +265,7 @@ function requestCours() {
                         }
 
                         if (totalComp2 !== undefined) {
-                            totalComp2Cell.textContent = totalComp2 + '%';
+                            totalComp2Cell.textContent = totalComp2 + ' / ' + totalComp2Pond;
                             totalComp2Cell.style.fontSize = '16px'; // Set the font size
                             totalComp2Cell.style.fontWeight = 'bold';
                         } else {
@@ -268,7 +273,7 @@ function requestCours() {
                         }
 
                         if (totalComp3 !== undefined) {
-                            totalComp3Cell.textContent = totalComp3 + '%';
+                            totalComp3Cell.textContent = totalComp3 + ' / ' + totalComp3Pond;
                             totalComp3Cell.style.fontSize = '16px'; // Set the font size
                             totalComp3Cell.style.fontWeight = 'bold';
                         } else {
