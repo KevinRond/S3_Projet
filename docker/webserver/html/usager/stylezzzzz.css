@@ -149,3 +149,21 @@ footer p {
 .limegreen {
     background-color: limegreen;
 }
+
+.box {
+    position: absolute;
+    background-color: lightgrey;
+    border: 1px solid #ccc;
+    padding: 5px;
+    font-size: 16px;
+    display: none;
+    width: 100px; /* Adjust the width as needed */
+    height: 40px; /* Adjust the height as needed */
+    border-radius: 15px;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    text-align: center;
+    white-space: nowrap; /* Prevent line break inside the box */
+    pointer-events: none; /* Prevent the box from affecting mouse events */
+    transform: translateX(10px); /* Position the box to the right of the cell */
+}

@@ -118,10 +118,16 @@ function requestCours() {
                         headerRow.appendChild(th);
                     });
                     table.appendChild(headerRow);
+                    const updatePopupPosition = (cell, box) => {
+                        const rect = cell.getBoundingClientRect();
+                        box.style.top = `${rect.top}px`;
+                        box.style.left = `${rect.right}px`;
+                    };
 
-                    // Create table rows
                     coursArray.forEach((cours, index) => {
                         const row = document.createElement('tr');
+
+
 
                         if (index === 0) {
                             currentTotalValue = cours.noteTotal !== undefined ? cours.noteTotal.toFixed(2) : '';
@@ -158,6 +164,9 @@ function requestCours() {
                         comp1Div.innerHTML += ' ' + comp1PonderationSpan.textContent;
                         comp1Cell.appendChild(comp1Div);
                         row.appendChild(comp1Cell);
+                        if (cours.moycomp1 !== null) {
+                            addHoverEffectToCell(comp1Cell, cours.moycomp1); // Apply hover effect to the cell
+                        }
 
                         const comp2Cell = document.createElement('td');
                         const comp2Value = getCoursCellValue(cours.comp2, cours.ponderationComp2);
@@ -173,6 +182,9 @@ function requestCours() {
                         comp2Div.innerHTML += ' ' + comp2PonderationSpan.textContent;
                         comp2Cell.appendChild(comp2Div);
                         row.appendChild(comp2Cell);
+                        if (cours.moycomp2 !== null) {
+                            addHoverEffectToCell(comp2Cell, cours.moycomp2);
+                        }
 
                         const comp3Cell = document.createElement('td');
                         const comp3Value = getCoursCellValue(cours.comp3, cours.ponderationComp3);
@@ -188,6 +200,9 @@ function requestCours() {
                         comp3Div.innerHTML += ' ' + comp3PonderationSpan.textContent;
                         comp3Cell.appendChild(comp3Div);
                         row.appendChild(comp3Cell);
+                        if (cours.moycomp3 !== null) {
+                            addHoverEffectToCell(comp3Cell, cours.moycomp3);
+                        }
 
                         const resCell = document.createElement('td');
                         const resValue = getCoursCellValue(cours.total);
@@ -199,6 +214,9 @@ function requestCours() {
                         resValueSpan.style.fontWeight = 'bold';
                         resValueSpan.style.fontSize = '18px'; // Augmenter la taille de la police
                         resValueSpan.textContent = resValueFormatted !== '' ? resValueFormatted : ' ';
+                        if (cours.moyenneTotal !== null) {
+                            addHoverEffectToCell(resCell, cours.moyenneTotal);
+                        }
 
                         resDiv.appendChild(resValueSpan);
 
@@ -248,6 +266,9 @@ function requestCours() {
 
                         // Create cells for totalComp1, totalComp2, and totalComp3
                         const totalComp1Cell = document.createElement('td');
+                        // if (cours.moycomp1total !== null) {
+                        //     addHoverEffectToCell(comp3Cell, cours.moycomp1total);
+                        // }
                         const totalComp2Cell = document.createElement('td');
                         const totalComp3Cell = document.createElement('td');
 
@@ -476,4 +497,46 @@ function logout() {
     //let logoutURL = "http://localhost:8180/realms/usager/protocol/openid-connect/logout"
     //window.location.href = logoutURL;
     keycloak.logout({ redirectUri: 'http://localhost/usager/' });
+
+
 }
+
+
+const addHoverEffectToCell = (cell, moyenne) => {
+    let box = null;
+
+    cell.addEventListener('mouseover', function () {
+        if (moyenne == null) {
+            return;
+        }
+        box = document.createElement('div');
+        box.classList.add('box');
+        box.textContent = "Moyenne : " + moyenne + "%";
+
+        const rect = cell.getBoundingClientRect();
+        box.style.top = `${rect.top}px`;
+        box.style.left = `${rect.right}px`;
+
+        document.body.appendChild(box);
+        box.style.display = 'block';
+
+        window.addEventListener('scroll', updatePopupPosition);
+    });
+
+    cell.addEventListener('mouseout', function () {
+        if (box && box.parentNode === document.body) {
+            box.style.display = 'none';
+            document.body.removeChild(box);
+            box = null;
+        }
+        window.removeEventListener('scroll', updatePopupPosition);
+    });
+
+    const updatePopupPosition = () => {
+        if (box && box.parentNode === document.body) {
+            const rect = cell.getBoundingClientRect();
+            box.style.top = `${rect.top}px`;
+            box.style.left = `${rect.right}px`;
+        }
+    };
+};

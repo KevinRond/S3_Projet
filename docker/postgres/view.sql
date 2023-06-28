@@ -136,3 +136,37 @@ GROUP BY
     cip, Sigle, Id_trimestre, Nom_cours
 ORDER BY
     cip, Sigle, Id_trimestre;
+
+CREATE VIEW vue_moyenne_eval AS
+SELECT
+    VNET.Id_trimestre,
+    VNET.Sigle,
+    VNET.Nom_evaluation,
+    ROUND(AVG(VNET.Comp1)) AS MoyComp1,
+    ROUND(AVG(VNET.Comp2)) AS MoyComp2,
+    ROUND(AVG(VNET.Comp3)) AS MoyComp3,
+    ROUND(AVG(VNET.Total)) AS Moyenne_Total
+FROM
+    vue_notes_etudiant_trimestre VNET
+GROUP BY
+    VNET.Id_trimestre, VNET.Sigle, VNET.Nom_evaluation;
+
+DROP VIEW IF EXISTS vue_moyenne_cours CASCADE ;
+
+CREATE VIEW vue_moyenne_cours AS
+SELECT
+    VNT.Id_trimestre,
+    VNT.Sigle,
+    ROUND(AVG(VNT.note_total)) AS MoyNoteTotal,
+    ROUND(AVG(vntcc.total_comp1)) AS MoyComp1Total,
+    ROUND(AVG(vntcc.total_comp2)) AS MoyComp2Total,
+    ROUND(AVG(vntcc.total_comp3)) AS MoyComp3Total
+
+FROM
+    vue_note_total VNT JOIN
+        vue_notes_totales_competence_cours vntcc ON
+            VNT.sigle = vntcc.sigle AND
+            VNT.id_trimestre = vntcc.id_trimestre
+
+GROUP BY
+    VNT.Id_trimestre, VNT.Sigle
