@@ -77,7 +77,15 @@
             vmc.moycomp1total,
             vmc.moycomp2total,
             vmc.moycomp3total,
-            vmc.moynotetotal
+            vmc.moynotetotal,
+            vme.ecartcomp1,
+            vme.ecartcomp2,
+            vme.ecartcomp3,
+            vme.ecart_total,
+            vmc.ecartcomp1total,
+            vmc.ecartcomp2total,
+            vmc.ecartcomp3total,
+            vmc.ecartnotetotal
 
         FROM
             projet.vue_notes_etudiant_trimestre vne

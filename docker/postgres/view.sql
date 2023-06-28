@@ -150,7 +150,7 @@ SELECT
     ROUND(stddev(VNET.Comp1)) AS EcartComp1,
     ROUND(stddev(VNET.Comp2)) AS EcartComp2,
     ROUND(stddev(VNET.Comp3)) AS EcartComp3,
-    ROUND(stddev(VNET.Comp1)) AS Ecart_total
+    ROUND(stddev(VNET.Total)) AS Ecart_total
 FROM
     vue_notes_etudiant_trimestre VNET
 GROUP BY
@@ -166,10 +166,10 @@ SELECT
     ROUND(AVG(vntcc.total_comp1)) AS MoyComp1Total,
     ROUND(AVG(vntcc.total_comp2)) AS MoyComp2Total,
     ROUND(AVG(vntcc.total_comp3)) AS MoyComp3Total,
-    ROUND(stddev(VNT.note_total)) AS EcartNoteTotal,
     ROUND(stddev(vntcc.total_comp1)) EcartComp1Total,
     ROUND(stddev(vntcc.total_comp2)) EcartComp2Total,
-    ROUND(stddev(vntcc.total_comp3)) EcartComp3Total
+    ROUND(stddev(vntcc.total_comp3)) EcartComp3Total,
+    ROUND(stddev(VNT.note_total)) AS EcartNoteTotal
 FROM
     vue_note_total VNT JOIN
         vue_notes_totales_competence_cours vntcc ON

@@ -87,6 +87,10 @@ function requestCours() {
     let moycomp2total = null;
     let moycomp3total = null;
     let moynotetotal = null;
+    let ecartcomp1total = null;
+    let ecartcomp2total = null;
+    let ecartcomp3total = null;
+    let ecartnotetotal = null;
 
 
 
@@ -144,6 +148,10 @@ function requestCours() {
                             moycomp2total = cours.moycomp2total;
                             moycomp3total = cours.moycomp3total;
                             moynotetotal = cours.moynotetotal;
+                            ecartcomp1total = cours.ecartcomp1total;
+                            ecartcomp2total = cours.ecartcomp2total;
+                            ecartcomp3total = cours.ecartcomp3total;
+                            ecartnotetotal = cours.ecartnotetotal;
                         }
 
                         if (index === 0) {
@@ -172,7 +180,7 @@ function requestCours() {
                         comp1Cell.appendChild(comp1Div);
                         row.appendChild(comp1Cell);
                         if (cours.moycomp1 !== null) {
-                            addHoverEffectToCell(comp1Cell, cours.moycomp1, cours.ponderationComp1, "C1"); // Apply hover effect to the cell
+                            addHoverEffectToCell(comp1Cell, cours.moycomp1,  cours.ecartcomp1, cours.ponderationComp1, "C1"); // Apply hover effect to the cell
                         }
 
                         const comp2Cell = document.createElement('td');
@@ -190,7 +198,7 @@ function requestCours() {
                         comp2Cell.appendChild(comp2Div);
                         row.appendChild(comp2Cell);
                         if (cours.moycomp2 !== null) {
-                            addHoverEffectToCell(comp2Cell, cours.moycomp2, cours.ponderationComp2, "C2");
+                            addHoverEffectToCell(comp2Cell, cours.moycomp2, cours.ecartcomp2, cours.ponderationComp2, "C2");
                         }
 
                         const comp3Cell = document.createElement('td');
@@ -208,7 +216,7 @@ function requestCours() {
                         comp3Cell.appendChild(comp3Div);
                         row.appendChild(comp3Cell);
                         if (cours.moycomp3 !== null) {
-                            addHoverEffectToCell(comp3Cell, cours.moycomp3, cours.ponderationComp3, "C3");
+                            addHoverEffectToCell(comp3Cell, cours.moycomp3, cours.ecartcomp3, cours.ponderationComp3, "C3");
                         }
 
                         const resCell = document.createElement('td');
@@ -222,7 +230,7 @@ function requestCours() {
                         resValueSpan.style.fontSize = '18px'; // Augmenter la taille de la police
                         resValueSpan.textContent = resValueFormatted !== '' ? resValueFormatted : ' ';
                         if (cours.moyenneTotal !== null) {
-                            addHoverEffectToCell(resCell, cours.moyenneTotal);
+                            addHoverEffectToCell(resCell, cours.moyenneTotal,  cours.ecartTotal);
                         }
 
                         resDiv.appendChild(resValueSpan);
@@ -274,15 +282,15 @@ function requestCours() {
                         // Create cells for totalComp1, totalComp2, and totalComp3
                         const totalComp1Cell = document.createElement('td');
                         if (moycomp1total !== null) {
-                            addHoverEffectToCell(totalComp1Cell, moycomp1total);
+                            addHoverEffectToCell(totalComp1Cell, moycomp1total, ecartcomp1total);
                         }
                         const totalComp2Cell = document.createElement('td');
                         if (moycomp2total !== null) {
-                            addHoverEffectToCell(totalComp2Cell, moycomp2total);
+                            addHoverEffectToCell(totalComp2Cell, moycomp2total, ecartcomp2total);
                         }
                         const totalComp3Cell = document.createElement('td');
                         if (moycomp3total !== null) {
-                            addHoverEffectToCell(totalComp3Cell, moycomp3total);
+                            addHoverEffectToCell(totalComp3Cell, moycomp3total, ecartcomp3total);
                         }
 
                         if (totalComp1 !== undefined) {
@@ -317,7 +325,7 @@ function requestCours() {
 
                         const resultCell = document.createElement('td');
                         if (moynotetotal !== null) {
-                            addHoverEffectToCell(resultCell, moynotetotal);
+                            addHoverEffectToCell(resultCell, moynotetotal, ecartnotetotal);
                         }
                         resultCell.style.textAlign = 'center';
                         resultCell.style.fontWeight = 'bold';
@@ -518,7 +526,7 @@ function logout() {
 }
 
 
-const addHoverEffectToCell = (cell, moyenne, ponderation, type) => {
+const addHoverEffectToCell = (cell, moyenne, ecart, ponderation, type) => {
     let box = null;
 
     cell.addEventListener('mouseover', function () {
@@ -528,9 +536,9 @@ const addHoverEffectToCell = (cell, moyenne, ponderation, type) => {
         box = document.createElement('div');
         box.classList.add('box');
         if (type === "C1" || type === "C2" || type === "C3"){
-            box.textContent = "Moyenne : " + moyenne + "/" + ponderation;
+            box.innerHTML = "Moyenne : " + moyenne + "/" + ponderation + "<br>" + "Ecart-Type: " + ecart;
         } else {
-            box.textContent = "Moyenne : " + moyenne + "%";
+            box.innerHTML = "Moyenne : " + moyenne + "%" + "<br>" + "Ecart-Type: " + ecart + "%";
         }
 
         const rect = cell.getBoundingClientRect();
