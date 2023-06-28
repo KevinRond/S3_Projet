@@ -156,7 +156,13 @@ function requestCours() {
 
                         if (index === 0) {
                             const sigleNomCoursCell = document.createElement('td');
-                            sigleNomCoursCell.innerHTML = `<div style="text-align: center;"><strong>${cours.sigle}</strong></div><div style="text-align: center;" class="small">${cours.nomCours}</div>`;
+                            sigleNomCoursCell.innerHTML = `
+                            <div style="text-align: center;">
+                                <strong>
+                                    <a href="detailcours.html?sigle=${cours.sigle}&cip=${cip}">${cours.sigle}</a>
+                                </strong>
+                            </div>
+                            <div style="text-align: center;" class="small">${cours.nomCours}</div>`;
                             sigleNomCoursCell.rowSpan = coursArray.length;
                             row.appendChild(sigleNomCoursCell);
                         }
