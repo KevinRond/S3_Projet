@@ -136,3 +136,21 @@ GROUP BY
     cip, Sigle, Id_trimestre, Nom_cours
 ORDER BY
     cip, Sigle, Id_trimestre;
+
+DROP VIEW IF EXISTS vue_moyenne_evaluation CASCADE ;
+CREATE VIEW vue_moyenne_evaluation AS
+SELECT
+    Id_trimestre,
+    Sigle,
+    Nom_cours,
+    Nom_evaluation,
+    AVG(Comp1) AS Moyenne_comp1,
+    AVG(Comp2) AS Moyenne_comp2,
+    AVG(Comp3) AS Moyenne_comp3
+
+FROM
+    vue_notes_etudiant_trimestre
+GROUP BY
+    Sigle, Id_trimestre, Nom_cours, Nom_evaluation
+ORDER BY
+    Sigle, Id_trimestre;
