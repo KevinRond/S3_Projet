@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Détails du Cours</title>
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
   <script>
     document.addEventListener("DOMContentLoaded", function() {
       const urlParams = new URLSearchParams(window.location.search);
@@ -12,14 +13,49 @@
       // Utilisez les variables sigle et cip pour afficher les informations du cours spécifique
       document.getElementById("course-name").innerHTML = sigle;
       document.getElementById("cip").innerHTML = cip;
-
     });
+
+    // Charger la bibliothèque de visualisation et le package corechart
+    google.charts.load('current', {'packages':['corechart']});
+
+    // Définir une fonction pour dessiner le graphique
+    google.charts.setOnLoadCallback(drawChart);
+
+    // Fonction pour générer une valeur aléatoire
+    function randomValue() {
+      return Math.floor(Math.random() * 100);
+    }
+
+    function drawChart() {
+      // Créer les données du graphique
+      var data = google.visualization.arrayToDataTable([
+        ['Element', 'Valeur'],
+        ['Element 1', randomValue()],
+        ['Element 2', randomValue()],
+        ['Element 3', randomValue()],
+        ['Element 4', randomValue()],
+        ['Element 5', randomValue()],
+      ]);
+
+      // Options pour le graphique
+      var options = {
+        title: 'Mon graphique',
+        is3D: true,
+      };
+
+      // Créer le graphique et le dessiner
+      var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+      chart.draw(data, options);
+    }
   </script>
 </head>
 <body>
 <h1>Détails du Cours</h1>
 
 <p>Nom du cours: <span id="course-name"></span></p>
+
+<!-- Element dans lequel le graphique sera dessiné -->
+<div id="piechart" style="width: 900px; height: 500px;"></div>
 
 <!-- Lien de retour à la page principale -->
 <a href="index.html">Retour à la page principale</a>
