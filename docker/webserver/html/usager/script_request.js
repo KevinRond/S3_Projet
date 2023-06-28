@@ -83,6 +83,14 @@ function requestCours() {
     let totalComp1 = null;
     let totalComp2 = null;
     let totalComp3 = null;
+    let moycomp1total = null;
+    let moycomp2total = null;
+    let moycomp3total = null;
+    let moynotetotal = null;
+    let ecartcomp1total = null;
+    let ecartcomp2total = null;
+    let ecartcomp3total = null;
+    let ecartnotetotal = null;
 
 
 
@@ -118,10 +126,16 @@ function requestCours() {
                         headerRow.appendChild(th);
                     });
                     table.appendChild(headerRow);
+                    const updatePopupPosition = (cell, box) => {
+                        const rect = cell.getBoundingClientRect();
+                        box.style.top = `${rect.top}px`;
+                        box.style.left = `${rect.right}px`;
+                    };
 
-                    // Create table rows
                     coursArray.forEach((cours, index) => {
                         const row = document.createElement('tr');
+
+
 
                         if (index === 0) {
                             currentTotalValue = cours.noteTotal !== undefined ? cours.noteTotal.toFixed(2) : '';
@@ -130,7 +144,14 @@ function requestCours() {
                             totalComp1 = cours.totalComp1 !== null ? cours.totalComp1 :'';
                             totalComp2 = cours.totalComp2 !== null ? cours.totalComp2 :'';
                             totalComp3 = cours.totalComp3 !== null ? cours.totalComp3 :'';
-
+                            moycomp1total = cours.moycomp1total;
+                            moycomp2total = cours.moycomp2total;
+                            moycomp3total = cours.moycomp3total;
+                            moynotetotal = cours.moynotetotal;
+                            ecartcomp1total = cours.ecartcomp1total;
+                            ecartcomp2total = cours.ecartcomp2total;
+                            ecartcomp3total = cours.ecartcomp3total;
+                            ecartnotetotal = cours.ecartnotetotal;
                         }
 
                         if (index === 0) {
@@ -158,6 +179,9 @@ function requestCours() {
                         comp1Div.innerHTML += ' ' + comp1PonderationSpan.textContent;
                         comp1Cell.appendChild(comp1Div);
                         row.appendChild(comp1Cell);
+                        if (cours.moycomp1 !== null) {
+                            addHoverEffectToCell(comp1Cell, cours.moycomp1,  cours.ecartcomp1, cours.ponderationComp1, "C1"); // Apply hover effect to the cell
+                        }
 
                         const comp2Cell = document.createElement('td');
                         const comp2Value = getCoursCellValue(cours.comp2, cours.ponderationComp2);
@@ -173,6 +197,9 @@ function requestCours() {
                         comp2Div.innerHTML += ' ' + comp2PonderationSpan.textContent;
                         comp2Cell.appendChild(comp2Div);
                         row.appendChild(comp2Cell);
+                        if (cours.moycomp2 !== null) {
+                            addHoverEffectToCell(comp2Cell, cours.moycomp2, cours.ecartcomp2, cours.ponderationComp2, "C2");
+                        }
 
                         const comp3Cell = document.createElement('td');
                         const comp3Value = getCoursCellValue(cours.comp3, cours.ponderationComp3);
@@ -188,6 +215,9 @@ function requestCours() {
                         comp3Div.innerHTML += ' ' + comp3PonderationSpan.textContent;
                         comp3Cell.appendChild(comp3Div);
                         row.appendChild(comp3Cell);
+                        if (cours.moycomp3 !== null) {
+                            addHoverEffectToCell(comp3Cell, cours.moycomp3, cours.ecartcomp3, cours.ponderationComp3, "C3");
+                        }
 
                         const resCell = document.createElement('td');
                         const resValue = getCoursCellValue(cours.total);
@@ -199,6 +229,9 @@ function requestCours() {
                         resValueSpan.style.fontWeight = 'bold';
                         resValueSpan.style.fontSize = '18px'; // Augmenter la taille de la police
                         resValueSpan.textContent = resValueFormatted !== '' ? resValueFormatted : ' ';
+                        if (cours.moyenneTotal !== null) {
+                            addHoverEffectToCell(resCell, cours.moyenneTotal,  cours.ecartTotal);
+                        }
 
                         resDiv.appendChild(resValueSpan);
 
@@ -248,8 +281,17 @@ function requestCours() {
 
                         // Create cells for totalComp1, totalComp2, and totalComp3
                         const totalComp1Cell = document.createElement('td');
+                        if (moycomp1total !== null) {
+                            addHoverEffectToCell(totalComp1Cell, moycomp1total, ecartcomp1total);
+                        }
                         const totalComp2Cell = document.createElement('td');
+                        if (moycomp2total !== null) {
+                            addHoverEffectToCell(totalComp2Cell, moycomp2total, ecartcomp2total);
+                        }
                         const totalComp3Cell = document.createElement('td');
+                        if (moycomp3total !== null) {
+                            addHoverEffectToCell(totalComp3Cell, moycomp3total, ecartcomp3total);
+                        }
 
                         if (totalComp1 !== undefined) {
                             totalComp1Cell.textContent = totalComp1 + '%';
@@ -282,6 +324,9 @@ function requestCours() {
                         table.appendChild(totalRow);
 
                         const resultCell = document.createElement('td');
+                        if (moynotetotal !== null) {
+                            addHoverEffectToCell(resultCell, moynotetotal, ecartnotetotal);
+                        }
                         resultCell.style.textAlign = 'center';
                         resultCell.style.fontWeight = 'bold';
                         totalRow.style.fontSize = '22px';
@@ -476,4 +521,52 @@ function logout() {
     //let logoutURL = "http://localhost:8180/realms/usager/protocol/openid-connect/logout"
     //window.location.href = logoutURL;
     keycloak.logout({ redirectUri: 'http://localhost/usager/' });
+
+
 }
+
+
+const addHoverEffectToCell = (cell, moyenne, ecart, ponderation, type) => {
+    let box = null;
+    if (ecart === undefined) {
+        ecart = '-'
+    }
+    cell.addEventListener('mouseover', function () {
+        if (moyenne == null) {
+            return;
+        }
+        box = document.createElement('div');
+        box.classList.add('box');
+        if (type === "C1" || type === "C2" || type === "C3"){
+            box.innerHTML = "Moyenne : " + moyenne + "/" + ponderation + "<br>" + "Ecart-Type: " + ecart;
+        } else {
+            box.innerHTML = "Moyenne : " + moyenne + "%" + "<br>" + "Ecart-Type: " + ecart + "%";
+        }
+
+        const rect = cell.getBoundingClientRect();
+        box.style.top = `${rect.top}px`;
+        box.style.left = `${rect.right}px`;
+
+        document.body.appendChild(box);
+        box.style.display = 'block';
+
+        window.addEventListener('scroll', updatePopupPosition);
+    });
+
+    cell.addEventListener('mouseout', function () {
+        if (box && box.parentNode === document.body) {
+            box.style.display = 'none';
+            document.body.removeChild(box);
+            box = null;
+        }
+        window.removeEventListener('scroll', updatePopupPosition);
+    });
+
+    function updatePopupPosition() {
+        if (box && box.parentNode === document.body) {
+            const rect = cell.getBoundingClientRect();
+            box.style.top = `${rect.top}px`;
+            box.style.left = `${rect.right}px`;
+        }
+    }
+};

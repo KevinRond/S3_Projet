@@ -137,98 +137,44 @@ GROUP BY
 ORDER BY
     cip, Sigle, Id_trimestre;
 
-DROP VIEW IF EXISTS vue_moyenne_evaluation CASCADE ;
-CREATE VIEW vue_moyenne_evaluation AS
+DROP VIEW IF EXISTS vue_moyenne_ecart_eval CASCADE;
+CREATE VIEW vue_moyenne_ecart_eval AS
 SELECT
-    Id_trimestre,
-    Sigle,
-    Nom_cours,
-    Nom_evaluation,
-    AVG(Comp1) AS Moyenne_comp1,
-    AVG(Comp2) AS Moyenne_comp2,
-    AVG(Comp3) AS Moyenne_comp3,
-    AVG(Total) AS Moyenne_total
-
+    VNET.Id_trimestre,
+    VNET.Sigle,
+    VNET.Nom_evaluation,
+    ROUND(AVG(VNET.Comp1)) AS MoyComp1,
+    ROUND(AVG(VNET.Comp2)) AS MoyComp2,
+    ROUND(AVG(VNET.Comp3)) AS MoyComp3,
+    ROUND(AVG(VNET.Total)) AS Moyenne_Total,
+    ROUND(stddev(VNET.Comp1)) AS EcartComp1,
+    ROUND(stddev(VNET.Comp2)) AS EcartComp2,
+    ROUND(stddev(VNET.Comp3)) AS EcartComp3,
+    ROUND(stddev(VNET.Total)) AS Ecart_total
 FROM
-    vue_notes_etudiant_trimestre
+    vue_notes_etudiant_trimestre VNET
 GROUP BY
-    Sigle, Id_trimestre, Nom_cours, Nom_evaluation
-ORDER BY
-    Sigle, Id_trimestre;
+    VNET.Id_trimestre, VNET.Sigle, VNET.Nom_evaluation;
 
-DROP VIEW IF EXISTS vue_moyenne_totale_competence CASCADE;
-CREATE VIEW vue_moyenne_totale_competence AS
+DROP VIEW IF EXISTS vue_moyenne_ecart_cours CASCADE ;
+
+CREATE VIEW vue_moyenne_ecart_cours AS
 SELECT
-    Id_trimestre,
-    Sigle,
-    Nom_cours,
-    AVG(TotalNotes_Comp1) AS Moyenne_totale_competence1,
-    AVG(TotalNotes_Comp2) AS Moyenne_totale_competence2,
-    AVG(TotalNotes_Comp3) AS Moyenne_totale_competence3
+    VNT.Id_trimestre,
+    VNT.Sigle,
+    ROUND(AVG(VNT.note_total)) AS MoyNoteTotal,
+    ROUND(AVG(vntcc.total_comp1)) AS MoyComp1Total,
+    ROUND(AVG(vntcc.total_comp2)) AS MoyComp2Total,
+    ROUND(AVG(vntcc.total_comp3)) AS MoyComp3Total,
+    ROUND(stddev(vntcc.total_comp1)) EcartComp1Total,
+    ROUND(stddev(vntcc.total_comp2)) EcartComp2Total,
+    ROUND(stddev(vntcc.total_comp3)) EcartComp3Total,
+    ROUND(stddev(VNT.note_total)) AS EcartNoteTotal
 FROM
-    vue_notes_totales_competence_cours
-GROUP BY
-    Id_trimestre, Sigle, Nom_cours
-ORDER BY
-    Sigle, Id_trimestre;
+    vue_note_total VNT JOIN
+        vue_notes_totales_competence_cours vntcc ON
+            VNT.sigle = vntcc.sigle AND
+            VNT.id_trimestre = vntcc.id_trimestre
 
-DROP VIEW IF EXISTS vue_moyenne_note_totale CASCADE;
-CREATE VIEW vue_moyenne_note_totale AS
-SELECT
-    Id_trimestre,
-    Sigle,
-    AVG(note_total) AS moyenne_note_totale
-FROM
-    vue_note_total
 GROUP BY
-    Id_trimestre, Sigle
-ORDER BY
-    Sigle, Id_trimestre;
-
-DROP VIEW IF EXISTS vue_EcartType_evaluation CASCADE ;
-CREATE VIEW vue_EcartType_evaluation AS
-SELECT
-    Id_trimestre,
-    Sigle,
-    Nom_cours,
-    Nom_evaluation,
-    STDDEV(Comp1) AS EcartType_comp1,
-    STDDEV(Comp2) AS EcartType_comp2,
-    STDDEV(Comp3) AS EcartType_comp3,
-    STDDEV(Total) AS EcartType_total
-
-FROM
-    vue_notes_etudiant_trimestre
-GROUP BY
-    Sigle, Id_trimestre, Nom_cours, Nom_evaluation
-ORDER BY
-    Sigle, Id_trimestre;
-
-DROP VIEW IF EXISTS vue_EcartType_total_competence CASCADE;
-CREATE VIEW vue_EcartType_total_competence AS
-SELECT
-    Id_trimestre,
-    Sigle,
-    Nom_cours,
-    STDDEV(TotalNotes_Comp1) AS EcartType_totale_competence1,
-    STDDEV(TotalNotes_Comp2) AS EcartType_totale_competence2,
-    STDDEV(TotalNotes_Comp3) AS EcartType_totale_competence3
-FROM
-    vue_notes_totales_competence_cours
-GROUP BY
-    Id_trimestre, Sigle, Nom_cours
-ORDER BY
-    Sigle, Id_trimestre;
-
-DROP VIEW IF EXISTS vue_EcartType_note_totale CASCADE;
-CREATE VIEW vue_EcartType_note_totale AS
-SELECT
-    Id_trimestre,
-    Sigle,
-    STDDEV(note_total) AS Ecart_Type_note_totale
-FROM
-    vue_note_total
-GROUP BY
-    Id_trimestre, Sigle
-ORDER BY
-    Sigle, Id_trimestre;
+    VNT.Id_trimestre, VNT.Sigle

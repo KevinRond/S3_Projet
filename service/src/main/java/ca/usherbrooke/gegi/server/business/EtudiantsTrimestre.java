@@ -24,5 +24,21 @@ public class EtudiantsTrimestre {
         public Float totalComp1;
         public Float totalComp2;
         public Float totalComp3;
+        public Float moycomp1;
+        public Float moycomp2;
+        public Float moycomp3;
+        public Float moyenneTotal;
+        public Float moycomp1total;
+        public Float moycomp2total;
+        public Float moycomp3total;
+        public Float moynotetotal;
+        public Float ecartcomp1;
+        public Float ecartcomp2;
+        public Float ecartcomp3;
+        public Float ecartTotal;
+        public Float ecartcomp1total;
+        public Float ecartcomp2total;
+        public Float ecartcomp3total;
+        public Float ecartnotetotal;
 
 }
