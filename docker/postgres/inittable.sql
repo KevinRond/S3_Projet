@@ -61,6 +61,17 @@ CREATE TABLE ETUDIANT
     FOREIGN KEY (Id_programme) REFERENCES PROGRAMME(Id_programme)
 );
 
+CREATE TABLE COMPETENCEPOND
+(
+    Id_evaluation INT NOT NULL ,
+    Sigle VARCHAR(64) NOT NULL,
+    Id_trimestre VARCHAR(16) NOT NULL,
+    nom_comp VARCHAR(64) NOT NULL,
+    Ponderation_competence FLOAT NOT NULL,
+    PRIMARY KEY (nom_comp, Sigle, Id_trimestre, Ponderation_competence, Id_evaluation),
+    FOREIGN KEY (nom_comp, Sigle, Id_trimestre) REFERENCES COMPETENCE(nom_comp, Sigle, Id_trimestre),
+    FOREIGN KEY (Id_evaluation, Sigle, Id_trimestre) REFERENCES EVALUATION(Id_evaluation, sigle, id_trimestre)
+);
 
 CREATE TABLE EVALUATIONCOMPETENCE
 (
@@ -71,10 +82,10 @@ CREATE TABLE EVALUATIONCOMPETENCE
     Id_evaluation INT NOT NULL,
     Id_trimestre VARCHAR(16) NOT NULL,
     Cip VARCHAR(16) NOT NULL,
-    PRIMARY KEY (nom_comp, Sigle, Id_evaluation, Id_trimestre, Cip),
-    FOREIGN KEY (nom_comp, Sigle, Id_trimestre) REFERENCES COMPETENCE(nom_comp, Sigle, Id_trimestre),
-    FOREIGN KEY (Id_evaluation, Sigle, Id_trimestre) REFERENCES EVALUATION(Id_evaluation, Sigle, Id_trimestre),
+    PRIMARY KEY (Ponderation_competence,nom_comp, Sigle, Id_evaluation, Id_trimestre, Cip),
+    FOREIGN KEY (nom_comp, Sigle, Id_trimestre, Ponderation_competence, Id_evaluation) REFERENCES COMPETENCEPOND(nom_comp, Sigle, Id_trimestre, Ponderation_competence, Id_evaluation),
     FOREIGN KEY (Cip) REFERENCES ETUDIANT(Cip)
+    --FOREIGN KEY (Ponderation_competence) REFERENCES COMPETENCEPOND(Ponderation_competence)
 );
 
 
@@ -110,3 +121,4 @@ CREATE TABLE ETUDIANTEVALUATION
     FOREIGN KEY (Id_evaluation, Sigle, Id_trimestre) REFERENCES EVALUATION(Id_evaluation, Sigle, Id_trimestre),
     FOREIGN KEY (Cip) REFERENCES ETUDIANT(Cip)
 );
+
