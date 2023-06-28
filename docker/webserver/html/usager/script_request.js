@@ -329,15 +329,15 @@ function requestCours() {
                     const resultDiv = document.createElement('div');
                     resultDiv.innerHTML = `Cote Z Trimestre: ${coteZTrimestre}`;
                     resultDiv.style.position = 'absolute';
-                    resultDiv.style.top = '40px';
-                    resultDiv.style.right = '10px';
+                    resultDiv.style.top = '102px';
+                    resultDiv.style.right = '28px';
                     span.appendChild(resultDiv);
 
                     const totalDiv = document.createElement('div');
                     totalDiv.innerHTML = `Cote Z Total: ${coteZTotal}`;
                     totalDiv.style.position = 'absolute';
-                    totalDiv.style.top = '60px'; // Adjust the value to move it down or up
-                    totalDiv.style.right = '10px';
+                    totalDiv.style.top = '120px'; // Adjust the value to move it down or up
+                    totalDiv.style.right = '28px';
                     span.appendChild(totalDiv);
                 })
                 .catch(function (error) {
