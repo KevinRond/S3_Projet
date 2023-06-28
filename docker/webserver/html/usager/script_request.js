@@ -231,9 +231,9 @@ function requestCours() {
                             encircledText.style.border = '2px solid blue';
                             encircledText.style.borderRadius = '50%';
                             encircledText.style.display = 'inline-block';
-                            encircledText.style.width = '28px';
-                            encircledText.style.height = '28px';
-                            encircledText.style.lineHeight = '28px';
+                            encircledText.style.width = '35px';
+                            encircledText.style.height = '35px';
+                            encircledText.style.lineHeight = '35px';
                             encircledText.style.color = 'blue';
                             encircledText.style.textAlign = 'center';
                             encircledText.textContent = coteZLettre;
