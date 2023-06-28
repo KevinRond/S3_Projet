@@ -528,7 +528,9 @@ function logout() {
 
 const addHoverEffectToCell = (cell, moyenne, ecart, ponderation, type) => {
     let box = null;
-
+    if (ecart === undefined) {
+        ecart = '-'
+    }
     cell.addEventListener('mouseover', function () {
         if (moyenne == null) {
             return;

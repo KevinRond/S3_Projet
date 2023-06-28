@@ -77,7 +77,15 @@
             vmc.moycomp1total,
             vmc.moycomp2total,
             vmc.moycomp3total,
-            vmc.moynotetotal
+            vmc.moynotetotal,
+            vme.ecartcomp1,
+            vme.ecartcomp2,
+            vme.ecartcomp3,
+            vme.ecart_total,
+            vmc.ecartcomp1total,
+            vmc.ecartcomp2total,
+            vmc.ecartcomp3total,
+            vmc.ecartnotetotal
 
         FROM
             projet.vue_notes_etudiant_trimestre vne
@@ -97,12 +105,12 @@
                vne.sigle = vntcc.sigle AND
                vne.id_trimestre = vntcc.id_trimestre
                 JOIN
-            projet.vue_moyenne_eval vme
+            projet.vue_moyenne_ecart_eval vme
             ON vne.id_trimestre = vme.id_trimestre AND
                vne.sigle = vme.sigle AND
                vne.nom_evaluation = vme.nom_evaluation
                 JOIN
-            projet.vue_moyenne_cours vmc
+            projet.vue_moyenne_ecart_cours vmc
             ON vne.id_trimestre = vmc.id_trimestre AND
                vne.sigle = vmc.sigle
 

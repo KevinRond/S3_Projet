@@ -92,15 +92,27 @@ label {
     margin-right: 5px;
 }
 
+
+label {
+    margin-right: 5px;
+}
+
+label {
+    margin-right: 5px;
+}
+
 table {
     margin: 10px auto;
     border-collapse: collapse;
 }
 
-th, td {
-    padding:10px;
+th,
+td {
+    padding: 10px;
     border: 1px solid black;
 }
+
+
 footer {
     position: relative;
     left: 0;
@@ -152,10 +164,10 @@ footer p {
 
 .box {
     position: fixed;
-    background-color: lightgrey;
-    border: 1px solid #ccc;
+    background-image: linear-gradient(to top, darkgrey, lightgrey); /* Dégradé du haut vers le bas */
+    border: 1px solid gray;
     padding: 5px;
-    font-size: 16px;
+    font-size: 15px;
     display: none;
     width: 115px; /* Adjust the width as needed */
     height: 40px; /* Adjust the height as needed */
@@ -165,5 +177,17 @@ footer p {
     text-align: center;
     white-space: nowrap; /* Prevent line break inside the box */
     pointer-events: none; /* Prevent the box from affecting mouse events */
-    transform: translateX(10px); /* Position the box to the right of the cell */
+    transform: translateX(-134px) translateY(-60px); /* Position the box to the right of the cell */
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.35);
+}
+
+.box::before {
+    content: "";
+    position: absolute;
+    top: 50px; /* Position the arrow at the top */
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 7px;
+    border-style: solid;
+    border-color: darkgrey transparent transparent transparent; /* Use the same border color as the box */
 }
