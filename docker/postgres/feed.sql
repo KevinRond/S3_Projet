@@ -559,7 +559,7 @@ INSERT INTO EVALUATIONCOMPETENCE(Resultat, Ponderation_competence, nom_comp, Sig
 INSERT INTO EVALUATIONCOMPETENCE(Resultat, Ponderation_competence, nom_comp, Sigle, Id_evaluation, id_trimestre, cip) VALUES (10, 10,'Comp2' , 'GEN200', 19, 'H23', 'guea0902');
 INSERT INTO EVALUATIONCOMPETENCE(Resultat, Ponderation_competence, nom_comp, Sigle, Id_evaluation, id_trimestre, cip) VALUES (39.2, 40, 'Comp1', 'GEN200', 20, 'H23', 'guea0902');
 INSERT INTO EVALUATIONCOMPETENCE(Resultat, Ponderation_competence, nom_comp, Sigle, Id_evaluation, id_trimestre, cip) VALUES (15.6, 15, 'Comp2', 'GEN200', 20, 'H23', 'guea0902');
-INSERT INTO EVALUATIONCOMPETENCE(Resultat, Ponderation_competence, nom_comp, Sigle, Id_evaluation, id_trimestre, cip) VALUES (50.7, 50, 'Comp1', 'GEN200', 21, 'H23', 'guea0902');
+INSERT INTO EVALUATIONCOMPETENCE(Resultat, Ponderation_competence, nom_comp, Sigle, Id_evaluation, id_trimestre, cip) VALUES (50, 50, 'Comp1', 'GEN200', 21, 'H23', 'guea0902');
 INSERT INTO EVALUATIONCOMPETENCE(Resultat, Ponderation_competence, nom_comp, Sigle, Id_evaluation, id_trimestre, cip) VALUES (30, 30, 'Comp2', 'GEN200', 21, 'H23', 'guea0902');
 INSERT INTO EVALUATIONCOMPETENCE(Resultat, Ponderation_competence, nom_comp, Sigle, Id_evaluation, id_trimestre, cip) VALUES (37.7, 40, 'Comp1', 'GEN200', 22, 'H23', 'guea0902');
 INSERT INTO EVALUATIONCOMPETENCE(Resultat, Ponderation_competence, nom_comp, Sigle, Id_evaluation, id_trimestre, cip) VALUES (15, 15, 'Comp1', 'GEN200', 23, 'H23', 'guea0902');

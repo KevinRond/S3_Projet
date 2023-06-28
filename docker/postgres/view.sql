@@ -56,7 +56,7 @@ SELECT
 
     CASE
         WHEN Note_Total IS NULL THEN null
-        WHEN Note_Total > 85 THEN 'A+'
+        WHEN Note_Total >= 85 THEN 'A+'
         WHEN Note_Total >= 81 AND Note_Total <= 84 THEN 'A'
         WHEN Note_Total >= 78 AND Note_Total <= 80 THEN 'A-'
         WHEN Note_Total >= 75 AND Note_Total <= 77 THEN 'B+'
@@ -72,7 +72,7 @@ SELECT
 
     CASE
         WHEN Note_Total IS NULL THEN null
-        WHEN Note_Total > 85 THEN 4.3
+        WHEN Note_Total >= 85 THEN 4.3
         WHEN Note_Total >= 81 AND Note_Total <= 84 THEN 4.0
         WHEN Note_Total >= 78 AND Note_Total <= 80 THEN 3.7
         WHEN Note_Total >= 75 AND Note_Total <= 77 THEN 3.3
