@@ -184,3 +184,51 @@ GROUP BY
     Id_trimestre, Sigle
 ORDER BY
     Sigle, Id_trimestre;
+
+DROP VIEW IF EXISTS vue_EcartType_evaluation CASCADE ;
+CREATE VIEW vue_EcartType_evaluation AS
+SELECT
+    Id_trimestre,
+    Sigle,
+    Nom_cours,
+    Nom_evaluation,
+    STDDEV(Comp1) AS EcartType_comp1,
+    STDDEV(Comp2) AS EcartType_comp2,
+    STDDEV(Comp3) AS EcartType_comp3,
+    STDDEV(Total) AS EcartType_total
+
+FROM
+    vue_notes_etudiant_trimestre
+GROUP BY
+    Sigle, Id_trimestre, Nom_cours, Nom_evaluation
+ORDER BY
+    Sigle, Id_trimestre;
+
+DROP VIEW IF EXISTS vue_EcartType_total_competence CASCADE;
+CREATE VIEW vue_EcartType_total_competence AS
+SELECT
+    Id_trimestre,
+    Sigle,
+    Nom_cours,
+    STDDEV(TotalNotes_Comp1) AS EcartType_totale_competence1,
+    STDDEV(TotalNotes_Comp2) AS EcartType_totale_competence2,
+    STDDEV(TotalNotes_Comp3) AS EcartType_totale_competence3
+FROM
+    vue_notes_totales_competence_cours
+GROUP BY
+    Id_trimestre, Sigle, Nom_cours
+ORDER BY
+    Sigle, Id_trimestre;
+
+DROP VIEW IF EXISTS vue_EcartType_note_totale CASCADE;
+CREATE VIEW vue_EcartType_note_totale AS
+SELECT
+    Id_trimestre,
+    Sigle,
+    STDDEV(note_total) AS Ecart_Type_note_totale
+FROM
+    vue_note_total
+GROUP BY
+    Id_trimestre, Sigle
+ORDER BY
+    Sigle, Id_trimestre;
