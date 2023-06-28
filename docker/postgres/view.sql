@@ -146,7 +146,8 @@ SELECT
     Nom_evaluation,
     AVG(Comp1) AS Moyenne_comp1,
     AVG(Comp2) AS Moyenne_comp2,
-    AVG(Comp3) AS Moyenne_comp3
+    AVG(Comp3) AS Moyenne_comp3,
+    AVG(Total) AS Moyenne_total
 
 FROM
     vue_notes_etudiant_trimestre
