@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
 body, html {
     margin: 0;
 }
@@ -16,12 +18,14 @@ header {
     font-size: 30px;
     margin-bottom: 20px;
 }
+
 .top-right {
     position: absolute;
     top: 75px;
     right: 28px;
-    font-size: 24px;
+    font-size: 18px;
     font-weight: bold;
+    font-family: 'Poppins', sans-serif;
 }
 
 .logout-section {
@@ -103,13 +107,25 @@ label {
 
 table {
     margin: 10px auto;
+    background-color: whitesmoke;
     border-collapse: collapse;
+    font-family: 'Poppins', sans-serif;
+    font-size: 15px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+tr:hover {
+    background-color: lightgrey;
 }
 
 th,
 td {
     padding: 10px;
     border: 1px solid black;
+}
+
+tr:nth-child(2) td:first-child:not(:hover) {
+    background-color: initial;
 }
 
 
@@ -164,10 +180,10 @@ footer p {
 
 .box {
     position: fixed;
-    background-image: linear-gradient(to top, darkgrey, lightgrey); /* Dégradé du haut vers le bas */
+    background-color: lightgrey; /* Dégradé du haut vers le bas */
     border: 1px solid gray;
     padding: 5px;
-    font-size: 15px;
+    font-size: 13px;
     display: none;
     width: 115px; /* Adjust the width as needed */
     height: 40px; /* Adjust the height as needed */
@@ -179,6 +195,7 @@ footer p {
     pointer-events: none; /* Prevent the box from affecting mouse events */
     transform: translateX(-134px) translateY(-60px); /* Position the box to the right of the cell */
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.35);
+    font-family: 'Poppins', sans-serif;
 }
 
 .box::before {

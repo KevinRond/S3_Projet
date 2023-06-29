@@ -164,6 +164,7 @@ function requestCours() {
                             </div>
                             <div style="text-align: center;" class="small">${cours.nomCours}</div>`;
                             sigleNomCoursCell.rowSpan = coursArray.length;
+                            sigleNomCoursCell.style.backgroundColor = 'whitesmoke';
                             row.appendChild(sigleNomCoursCell);
                         }
 
@@ -382,6 +383,7 @@ function requestCours() {
                     resultDiv.style.position = 'absolute';
                     resultDiv.style.top = '102px';
                     resultDiv.style.right = '28px';
+                    resultDiv.style.fontFamily = 'Poppins';
                     span.appendChild(resultDiv);
 
                     const totalDiv = document.createElement('div');
@@ -389,6 +391,7 @@ function requestCours() {
                     totalDiv.style.position = 'absolute';
                     totalDiv.style.top = '120px'; // Adjust the value to move it down or up
                     totalDiv.style.right = '28px';
+                    totalDiv.style.fontFamily = 'Poppins';
                     span.appendChild(totalDiv);
                 })
                 .catch(function (error) {

@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
+  <link rel="stylesheet" type="text/css" href="stylezzzzz.css">
+  <link rel="stylesheet" type="text/css" href="stylezz2..css">
+  <link rel="icon" href="favicon.ico">
   <meta charset="UTF-8">
   <title>Détails du Cours</title>
   <script>
@@ -12,16 +15,24 @@
       // Utilisez les variables sigle et cip pour afficher les informations du cours spécifique
       document.getElementById("course-name").innerHTML = sigle;
       document.getElementById("cip").innerHTML = cip;
-
     });
   </script>
 </head>
 <body>
-<h1>Détails du Cours</h1>
+<header>
+  <img alt="Université de Sherbrooke" src="udes.svg">
+  <div class="top-right">Détails du Cours</div>
+  <div class="logout-section">
+    <button class="logout" role="button" onclick="logout()">Logout</button>
+  </div>
+</header>
 
-<p>Nom du cours: <span id="course-name"></span></p>
+
+
+<div class="nom-cours">Cours : <span id="course-name"></span></div>
 
 <!-- Lien de retour à la page principale -->
-<a href="index.html">Retour à la page principale</a>
+<a href="index.html" class="retour">Retour à la page principale</a>
+
 </body>
 </html>
