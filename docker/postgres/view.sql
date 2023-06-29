@@ -121,12 +121,12 @@ SELECT
     Id_trimestre,
     Sigle,
     Nom_cours,
-    SUM(Comp1) AS TotalNotes_Comp1,
-    SUM(Ponderation_Comp1) AS Total_Ponderation_Comp1,
-    SUM(Comp2) AS TotalNotes_Comp2,
-    SUM(Ponderation_Comp2) AS Total_Ponderation_Comp2,
-    SUM(Comp3) AS TotalNotes_Comp3,
-    SUM(Ponderation_Comp3) AS Total_Ponderation_Comp3
+    Round(SUM(Comp1)) AS TotalNotes_Comp1,
+    Round(SUM(Ponderation_Comp1)) AS Total_Ponderation_Comp1,
+    Round(SUM(Comp2)) AS TotalNotes_Comp2,
+    Round(SUM(Ponderation_Comp2)) AS Total_Ponderation_Comp2,
+    Round(SUM(Comp3)) AS TotalNotes_Comp3,
+    Round(SUM(Ponderation_Comp3)) AS Total_Ponderation_Comp3
 FROM
     vue_notes_etudiant_trimestre
 GROUP BY

@@ -127,21 +127,22 @@ function requestCours() {
                         const row = document.createElement('tr');
 
                         if (index === 0) {
-                            currentTotalValue = cours.noteTotal !== undefined ? cours.noteTotal.toFixed(2) : '';
+                            currentTotalValue = cours.noteTotal !== undefined ? (cours.noteTotal).toFixed(2) : '';
                             coteZLettre = cours.coteZLettre !== null ? cours.coteZLettre : '';
                             coteZChiffre = cours.coteZChiffre !== null && cours.coteZChiffre !== undefined ? cours.coteZChiffre.toFixed(1) : '';
-                            totalComp1 = cours.TotalNotesComp1!== null ? cours.TotalNotesComp1 :'';
-                            totalComp1Pond = cours.TotalPonderationComp1 !== null ? cours.TotalPonderationComp1 : '';
-                            totalComp2 = cours.TotalNotesComp2 !== null ? cours.TotalNotesComp2 :'';
-                            totalComp2Pond = cours.TotalPonderationComp2 !== null ? cours.TotalPonderationComp2 : '';
-                            totalComp3 = cours.TotalNotesComp3 !== null ? cours.TotalNotesComp3 :'';
-                            totalComp3Pond = cours.TotalPonderationComp3 !== null ? cours.TotalPonderationComp3 : '';
+                            totalComp1 = cours.TotalNotesComp1 !== null && cours.TotalNotesComp1 !== undefined ? cours.TotalNotesComp1.toFixed(0) : '';
+                            totalComp1Pond = cours.TotalPonderationComp1 !== null && cours.TotalPonderationComp1 !== undefined ? cours.TotalPonderationComp1.toFixed(0) : '';
+                            totalComp2 = cours.TotalNotesComp2 !== null && cours.TotalNotesComp2 !== undefined ? cours.TotalNotesComp2.toFixed(0) : '';
+                            totalComp2Pond = cours.TotalPonderationComp2 !== null && cours.TotalPonderationComp2 !== undefined ? cours.TotalPonderationComp2.toFixed(0) : '';
+                            totalComp3 = cours.TotalNotesComp3 !== null && cours.TotalNotesComp3 !== undefined ? cours.TotalNotesComp3.toFixed(0) : '';
+                            totalComp3Pond = cours.TotalPonderationComp3 !== null && cours.TotalPonderationComp3 !== undefined ? cours.TotalPonderationComp3.toFixed(0) : '';
                         }
 
                         if (index === 0) {
                             const sigleNomCoursCell = document.createElement('td');
                             sigleNomCoursCell.innerHTML = `<div style="text-align: center;"><strong>${cours.sigle}</strong></div><div style="text-align: center;" class="small">${cours.nomCours}</div>`;
                             sigleNomCoursCell.rowSpan = coursArray.length;
+                            sigleNomCoursCell.style.backgroundColor = 'white';
                             row.appendChild(sigleNomCoursCell);
                         }
 
@@ -256,7 +257,7 @@ function requestCours() {
                         const totalComp2Cell = document.createElement('td');
                         const totalComp3Cell = document.createElement('td');
 
-                        if (totalComp1 !== undefined) {
+                        if (totalComp1 !== ''  && totalComp1Pond !== '') {
                             totalComp1Cell.textContent = totalComp1 + ' / ' + totalComp1Pond;
                             totalComp1Cell.style.fontSize = '16px'; // Set the font size
                             totalComp1Cell.style.fontWeight = 'bold';
@@ -264,7 +265,7 @@ function requestCours() {
                             totalComp1Cell.textContent = '';
                         }
 
-                        if (totalComp2 !== undefined) {
+                        if (totalComp2 !== '' && totalComp2Pond !== '') {
                             totalComp2Cell.textContent = totalComp2 + ' / ' + totalComp2Pond;
                             totalComp2Cell.style.fontSize = '16px'; // Set the font size
                             totalComp2Cell.style.fontWeight = 'bold';
@@ -272,7 +273,7 @@ function requestCours() {
                             totalComp2Cell.textContent = '';
                         }
 
-                        if (totalComp3 !== undefined) {
+                        if (totalComp3 !== '' && totalComp3Pond !== '') {
                             totalComp3Cell.textContent = totalComp3 + ' / ' + totalComp3Pond;
                             totalComp3Cell.style.fontSize = '16px'; // Set the font size
                             totalComp3Cell.style.fontWeight = 'bold';
