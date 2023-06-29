@@ -114,20 +114,14 @@ table {
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
 }
 
+th, td {
+    padding: 12px 15px;
+    border: 0.5px solid lightslategrey;
+}
+
 tr:hover {
     background-color: lightgrey;
 }
-
-th,
-td {
-    padding: 10px;
-    border: 1px solid black;
-}
-
-tr:nth-child(2) td:first-child:not(:hover) {
-    background-color: initial;
-}
-
 
 footer {
     position: relative;

@@ -21,9 +21,12 @@ public class EtudiantsTrimestre {
         public Float noteTotal;
         public Float coteZChiffre;
         public String coteZLettre;
-        public Float totalComp1;
-        public Float totalComp2;
-        public Float totalComp3;
+        public Float TotalNotesComp1;
+        public Float TotalPonderationComp1;
+        public Float TotalNotesComp2;
+        public Float TotalPonderationComp2;
+        public Float TotalNotesComp3;
+        public Float TotalPonderationComp3;
         public Float moycomp1;
         public Float moycomp2;
         public Float moycomp3;
@@ -40,5 +43,6 @@ public class EtudiantsTrimestre {
         public Float ecartcomp2total;
         public Float ecartcomp3total;
         public Float ecartnotetotal;
+
 
 }

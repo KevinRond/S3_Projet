@@ -67,6 +67,7 @@
             vnt.note_total AS noteTotal,
             vczc.cote_z_lettre,
             vczc.cote_z_chiffre,
+<<<<<<< HEAD
             vntcc.total_comp1,
             vntcc.total_comp2,
             vntcc.total_comp3,
@@ -87,6 +88,14 @@
             vmc.ecartcomp3total,
             vmc.ecartnotetotal
 
+=======
+            vntcc.TotalNotes_Comp1,
+            vntcc.Total_Ponderation_Comp1,
+            vntcc.TotalNotes_Comp2,
+            vntcc.Total_Ponderation_Comp2,
+            vntcc.TotalNotes_Comp3,
+            vntcc.Total_Ponderation_Comp3
+>>>>>>> raph
         FROM
             projet.vue_notes_etudiant_trimestre vne
                 JOIN

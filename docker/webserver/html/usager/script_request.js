@@ -83,6 +83,9 @@ function requestCours() {
     let totalComp1 = null;
     let totalComp2 = null;
     let totalComp3 = null;
+    let totalComp1Pond = null;
+    let totalComp2Pond = null;
+    let totalComp3Pond = null;
     let moycomp1total = null;
     let moycomp2total = null;
     let moycomp3total = null;
@@ -138,12 +141,15 @@ function requestCours() {
 
 
                         if (index === 0) {
-                            currentTotalValue = cours.noteTotal !== undefined ? cours.noteTotal.toFixed(2) : '';
+                            currentTotalValue = cours.noteTotal !== undefined ? (cours.noteTotal).toFixed(2) : '';
                             coteZLettre = cours.coteZLettre !== null ? cours.coteZLettre : '';
                             coteZChiffre = cours.coteZChiffre !== null && cours.coteZChiffre !== undefined ? cours.coteZChiffre.toFixed(1) : '';
-                            totalComp1 = cours.totalComp1 !== null ? cours.totalComp1 :'';
-                            totalComp2 = cours.totalComp2 !== null ? cours.totalComp2 :'';
-                            totalComp3 = cours.totalComp3 !== null ? cours.totalComp3 :'';
+                            totalComp1 = cours.TotalNotesComp1 !== null && cours.TotalNotesComp1 !== undefined ? cours.TotalNotesComp1.toFixed(0) : '';
+                            totalComp1Pond = cours.TotalPonderationComp1 !== null && cours.TotalPonderationComp1 !== undefined ? cours.TotalPonderationComp1.toFixed(0) : '';
+                            totalComp2 = cours.TotalNotesComp2 !== null && cours.TotalNotesComp2 !== undefined ? cours.TotalNotesComp2.toFixed(0) : '';
+                            totalComp2Pond = cours.TotalPonderationComp2 !== null && cours.TotalPonderationComp2 !== undefined ? cours.TotalPonderationComp2.toFixed(0) : '';
+                            totalComp3 = cours.TotalNotesComp3 !== null && cours.TotalNotesComp3 !== undefined ? cours.TotalNotesComp3.toFixed(0) : '';
+                            totalComp3Pond = cours.TotalPonderationComp3 !== null && cours.TotalPonderationComp3 !== undefined ? cours.TotalPonderationComp3.toFixed(0) : '';
                             moycomp1total = cours.moycomp1total;
                             moycomp2total = cours.moycomp2total;
                             moycomp3total = cours.moycomp3total;
@@ -300,24 +306,24 @@ function requestCours() {
                             addHoverEffectToCell(totalComp3Cell, moycomp3total, ecartcomp3total);
                         }
 
-                        if (totalComp1 !== undefined) {
-                            totalComp1Cell.textContent = totalComp1 + '%';
+                        if (totalComp1 !== ''  && totalComp1Pond !== '') {
+                            totalComp1Cell.textContent = totalComp1 + ' / ' + totalComp1Pond;
                             totalComp1Cell.style.fontSize = '16px'; // Set the font size
                             totalComp1Cell.style.fontWeight = 'bold';
                         } else {
                             totalComp1Cell.textContent = '';
                         }
 
-                        if (totalComp2 !== undefined) {
-                            totalComp2Cell.textContent = totalComp2 + '%';
+                        if (totalComp2 !== '' && totalComp2Pond !== '') {
+                            totalComp2Cell.textContent = totalComp2 + ' / ' + totalComp2Pond;
                             totalComp2Cell.style.fontSize = '16px'; // Set the font size
                             totalComp2Cell.style.fontWeight = 'bold';
                         } else {
                             totalComp2Cell.textContent = '';
                         }
 
-                        if (totalComp3 !== undefined) {
-                            totalComp3Cell.textContent = totalComp3 + '%';
+                        if (totalComp3 !== '' && totalComp3Pond !== '') {
+                            totalComp3Cell.textContent = totalComp3 + ' / ' + totalComp3Pond;
                             totalComp3Cell.style.fontSize = '16px'; // Set the font size
                             totalComp3Cell.style.fontWeight = 'bold';
                         } else {
