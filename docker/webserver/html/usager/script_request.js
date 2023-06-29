@@ -94,6 +94,9 @@ function requestCours() {
     let ecartcomp2total = null;
     let ecartcomp3total = null;
     let ecartnotetotal = null;
+    let notePondtotal = null;
+    let pondcours = null;
+
 
 
 
@@ -141,7 +144,7 @@ function requestCours() {
 
 
                         if (index === 0) {
-                            currentTotalValue = cours.noteTotal !== undefined ? (cours.noteTotal).toFixed(2) : '';
+                            currentTotalValue = cours.noteTotal !== undefined ? (cours.noteTotal).toFixed(0) : '';
                             coteZLettre = cours.coteZLettre !== null ? cours.coteZLettre : '';
                             coteZChiffre = cours.coteZChiffre !== null && cours.coteZChiffre !== undefined ? cours.coteZChiffre.toFixed(1) : '';
                             totalComp1 = cours.TotalNotesComp1 !== null && cours.TotalNotesComp1 !== undefined ? cours.TotalNotesComp1.toFixed(0) : '';
@@ -158,6 +161,8 @@ function requestCours() {
                             ecartcomp2total = cours.ecartcomp2total;
                             ecartcomp3total = cours.ecartcomp3total;
                             ecartnotetotal = cours.ecartnotetotal;
+                            notePondtotal = cours.notePondtotal;
+                            pondcours = cours.pondcours;
                         }
 
                         if (index === 0) {
@@ -233,24 +238,24 @@ function requestCours() {
                         }
 
                         const resCell = document.createElement('td');
-                        const resValue = getCoursCellValue(cours.total);
+                        const resValue = getCoursCellValue(cours.totalnotepond);
                         const resValueFormatted = resValue.value !== '' ? resValue.value.toFixed(0) : ''; // Supprimer les chiffres après la virgule
                         const resDiv = document.createElement('div');
                         resDiv.style.display = 'flex';
                         resDiv.style.justifyContent = 'center'; // Centrer le contenu
                         const resValueSpan = document.createElement('span');
                         resValueSpan.style.fontWeight = 'bold';
-                        resValueSpan.style.fontSize = '18px'; // Augmenter la taille de la police
-                        resValueSpan.textContent = resValueFormatted !== '' ? resValueFormatted : ' ';
+                        resValueSpan.style.fontSize = '15px'; // Augmenter la taille de la police
+                        resValueSpan.textContent = resValueFormatted !== '' ? resValueFormatted + "/" + cours.totalpond: ' ';
                         if (cours.moyenneTotal !== null) {
-                            addHoverEffectToCell(resCell, cours.moyenneTotal,  cours.ecartTotal);
+                            addHoverEffectToCell(resCell, cours.moyenneTotal,  cours.ecartTotal, "T", "T", cours.total);
                         }
 
                         resDiv.appendChild(resValueSpan);
 
                         if (resValueFormatted !== ''){
                             const resPonderationSpan = document.createElement('span');
-                            resPonderationSpan.textContent = "%"; // Ajouter le signe "%"
+                            // resPonderationSpan.textContent = "%"; // Ajouter le signe "%"
                             resDiv.appendChild(resPonderationSpan);
                         }
 
@@ -338,13 +343,13 @@ function requestCours() {
 
                         const resultCell = document.createElement('td');
                         if (moynotetotal !== null) {
-                            addHoverEffectToCell(resultCell, moynotetotal, ecartnotetotal, );
+                            addHoverEffectToCell(resultCell, moynotetotal, ecartnotetotal, "t", "y", currentTotalValue);
                         }
                         resultCell.style.textAlign = 'center';
                         resultCell.style.fontWeight = 'bold';
-                        totalRow.style.fontSize = '22px';
-                        const totalValueFormatted = currentTotalValue !== '' ? currentTotalValue.split('.')[0] : '';
-                        resultCell.textContent = totalValueFormatted !== '' ? totalValueFormatted + '%' : '';
+                        totalRow.style.fontSize = '18px';
+                        const totalValueFormatted = notePondtotal !== '' ? notePondtotal : '';
+                        resultCell.textContent = totalValueFormatted !== '' ? totalValueFormatted +  "/" + pondcours: '';
 
 
                         if (currentTotalValue < 50) {
@@ -541,7 +546,7 @@ function logout() {
 }
 
 
-const addHoverEffectToCell = (cell, moyenne, ecart, ponderation, type) => {
+const addHoverEffectToCell = (cell, moyenne, ecart, ponderation, type, total) => {
     let box = null;
     if (ecart === undefined) {
         ecart = '-'
@@ -555,7 +560,7 @@ const addHoverEffectToCell = (cell, moyenne, ecart, ponderation, type) => {
         if (type === "C1" || type === "C2" || type === "C3" || type === "TC1" || type === "TC2" || type === "TC3"){
             box.innerHTML = "Moyenne : " + moyenne + "/" + ponderation + "<br>" + "Ecart-Type: " + ecart;
         } else {
-            box.innerHTML = "Moyenne : " + moyenne + "%" + "<br>" + "Ecart-Type: " + ecart + "%";
+            box.innerHTML = "Note (%): " +  total  + "%" + "<br>" + "Moyenne : " + moyenne + "%" + "<br>" + "Ecart-Type: " + ecart + "%";
         }
 
         const rect = cell.getBoundingClientRect();
