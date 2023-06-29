@@ -164,8 +164,8 @@ SELECT
     ROUND(AVG(vntcc.TotalNotes_Comp2)) AS MoyComp2Total,
     ROUND(AVG(vntcc.TotalNotes_Comp3)) AS MoyComp3Total,
     ROUND(stddev(vntcc.TotalNotes_Comp1)) EcartComp1Total,
-    ROUND(stddev(vntcc.TotalNotes_Comp1)) EcartComp2Total,
-    ROUND(stddev(vntcc.TotalNotes_Comp1)) EcartComp3Total,
+    ROUND(stddev(vntcc.TotalNotes_Comp2)) EcartComp2Total,
+    ROUND(stddev(vntcc.TotalNotes_Comp3)) EcartComp3Total,
     ROUND(stddev(VNT.note_total)) AS EcartNoteTotal
 FROM
     vue_note_total VNT JOIN

@@ -179,7 +179,7 @@ footer p {
     padding: 5px;
     font-size: 13px;
     display: none;
-    width: 115px; /* Adjust the width as needed */
+    width: 125px; /* Adjust the width as needed */
     height: 40px; /* Adjust the height as needed */
     border-radius: 15px;
     justify-content: center; /* Center horizontally */
@@ -187,7 +187,7 @@ footer p {
     text-align: center;
     white-space: nowrap; /* Prevent line break inside the box */
     pointer-events: none; /* Prevent the box from affecting mouse events */
-    transform: translateX(-134px) translateY(-60px); /* Position the box to the right of the cell */
+    transform: translateX(-140px) translateY(-60px); /* Position the box to the right of the cell */
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.35);
     font-family: 'Poppins', sans-serif;
 }
