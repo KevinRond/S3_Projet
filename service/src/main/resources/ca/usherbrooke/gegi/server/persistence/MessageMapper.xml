@@ -72,7 +72,7 @@
             vntcc.TotalNotes_Comp2,
             vntcc.Total_Ponderation_Comp2,
             vntcc.TotalNotes_Comp3,
-            vntcc.Total_Ponderation_Comp3
+            vntcc.Total_Ponderation_Comp3,
             vme.moycomp1,
             vme.moycomp2,
             vme.moycomp3,

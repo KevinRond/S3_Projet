@@ -160,12 +160,12 @@ SELECT
     VNT.Id_trimestre,
     VNT.Sigle,
     ROUND(AVG(VNT.note_total)) AS MoyNoteTotal,
-    ROUND(AVG(vntcc.total_comp1)) AS MoyComp1Total,
-    ROUND(AVG(vntcc.total_comp2)) AS MoyComp2Total,
-    ROUND(AVG(vntcc.total_comp3)) AS MoyComp3Total,
-    ROUND(stddev(vntcc.total_comp1)) EcartComp1Total,
-    ROUND(stddev(vntcc.total_comp2)) EcartComp2Total,
-    ROUND(stddev(vntcc.total_comp3)) EcartComp3Total,
+    ROUND(AVG(vntcc.TotalNotes_Comp1)) AS MoyComp1Total,
+    ROUND(AVG(vntcc.TotalNotes_Comp2)) AS MoyComp2Total,
+    ROUND(AVG(vntcc.TotalNotes_Comp3)) AS MoyComp3Total,
+    ROUND(stddev(vntcc.TotalNotes_Comp1)) EcartComp1Total,
+    ROUND(stddev(vntcc.TotalNotes_Comp1)) EcartComp2Total,
+    ROUND(stddev(vntcc.TotalNotes_Comp1)) EcartComp3Total,
     ROUND(stddev(VNT.note_total)) AS EcartNoteTotal
 FROM
     vue_note_total VNT JOIN
