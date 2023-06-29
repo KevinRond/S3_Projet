@@ -295,15 +295,15 @@ function requestCours() {
                         // Create cells for totalComp1, totalComp2, and totalComp3
                         const totalComp1Cell = document.createElement('td');
                         if (moycomp1total !== null) {
-                            addHoverEffectToCell(totalComp1Cell, moycomp1total, ecartcomp1total);
+                            addHoverEffectToCell(totalComp1Cell, moycomp1total, ecartcomp1total, totalComp1Pond, "TC1");
                         }
                         const totalComp2Cell = document.createElement('td');
                         if (moycomp2total !== null) {
-                            addHoverEffectToCell(totalComp2Cell, moycomp2total, ecartcomp2total);
+                            addHoverEffectToCell(totalComp2Cell, moycomp2total, ecartcomp2total, totalComp2Pond, "TC2");
                         }
                         const totalComp3Cell = document.createElement('td');
                         if (moycomp3total !== null) {
-                            addHoverEffectToCell(totalComp3Cell, moycomp3total, ecartcomp3total);
+                            addHoverEffectToCell(totalComp3Cell, moycomp3total, ecartcomp3total, totalComp3Pond, "TC3");
                         }
 
                         if (totalComp1 !== ''  && totalComp1Pond !== '') {
@@ -338,7 +338,7 @@ function requestCours() {
 
                         const resultCell = document.createElement('td');
                         if (moynotetotal !== null) {
-                            addHoverEffectToCell(resultCell, moynotetotal, ecartnotetotal);
+                            addHoverEffectToCell(resultCell, moynotetotal, ecartnotetotal, );
                         }
                         resultCell.style.textAlign = 'center';
                         resultCell.style.fontWeight = 'bold';
@@ -552,7 +552,7 @@ const addHoverEffectToCell = (cell, moyenne, ecart, ponderation, type) => {
         }
         box = document.createElement('div');
         box.classList.add('box');
-        if (type === "C1" || type === "C2" || type === "C3"){
+        if (type === "C1" || type === "C2" || type === "C3" || type === "TC1" || type === "TC2" || type === "TC3"){
             box.innerHTML = "Moyenne : " + moyenne + "/" + ponderation + "<br>" + "Ecart-Type: " + ecart;
         } else {
             box.innerHTML = "Moyenne : " + moyenne + "%" + "<br>" + "Ecart-Type: " + ecart + "%";
