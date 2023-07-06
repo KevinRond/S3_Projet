@@ -43,6 +43,8 @@ public class EtudiantsTrimestre {
         public Float ecartcomp2total;
         public Float ecartcomp3total;
         public Float ecartnotetotal;
-
-
+        public Float totalnotepond;
+        public Float totalpond;
+        public Float notePondtotal;
+        public Float pondcours;
 }

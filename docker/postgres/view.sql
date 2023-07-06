@@ -17,7 +17,9 @@ SELECT
     MAX(CASE WHEN Co.nom_comp = 'Comp2' THEN CP.Ponderation_competence END) AS Ponderation_Comp2,
     MAX(CASE WHEN Co.nom_comp = 'Comp3' THEN EC.Resultat END) AS Comp3,
     MAX(CASE WHEN Co.nom_comp = 'Comp3' THEN CP.Ponderation_competence END) AS Ponderation_Comp3,
-    ROUND((SUM(CASE WHEN Co.nom_comp IN ('Comp1', 'Comp2', 'Comp3') THEN EC.Resultat ELSE 0 END) / NULLIF(SUM(CASE WHEN Co.nom_comp IN ('Comp1', 'Comp2', 'Comp3') THEN CP.Ponderation_competence ELSE 0 END), 0)) * 100) AS Total
+    ROUND((SUM(CASE WHEN Co.nom_comp IN ('Comp1', 'Comp2', 'Comp3') THEN EC.Resultat ELSE 0 END) / NULLIF(SUM(CASE WHEN Co.nom_comp IN ('Comp1', 'Comp2', 'Comp3') THEN CP.Ponderation_competence ELSE 0 END), 0)) * 100) AS Total,
+    ROUND(SUM(CASE WHEN Co.nom_comp IN ('Comp1', 'Comp2', 'Comp3') THEN EC.Resultat ELSE 0 END)::NUMERIC, 1) AS Totalnotepond,
+    ROUND(SUM(CASE WHEN Co.nom_comp IN ('Comp1', 'Comp2', 'Comp3') THEN CP.ponderation_competence ELSE 0 END)) AS TotalPond
 FROM
     ETUDIANT E
         JOIN ETUDIANTCOURS ECrs ON E.Cip = ECrs.Cip
@@ -36,13 +38,17 @@ SELECT
     E.cip,
     C.id_trimestre,
     C.Sigle,
-    ROUND((SUM(CASE WHEN Co.nom_comp IN ('Comp1', 'Comp2', 'Comp3') THEN EC.Resultat ELSE 0 END) / NULLIF(SUM(EC.Ponderation_competence), 0)) * 100) AS Note_Total
+    ROUND((SUM(CASE WHEN Co.nom_comp IN ('Comp1', 'Comp2', 'Comp3') THEN EC.Resultat ELSE 0 END) / NULLIF(SUM(EC.Ponderation_competence), 0)) * 100) AS Note_Total,
+    ROUND(SUM(CASE WHEN Co.nom_comp IN ('Comp1', 'Comp2', 'Comp3') THEN EC.Resultat ELSE 0 END)) AS Note_pondTotal,
+    ROUND(SUM(CASE WHEN Co.nom_comp IN ('Comp1', 'Comp2', 'Comp3') THEN CP.ponderation_competence ELSE 0 END)) AS pondCours
+
 FROM
     ETUDIANT E
         JOIN ETUDIANTCOURS ECrs ON E.Cip = ECrs.Cip
         JOIN COURS C ON ECrs.Sigle = C.Sigle AND ECrs.Id_trimestre = C.Id_trimestre
         JOIN EVALUATION Ev ON C.Sigle = Ev.Sigle AND C.Id_trimestre = Ev.Id_trimestre
         JOIN COMPETENCE Co ON C.Sigle = Co.Sigle AND C.Id_trimestre = Co.Id_trimestre
+        LEFT JOIN COMPETENCEPOND CP ON Ev.Id_evaluation = CP.Id_evaluation AND Ev.Sigle = CP.Sigle AND Ev.Id_trimestre = CP.Id_trimestre AND Co.nom_comp = CP.nom_comp
         LEFT JOIN EVALUATIONCOMPETENCE EC ON Ev.Id_evaluation = EC.Id_evaluation AND Ev.Sigle = EC.Sigle AND Ev.Id_trimestre = EC.Id_trimestre AND E.Cip = EC.Cip AND Co.nom_comp = EC.nom_comp
 GROUP BY
     E.Cip, C.id_trimestre, C.Sigle;

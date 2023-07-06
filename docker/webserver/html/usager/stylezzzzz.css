@@ -180,14 +180,14 @@ footer p {
     font-size: 13px;
     display: none;
     width: 125px; /* Adjust the width as needed */
-    height: 40px; /* Adjust the height as needed */
+    height: 60px; /* Adjust the height as needed */
     border-radius: 15px;
     justify-content: center; /* Center horizontally */
     align-items: center; /* Center vertically */
     text-align: center;
     white-space: nowrap; /* Prevent line break inside the box */
     pointer-events: none; /* Prevent the box from affecting mouse events */
-    transform: translateX(-140px) translateY(-60px); /* Position the box to the right of the cell */
+    transform: translateX(-117px) translateY(-80px); /* Position the box to the right of the cell */
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.35);
     font-family: 'Poppins', sans-serif;
 }
@@ -195,7 +195,7 @@ footer p {
 .box::before {
     content: "";
     position: absolute;
-    top: 50px; /* Position the arrow at the top */
+    top: 70px; /* Position the arrow at the top */
     left: 50%;
     transform: translateX(-50%);
     border-width: 7px;
