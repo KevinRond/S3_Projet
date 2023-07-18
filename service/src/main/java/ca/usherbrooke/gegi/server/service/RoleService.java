@@ -74,6 +74,14 @@ public class RoleService {
         return messageMapper.selectCoteZTotal(cip);
     }
 
+    @GET
+    @Path("selectNotesGraphique/{cip}/{sigle}/{trimestre}")
+    @PermitAll
+    public List<NotesGraphique> selectNotesGraphique(@PathParam("cip") String cip, @PathParam("sigle") String sigle, @PathParam("trimestre") String trimestre) {
+        List<NotesGraphique> notesGraphique = messageMapper.selectNotesGraphique(cip, sigle, trimestre);
+        return notesGraphique;
+    }
+
 
 
 //        Message message = messageMapper.selectOne(id);

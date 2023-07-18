@@ -35,7 +35,7 @@
                comp3,
                ponderation_comp3,
                total
-        from projet.vue_notes_etudiant
+        from projet.vue_notes_etudiantge
         where nom_cours = #{nom_cours}
     </select>
 
