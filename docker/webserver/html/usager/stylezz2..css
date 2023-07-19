@@ -1,3 +1,14 @@
+body, html {
+    margin: 0;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    margin-bottom: 75px;
+}
+
 .nom-cours {
     position: absolute;
     top: 75px;
@@ -54,4 +65,25 @@
 
 .retour:hover {
     box-shadow: rgba(39, 174, 96, .2) 0 6px 12px;
+}
+
+footer {
+    position: relative;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #f5f5f5;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+}
+
+footer img {
+    margin-right: 10px;
+    height: 20px; /* Adjust the height as needed */
+}
+
+footer p {
+    margin: 0;
 }

@@ -19,7 +19,7 @@
       document.getElementById("course-name").innerHTML = sigle;
 
 
-      axios.get('http://localhost:8888/api/selectNotesGraphique/' + cip + '/' + sigle + '/' + trimestre)
+      axios.get("http://localhost:8888/api/selectNotesGraphique/" + cip + '/' + sigle + '/' + trimestre)
               .then(response => {
                 let totalPond = 0;
                 let totalNotePond = 0;
@@ -91,6 +91,9 @@
 
 <!-- Lien de retour à la page principale -->
 <a href="index.html" class="retour">Retour à la page principale</a>
-
+<footer>
+  <img src="favicon.ico" alt="Favicon">
+  <p>Developpé par l'équipe PassionFruit ( ͡°( ͡° ͜ʖ ͡°( ͡▧ ͜ʖ ͡▧) ͡° ͜ʖ ͡°) ͡°)</p>
+</footer>
 </body>
 </html>
