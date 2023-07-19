@@ -4,17 +4,68 @@
   <link rel="stylesheet" type="text/css" href="stylezzzzz.css">
   <link rel="stylesheet" type="text/css" href="stylezz2..css">
   <link rel="icon" href="favicon.ico">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   <meta charset="UTF-8">
   <title>Détails du Cours</title>
+
   <script>
     document.addEventListener("DOMContentLoaded", function() {
       const urlParams = new URLSearchParams(window.location.search);
       const sigle = urlParams.get("sigle");
       const cip = urlParams.get("cip");
-
+      const trimestre = urlParams.get("selectedTrimestre");
       // Utilisez les variables sigle et cip pour afficher les informations du cours spécifique
       document.getElementById("course-name").innerHTML = sigle;
-      document.getElementById("cip").innerHTML = cip;
+
+
+      axios.get('http://localhost:8888/api/selectNotesGraphique/' + cip + '/' + sigle + '/' + trimestre)
+              .then(response => {
+                let totalPond = 0;
+                let totalNotePond = 0;
+                const graphData = response.data.map(entry => {
+                  totalPond += entry.totalpond;
+                  totalNotePond += entry.totalnotepond;
+                  const point = {x: totalPond, y: (totalNotePond / totalPond)*100};
+                  console.log(point);
+                  return point;
+                });
+                var ctx = document.getElementById('myChart').getContext('2d');
+                var chart = new Chart(ctx, {
+                  type: 'line',
+                  data: {
+                    datasets: [{
+                      label: 'Evolution de la note',
+                      backgroundColor: 'rgb(255, 99, 132)',
+                      borderColor: 'rgb(255, 99, 132)',
+                      data: graphData
+                    }]
+                  },
+                  options: {
+                    legend: {
+                      display: false
+                    },
+                    scales: {
+                      x: {
+                        type: 'linear', // add this line
+                        display: true,
+                        title: {
+                          display: true,
+                          text: 'Ponderation'
+                        }
+                      },
+                      y: {
+                        display: true,
+                        title: {
+                          display: true,
+                          text: 'Note moyenne (%)'
+                        }
+                      }
+                    }
+                  }
+                });
+              })
+              .catch(err => console.log(err)); // Log errors if any
     });
   </script>
 </head>
@@ -27,6 +78,9 @@
   </div>
 </header>
 
+<div style="width:600px; height:400px;">
+  <canvas id="myChart"></canvas>
+</div>
 
 
 <div class="nom-cours">Cours : <span id="course-name"></span></div>

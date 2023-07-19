@@ -51,6 +51,20 @@
     <!-- ========================================================================================================== -->
 
     <!-- ===================================================================================================== -->
+    <!-- request for the grades of the student for a specified course -->
+    <select id="selectNotesGraphique" resultType="ca.usherbrooke.gegi.server.business.NotesGraphique">
+        SELECT
+            vnet.totalnotepond,
+            vnet.totalpond
+        FROM
+            projet.vue_notes_etudiant_trimestre vnet
+        WHERE
+            vnet.cip= #{cip} AND
+            vnet.sigle = #{sigle} AND
+            vnet.id_trimestre= #{trimestre}
+    </select>
+
+    <!-- ===================================================================================================== -->
     <!-- request for the grades of the student for a specific semester -->
     <select id="selectinfo" resultType="ca.usherbrooke.gegi.server.business.EtudiantsTrimestre">
         SELECT
