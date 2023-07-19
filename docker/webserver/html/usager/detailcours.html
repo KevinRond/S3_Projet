@@ -42,8 +42,10 @@
                     }]
                   },
                   options: {
-                    legend: {
-                      display: false
+                    plugins : {
+                      legend: {
+                        display: false
+                      }
                     },
                     scales: {
                       x: {
@@ -59,7 +61,9 @@
                         title: {
                           display: true,
                           text: 'Note moyenne (%)'
-                        }
+                        },
+                        min:0,
+                        max: 100
                       }
                     }
                   }
