@@ -23,10 +23,12 @@
               .then(response => {
                 let totalPond = 0;
                 let totalNotePond = 0;
+                let totalPondSum=0;
                 const graphData = response.data.map(entry => {
                   totalPond += entry.totalpond;
                   totalNotePond += entry.totalnotepond;
-                  const point = {x: totalPond, y: (totalNotePond / totalPond)*100};
+                  totalPondSum= entry.totalPondSum;
+                  const point = {x: (totalPond/totalPondSum)*100, y: (totalNotePond / totalPond)*100};
                   console.log(point);
                   return point;
                 });
@@ -36,8 +38,8 @@
                   data: {
                     datasets: [{
                       label: 'Evolution de la note',
-                      backgroundColor: 'rgb(255, 99, 132)',
-                      borderColor: 'rgb(255, 99, 132)',
+                      backgroundColor: '#27ae60',
+                      borderColor: '#27ae60',
                       data: graphData
                     }]
                   },
@@ -54,7 +56,9 @@
                         title: {
                           display: true,
                           text: 'Ponderation'
-                        }
+                        },
+                        min:0,
+                        max:100
                       },
                       y: {
                         display: true,
@@ -82,12 +86,13 @@
   </div>
 </header>
 
-<div style="width:600px; height:400px;">
-  <canvas id="myChart"></canvas>
+<div class="nom-cours">
+  <p>Cours : <span id="course-name"></span></p>
 </div>
 
-
-<div class="nom-cours">Cours : <span id="course-name"></span></div>
+<div style="width:50%; height:30%; margin-left:24%; margin-top: 30px; margin-bottom: 50px;">
+  <canvas id="myChart"></canvas>
+</div>
 
 <!-- Lien de retour à la page principale -->
 <a href="index.html" class="retour">Retour à la page principale</a>
