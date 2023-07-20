@@ -481,10 +481,6 @@ INSERT INTO COMPETENCEPOND(Ponderation_competence, nom_comp, Sigle, Id_evaluatio
 INSERT INTO COMPETENCEPOND(Ponderation_competence, nom_comp, Sigle, Id_evaluation, id_trimestre) VALUES ( 20, 'Comp2', 'GIF302', 31, 'E23');
 INSERT INTO COMPETENCEPOND(Ponderation_competence, nom_comp, Sigle, Id_evaluation, id_trimestre) VALUES ( 20, 'Comp3', 'GIF302', 31, 'E23');
 
-
-
-
-
 -- Insertion dans la table EVALUATION_COMPETENCE (notes obtenues aux evaluations)
 -- ## Cours GEN111 ##
 INSERT INTO EVALUATIONCOMPETENCE(Resultat, Ponderation_competence, nom_comp, Sigle, Id_evaluation, id_trimestre, cip) VALUES (26, 30,'Comp1', 'GEN111', 1,'A22', 'gerz0501');
