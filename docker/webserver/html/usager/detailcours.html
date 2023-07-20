@@ -23,10 +23,12 @@
               .then(response => {
                 let totalPond = 0;
                 let totalNotePond = 0;
+                let totalPondSum=0;
                 const graphData = response.data.map(entry => {
                   totalPond += entry.totalpond;
                   totalNotePond += entry.totalnotepond;
-                  const point = {x: totalPond, y: (totalNotePond / totalPond)*100};
+                  totalPondSum= entry.totalPondSum;
+                  const point = {x: (totalPond/totalPondSum)*100, y: (totalNotePond / totalPond)*100};
                   console.log(point);
                   return point;
                 });
@@ -54,7 +56,9 @@
                         title: {
                           display: true,
                           text: 'Ponderation'
-                        }
+                        },
+                        min:0,
+                        max:100
                       },
                       y: {
                         display: true,
