@@ -171,7 +171,7 @@ function requestCours() {
                             sigleNomCoursCell.innerHTML = `
                             <div style="text-align: center;">
                                 <strong>
-                                    <a href="detailcours.html?sigle=${cours.sigle}&cip=${cip}&selectedTrimestre=${selectedTrimestre}">${cours.sigle}</a>
+                                    <a href="page_graph.html?sigle=${cours.sigle}&cip=${cip}&selectedTrimestre=${selectedTrimestre}">${cours.sigle}</a>
                                 </strong>
                             </div>
                             <div style="text-align: center;" class="small">${cours.nomCours}</div>`;
