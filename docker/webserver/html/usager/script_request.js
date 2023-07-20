@@ -247,7 +247,7 @@ function requestCours() {
                         const resValueSpan = document.createElement('span');
                         resValueSpan.style.fontWeight = 'bold';
                         resValueSpan.style.fontSize = '15px'; // Augmenter la taille de la police
-                        resValueSpan.textContent = resValueFormatted !== '' ? resValueFormatted + "/" + cours.totalpond: ' ';
+                        resValueSpan.textContent = resValueFormatted !== '' ? resValueFormatted + "/" + cours.totalpond: '/' + cours.totalpond;
                         if (cours.moyenneTotal !== null) {
                             addHoverEffectToCell(resCell, cours.moyenneTotal,  cours.ecartTotal, "T", "T", cours.total);
                         }
@@ -266,7 +266,7 @@ function requestCours() {
                         table.appendChild(row);
                     });
 
-                    if (currentTotalValue !== null && currentTotalValue !== '') {
+                    if (1 === 1) {
                         const totalRow = document.createElement('tr');
                         const totalTitleCell = document.createElement('td');
                         totalTitleCell.style.fontWeight = 'bold';
@@ -317,7 +317,7 @@ function requestCours() {
                             totalComp1Cell.style.fontSize = '16px'; // Set the font size
                             totalComp1Cell.style.fontWeight = 'bold';
                         } else {
-                            totalComp1Cell.textContent = '';
+                            totalComp1Cell.textContent = '/' + totalComp1Pond;
                         }
 
                         if (totalComp2 !== '' && totalComp2Pond !== '') {
@@ -325,7 +325,7 @@ function requestCours() {
                             totalComp2Cell.style.fontSize = '16px'; // Set the font size
                             totalComp2Cell.style.fontWeight = 'bold';
                         } else {
-                            totalComp2Cell.textContent = '';
+                            totalComp2Cell.textContent = '/' + totalComp2Pond;
                         }
 
                         if (totalComp3 !== '' && totalComp3Pond !== '') {
@@ -333,7 +333,7 @@ function requestCours() {
                             totalComp3Cell.style.fontSize = '16px'; // Set the font size
                             totalComp3Cell.style.fontWeight = 'bold';
                         } else {
-                            totalComp3Cell.textContent = '';
+                            totalComp3Cell.textContent = '/' + totalComp3Pond;
                         }
 
                         totalRow.appendChild(totalComp1Cell);
@@ -350,7 +350,11 @@ function requestCours() {
                         resultCell.style.fontWeight = 'bold';
                         totalRow.style.fontSize = '18px';
                         const totalValueFormatted = notePondtotal !== '' ? notePondtotal : '';
-                        resultCell.textContent = totalValueFormatted !== '' ? totalValueFormatted +  "/" + pondcours: '';
+                        if (totalValueFormatted !== undefined) {
+                            resultCell.textContent = totalValueFormatted !== '' ? totalValueFormatted + "/" + pondcours : '';
+                        } else {
+                            resultCell.textContent = '/' + pondcours;
+                        }
 
 
                         if (currentTotalValue < 50) {

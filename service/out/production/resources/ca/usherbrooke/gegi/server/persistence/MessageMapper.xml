@@ -55,15 +55,21 @@
     <select id="selectNotesGraphique" resultType="ca.usherbrooke.gegi.server.business.NotesGraphique">
         SELECT
             vnet.totalnotepond,
-            vnet.totalpond
+            vnet.totalpond,
+            (SELECT SUM(vnet2.totalpond)
+             FROM projet.vue_notes_etudiant_trimestre vnet2
+             WHERE vnet2.cip= #{cip} AND
+                 vnet2.sigle = #{sigle} AND
+                 vnet2.id_trimestre= #{trimestre}) as total_pond_sum
         FROM
             projet.vue_notes_etudiant_trimestre vnet
         WHERE
             vnet.cip= #{cip} AND
             vnet.sigle = #{sigle} AND
-            vnet.id_trimestre= #{trimestre}
+            vnet.id_trimestre= #{trimestre} AND
+            vnet.totalnotepond IS NOT NULL AND
+            vnet.totalpond IS NOT NULL
     </select>
-
     <!-- ===================================================================================================== -->
     <!-- request for the grades of the student for a specific semester -->
     <select id="selectinfo" resultType="ca.usherbrooke.gegi.server.business.EtudiantsTrimestre">
